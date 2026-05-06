@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>模試開始 | 簿記3級 模擬試験Web版</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <header class="site-header compact">
+      <div class="container header-inner">
+        <div>
+          <p class="eyebrow">模試開始</p>
+          <h1 id="start-title">第1回 模擬試験</h1>
+        </div>
+        <a class="button secondary" href="index.html">戻る</a>
+      </div>
+    </header>
+
+    <main class="container page-main">
+      <section class="start-panel">
+        <div class="section-heading">
+          <h2>試験情報</h2>
+          <p>開始すると残り時間のカウントが始まります。途中の回答はこの端末に自動保存されます。</p>
+        </div>
+
+        <dl id="start-meta" class="meta-grid"></dl>
+
+        <div class="start-breakdown" id="start-breakdown"></div>
+
+        <div class="start-actions">
+          <a id="resume-link" class="button secondary" href="exam.html?examId=mock_001">続きから再開</a>
+          <a id="start-link" class="button primary" href="exam.html?examId=mock_001">試験を開始する</a>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/common.js"></script>
+    <script>
+      (async function () {
+        const examId = window.BokiMock.getExamIdFromUrl();
+        const exam = await window.BokiMock.loadExam(examId);
+        const session = window.BokiMock.getSession(examId);
+        document.getElementById("start-title").textContent = exam.title;
+        document.getElementById("start-meta").innerHTML = `
+          <div><dt>試験時間</dt><dd>${exam.durationMinutes}分</dd></div>
+          <div><dt>満点</dt><dd>${exam.totalScore}点</dd></div>
+          <div><dt>合格基準</dt><dd>${exam.passScore}点</dd></div>
+        `;
+        document.getElementById("start-breakdown").innerHTML = exam.sections.map((section) => `
+          <article>
+            <h3>${section.title}</h3>
+            <p>${section.description}</p>
+            <strong>${section.score}点</strong>
+          </article>
+        `).join("");
+        document.getElementById("start-link").href = `exam.html?examId=${encodeURIComponent(examId)}`;
+        document.getElementById("resume-link").href = `exam.html?examId=${encodeURIComponent(examId)}`;
+        document.getElementById("resume-link").hidden = !session;
+      })().catch((error) => {
+        document.querySelector(".start-panel").innerHTML = `<div class="empty-state"><h2>読み込みに失敗しました</h2><p>${error.message}</p></div>`;
+      });
+    </script>
+  </body>
+</html>

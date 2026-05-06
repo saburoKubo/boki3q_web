@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>試験画面 | 簿記3級 模擬試験Web版</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <header class="exam-topbar">
+      <div class="exam-topbar-inner">
+        <div>
+          <p class="eyebrow">日商簿記3級 模擬試験</p>
+          <h1 id="exam-title">読み込み中</h1>
+        </div>
+        <div class="timer-box" aria-live="polite">
+          <span>残り時間</span>
+          <strong id="timer">--:--</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="exam-layout">
+      <aside class="section-nav" aria-label="大問切替">
+        <div id="section-tabs" class="section-tabs"></div>
+      </aside>
+
+      <section class="exam-panel" aria-live="polite">
+        <div id="exam-status" class="status-line"></div>
+        <div id="question-area"></div>
+
+        <div class="exam-actions">
+          <button id="prev-button" class="button secondary" type="button">前へ</button>
+          <button id="next-button" class="button secondary" type="button">次へ</button>
+          <button id="submit-button" class="button danger" type="button">提出する</button>
+        </div>
+      </section>
+    </main>
+
+    <div id="confirm-modal" class="modal-backdrop" hidden>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+        <h2 id="confirm-title">答案を提出しますか</h2>
+        <p>提出後は結果画面に移動します。未入力の解答は0点として採点されます。</p>
+        <div class="modal-actions">
+          <button id="cancel-submit" class="button secondary" type="button">戻る</button>
+          <button id="confirm-submit" class="button danger" type="button">提出する</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/exam.js"></script>
+  </body>
+</html>
