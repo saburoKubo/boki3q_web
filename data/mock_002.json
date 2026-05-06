@@ -12,6 +12,7 @@
     "繰越商品",
     "備品",
     "備品減価償却累計額",
+    "土地",
     "貸倒引当金",
     "仮払金",
     "前払保険料",
@@ -19,6 +20,7 @@
     "未払給料",
     "未払法人税等",
     "未払利息",
+    "手形借入金",
     "借入金",
     "資本金",
     "繰越利益剰余金",
@@ -29,6 +31,7 @@
     "給料",
     "旅費交通費",
     "通信費",
+    "消耗品費",
     "保険料",
     "減価償却費",
     "貸倒引当金繰入",
@@ -62,6 +65,7 @@
     "貸倒損失",
     "支払利息",
     "受取商品券",
+    "現金過不足",
     "貯蔵品",
     "貯蔵品消耗費",
     "前払金",
@@ -79,235 +83,232 @@
           "id": "m002_s1_q01",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "従業員の給料 ￥620,000 を支給するにあたり、所得税 ￥31,000、住民税 ￥18,000、社会保険料 ￥45,000 を差し引き、残額を普通預金口座から支払った。",
-          "answerLineCount": 5,
+          "question": "かねて約束手形を振り出して借り入れていた ￥2,000,000 の満期日となり、同額が当座預金口座から引き落とされるとともに、約束手形の返却を受けた。",
+          "answerLineCount": 2,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "給料", "debitAmount": 620000 },
-              { "creditAccount": "普通預金", "creditAmount": 526000 },
-              { "creditAccount": "所得税預り金", "creditAmount": 31000 },
-              { "creditAccount": "住民税預り金", "creditAmount": 18000 },
-              { "creditAccount": "社会保険料預り金", "creditAmount": 45000 }
+              { "debitAccount": "手形借入金", "debitAmount": 2000000 },
+              { "creditAccount": "当座預金", "creditAmount": 2000000 }
             ]
           },
-          "explanation": "給料総額を借方に計上し、差引支給額は普通預金、控除した税金や社会保険料は預り金として処理します。"
+          "explanation": "約束手形を振り出して借り入れていた場合、満期日の返済では手形借入金を減少させ、当座預金の減少を記入します。"
         },
         {
           "id": "m002_s1_q02",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "商品 ￥480,000 を売り上げ、消費税 ￥48,000 とともに代金は掛けとした。なお、消費税は税抜方式で処理する。",
-          "answerLineCount": 3,
+          "question": "土地付き建物を購入し、購入代価（土地 ￥5,000,000、建物 ￥7,500,000）とともに、不動産会社への手数料（それぞれ購入代価の3％）および印紙税 ￥20,000 を普通預金口座から支払った。なお、印紙税は費用処理する。",
+          "answerLineCount": 5,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "売掛金", "debitAmount": 528000 },
-              { "creditAccount": "売上", "creditAmount": 480000 },
-              { "creditAccount": "仮受消費税", "creditAmount": 48000 }
+              { "debitAccount": "土地", "debitAmount": 5150000 },
+              { "debitAccount": "建物", "debitAmount": 7725000 },
+              { "debitAccount": "租税公課", "debitAmount": 20000 },
+              { "creditAccount": "普通預金", "creditAmount": 12895000 }
             ]
           },
-          "explanation": "税抜方式では本体価格を売上、消費税分を仮受消費税として区分します。"
+          "explanation": "購入に直接必要な不動産会社への手数料は取得原価に含めます。土地は5,000,000＋150,000、建物は7,500,000＋225,000です。印紙税は租税公課として費用処理します。"
         },
         {
           "id": "m002_s1_q03",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "業務用パソコン ￥158,000 を購入し、初期設定費 ￥12,000 と購入時の配送料 ￥6,000 を含めた請求額を月末に支払うこととした。",
-          "answerLineCount": 2,
+          "question": "不動産の賃貸借契約を解約し、契約時に支払っていた保証金（敷金）について、修繕費 ￥150,000 が差し引かれた残額 ￥320,000 が普通預金口座へ振り込まれた。",
+          "answerLineCount": 3,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "備品", "debitAmount": 176000 },
-              { "creditAccount": "未払金", "creditAmount": 176000 }
+              { "debitAccount": "普通預金", "debitAmount": 320000 },
+              { "debitAccount": "修繕費", "debitAmount": 150000 },
+              { "creditAccount": "差入保証金", "creditAmount": 470000 }
             ]
           },
-          "explanation": "使用可能にするための初期設定費と購入時の配送料は、備品の取得原価に含めます。"
+          "explanation": "返還される保証金は差入保証金の減少として処理し、差し引かれた修繕費は費用として処理します。"
         },
         {
           "id": "m002_s1_q04",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "取得原価 ￥600,000、減価償却累計額 ￥360,000 の備品を ￥270,000 で売却し、代金は現金で受け取った。",
-          "answerLineCount": 4,
+          "question": "南町株式会社は、株主総会において配当金 ￥1,200,000 の支払いと利益準備金 ￥120,000 の積立てを繰越利益剰余金から行うことを承認した。なお、配当金はまだ支払っていない。",
+          "answerLineCount": 3,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "備品減価償却累計額", "debitAmount": 360000 },
-              { "debitAccount": "現金", "debitAmount": 270000 },
-              { "creditAccount": "備品", "creditAmount": 600000 },
-              { "creditAccount": "固定資産売却益", "creditAmount": 30000 }
+              { "debitAccount": "繰越利益剰余金", "debitAmount": 1320000 },
+              { "creditAccount": "未払配当金", "creditAmount": 1200000 },
+              { "creditAccount": "利益準備金", "creditAmount": 120000 }
             ]
           },
-          "explanation": "帳簿価額は240,000円です。売却価額270,000円との差額30,000円を固定資産売却益とします。"
+          "explanation": "配当金と利益準備金の合計を繰越利益剰余金から減額します。"
         },
         {
           "id": "m002_s1_q05",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "商品 ￥400,000 を売り上げ、代金のうち ￥100,000 は現金で受け取り、￥200,000 は掛けとし、残額は約束手形で受け取った。",
-          "answerLineCount": 4,
+          "question": "商品 ￥2,000,000 を仕入れ、当社負担の引取運賃 ￥5,000 を含めて掛けとした。",
+          "answerLineCount": 2,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "現金", "debitAmount": 100000 },
-              { "debitAccount": "売掛金", "debitAmount": 200000 },
-              { "debitAccount": "受取手形", "debitAmount": 100000 },
-              { "creditAccount": "売上", "creditAmount": 400000 }
+              { "debitAccount": "仕入", "debitAmount": 2005000 },
+              { "creditAccount": "買掛金", "creditAmount": 2005000 }
             ]
           },
-          "explanation": "受取方法ごとに資産を分け、売上は全額を貸方に計上します。"
+          "explanation": "仕入にかかる引取運賃などは仕入原価に含めます。掛けとしたため買掛金を計上します。"
         },
         {
           "id": "m002_s1_q06",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "買掛金 ￥380,000 を当座預金口座から支払った。ただし、支払前の当座預金残高は ￥320,000 であり、銀行と当座借越契約を結んでいる。",
+          "question": "普通預金口座から ￥500,000 および別の普通預金口座から ￥350,000 を当座預金口座へ振り替えた。その際、振込手数料 ￥300 が普通預金口座から差し引かれた。",
           "answerLineCount": 3,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "買掛金", "debitAmount": 380000 },
-              { "creditAccount": "当座預金", "creditAmount": 320000 },
-              { "creditAccount": "当座借越", "creditAmount": 60000 }
+              { "debitAccount": "当座預金", "debitAmount": 850000 },
+              { "debitAccount": "支払手数料", "debitAmount": 300 },
+              { "creditAccount": "普通預金", "creditAmount": 850300 }
             ]
           },
-          "explanation": "当座預金残高を超える支払額60,000円は当座借越として処理します。"
+          "explanation": "当座預金へ振り替えた合計額を当座預金の増加とし、差し引かれた振込手数料は支払手数料として処理します。"
         },
         {
           "id": "m002_s1_q07",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "得意先から商品の注文を受け、手付金 ￥150,000 が普通預金口座に振り込まれた。",
+          "question": "店舗兼事務所として使用している建物の固定資産税 ￥150,000 を普通預金口座から納付した。",
           "answerLineCount": 2,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "普通預金", "debitAmount": 150000 },
-              { "creditAccount": "前受金", "creditAmount": 150000 }
+              { "debitAccount": "租税公課", "debitAmount": 150000 },
+              { "creditAccount": "普通預金", "creditAmount": 150000 }
             ]
           },
-          "explanation": "商品引渡し前に受け取った手付金は、前受金として処理します。"
+          "explanation": "固定資産税などの税金は租税公課として費用処理します。"
         },
         {
           "id": "m002_s1_q08",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "商品 ￥250,000 を仕入れ、代金のうち ￥80,000 は注文時に支払った手付金と相殺し、残額は約束手形を振り出して支払った。",
+          "question": "商品 ￥220,000（税込価格）を仕入れ、代金は掛けとした。なお、消費税率は10％であり、税抜方式で処理する。",
           "answerLineCount": 3,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "仕入", "debitAmount": 250000 },
-              { "creditAccount": "前払金", "creditAmount": 80000 },
-              { "creditAccount": "支払手形", "creditAmount": 170000 }
+              { "debitAccount": "仕入", "debitAmount": 200000 },
+              { "debitAccount": "仮払消費税", "debitAmount": 20000 },
+              { "creditAccount": "買掛金", "creditAmount": 220000 }
             ]
           },
-          "explanation": "仕入額全額を借方に計上し、手付金の相殺は前払金の減少、残額は支払手形とします。"
+          "explanation": "税込価格220,000円を本体200,000円と消費税20,000円に分け、仮払消費税を計上します。"
         },
         {
           "id": "m002_s1_q09",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "電子記録債権 ￥420,000 の支払期日となり、普通預金口座に入金された。",
+          "question": "電子記録債権 ￥750,000 が決済され、同額が当座預金口座に振り込まれた。",
           "answerLineCount": 2,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "普通預金", "debitAmount": 420000 },
-              { "creditAccount": "電子記録債権", "creditAmount": 420000 }
+              { "debitAccount": "当座預金", "debitAmount": 750000 },
+              { "creditAccount": "電子記録債権", "creditAmount": 750000 }
             ]
           },
-          "explanation": "電子記録債権の決済により、普通預金が増加し電子記録債権が減少します。"
+          "explanation": "電子記録債権の決済により、当座預金が増加し電子記録債権が減少します。"
         },
         {
           "id": "m002_s1_q10",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "南町株式会社は、株主総会において配当金 ￥800,000 の支払いと利益準備金 ￥80,000 の積立てを繰越利益剰余金から行うことを承認した。なお、配当金はまだ支払っていない。",
-          "answerLineCount": 3,
+          "question": "期首に、不要になった備品（取得原価 ￥1,200,000、減価償却累計額 ￥800,000、間接法で記帳）を ￥250,000 で売却し、代金は月末に普通預金口座へ振り込んでもらうこととした。",
+          "answerLineCount": 4,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "繰越利益剰余金", "debitAmount": 880000 },
-              { "creditAccount": "未払配当金", "creditAmount": 800000 },
-              { "creditAccount": "利益準備金", "creditAmount": 80000 }
+              { "debitAccount": "備品減価償却累計額", "debitAmount": 800000 },
+              { "debitAccount": "未収入金", "debitAmount": 250000 },
+              { "debitAccount": "固定資産売却損", "debitAmount": 150000 },
+              { "creditAccount": "備品", "creditAmount": 1200000 }
             ]
           },
-          "explanation": "配当金と利益準備金の合計額を繰越利益剰余金から減額します。"
+          "explanation": "帳簿価額は400,000円です。売却代金250,000円との差額150,000円を固定資産売却損として処理します。"
         },
         {
           "id": "m002_s1_q11",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "店舗の改修を行い、代金 ￥400,000 を現金で支払った。このうち ￥160,000 は改良、残額は通常の修繕である。",
-          "answerLineCount": 3,
+          "question": "かねて受け取っていた約束手形 ￥870,000 が決済され、同額が当座預金口座に入金された。",
+          "answerLineCount": 2,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "建物", "debitAmount": 160000 },
-              { "debitAccount": "修繕費", "debitAmount": 240000 },
-              { "creditAccount": "現金", "creditAmount": 400000 }
+              { "debitAccount": "当座預金", "debitAmount": 870000 },
+              { "creditAccount": "受取手形", "creditAmount": 870000 }
             ]
           },
-          "explanation": "改良部分は建物として資産計上し、通常の修繕部分は修繕費として処理します。"
+          "explanation": "受取手形の決済により、当座預金が増加し受取手形が減少します。"
         },
         {
           "id": "m002_s1_q12",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "前期に貸倒れとして処理した売掛金 ￥120,000 を普通預金口座で回収した。",
-          "answerLineCount": 2,
+          "question": "売掛金 ￥450,000（うち前期販売分 ￥200,000、当期販売分 ￥250,000）が貸し倒れた。なお、貸倒引当金の残高は ￥180,000 である。",
+          "answerLineCount": 3,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "普通預金", "debitAmount": 120000 },
-              { "creditAccount": "償却債権取立益", "creditAmount": 120000 }
+              { "debitAccount": "貸倒引当金", "debitAmount": 180000 },
+              { "debitAccount": "貸倒損失", "debitAmount": 270000 },
+              { "creditAccount": "売掛金", "creditAmount": 450000 }
             ]
           },
-          "explanation": "前期以前に貸倒処理した債権の回収は、償却債権取立益として処理します。"
+          "explanation": "前期発生分は貸倒引当金を取り崩しますが、引当金残高を超える部分と当期発生分は貸倒損失として処理します。"
         },
         {
           "id": "m002_s1_q13",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "得意先へ販売した商品の発送費 ￥18,000 を、当社負担として現金で支払った。",
-          "answerLineCount": 2,
+          "question": "現金の帳簿残高は ￥35,000、実際有高は ￥32,000 であった。不一致の原因を調査したところ、消耗品費の支払い ￥2,000 が記帳漏れであることが判明したが、残額については期末決算まで継続して調査することにした。",
+          "answerLineCount": 3,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "発送費", "debitAmount": 18000 },
-              { "creditAccount": "現金", "creditAmount": 18000 }
+              { "debitAccount": "消耗品費", "debitAmount": 2000 },
+              { "debitAccount": "現金過不足", "debitAmount": 1000 },
+              { "creditAccount": "現金", "creditAmount": 3000 }
             ]
           },
-          "explanation": "販売した商品の発送費を当社が負担した場合は、発送費として費用処理します。"
+          "explanation": "実際有高が帳簿残高より3,000円少ないため現金を減少させます。原因判明分2,000円は消耗品費、残額1,000円は現金過不足で処理します。"
         },
         {
           "id": "m002_s1_q14",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "東都商店は、請求書に示されている商品と引取運賃の合計額を現金で支払った。",
+          "question": "従業員から預かっていた所得税の源泉徴収額 ￥50,000 を普通預金口座から納付した。",
           "answerLineCount": 2,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "仕入", "debitAmount": 312000 },
-              { "creditAccount": "現金", "creditAmount": 312000 }
+              { "debitAccount": "所得税預り金", "debitAmount": 50000 },
+              { "creditAccount": "普通預金", "creditAmount": 50000 }
             ]
           },
-          "sourceDocument": {
-            "title": "請求書",
-            "summary": "ご請求金額 ￥312,000",
-            "rows": [
-              { "item": "商品A", "quantity": "40個", "unitPrice": 4500, "amount": 180000 },
-              { "item": "商品B", "quantity": "30個", "unitPrice": 4000, "amount": 120000 },
-              { "item": "引取運賃", "quantity": "", "unitPrice": "", "amount": 12000 }
-            ],
-            "total": 312000,
-            "note": "仕入先から当社倉庫までの運賃を含みます。"
-          },
-          "explanation": "仕入に直接必要な引取運賃は、商品の取得原価として仕入に含めます。"
+          "explanation": "源泉徴収した所得税を納付したため、所得税預り金を減少させ、普通預金の減少を記入します。"
         },
         {
           "id": "m002_s1_q15",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "クレジット売掛金 ￥220,000 について、信販会社の手数料3％を差し引いた残額が普通預金口座に入金された。",
-          "answerLineCount": 3,
+          "question": "商品を売り上げ、適正に処理するとともに次の納品書兼請求書を送付していたが、本日、請求した合計金額が普通預金口座へ振り込まれた。なお、振込手数料は得意先負担である。",
+          "answerLineCount": 2,
           "correctAnswer": {
             "lines": [
-              { "debitAccount": "普通預金", "debitAmount": 213400 },
-              { "debitAccount": "支払手数料", "debitAmount": 6600 },
-              { "creditAccount": "クレジット売掛金", "creditAmount": 220000 }
+              { "debitAccount": "普通預金", "debitAmount": 1775000 },
+              { "creditAccount": "売掛金", "creditAmount": 1775000 }
             ]
           },
-          "explanation": "クレジット売掛金の回収時に差し引かれた手数料は支払手数料として処理します。"
+          "sourceDocument": {
+            "title": "納品書兼請求書",
+            "summary": "ご請求金額 ￥1,775,000",
+            "rows": [
+              { "item": "A商品", "quantity": "11個", "unitPrice": 82500, "amount": 907500 },
+              { "item": "B商品", "quantity": "26個", "unitPrice": 33400, "amount": 868400 },
+              { "item": "値引き", "quantity": "", "unitPrice": "", "amount": -900 }
+            ],
+            "total": 1775000,
+            "note": "X7年9月30日までに下記口座にお振り込みください。振込手数料はご負担ください。"
+          },
+          "explanation": "商品売上時に売掛金を計上済みのため、入金時は普通預金の増加と売掛金の減少を記入します。請求書の合計金額は907,500円＋868,400円－900円＝1,775,000円です。"
         }
       ]
     },
