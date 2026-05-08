@@ -313,34 +313,26 @@
           "id": "m003_s2_q01",
           "type": "account_fill",
           "score": 10,
-          "title": "小問(1) 商品売買の勘定記入",
-          "question": "商品売買の記録に3分法を用い、仕入勘定で売上原価を算定している。次の勘定記入の空欄を埋めなさい。期首商品棚卸高は ￥360,000、期末商品棚卸高は ￥420,000 であり、売上勘定の貸方合計は ￥4,200,000、仕入勘定の借方仕入高は ￥2,750,000 である。",
+          "title": "小問(1) 当座預金出納帳",
+          "question": "次の取引にもとづいて、当座預金出納帳の空欄を埋めなさい。月初残高は ￥520,000 である。4/5 売掛金 ￥300,000 を当座預金口座で回収した。4/10 買掛金 ￥180,000 を小切手を振り出して支払った。4/18 普通預金口座から当座預金口座へ ￥250,000 を振り替えた。4/25 給料 ￥210,000 を当座預金口座から支払った。",
           "fields": [
-            { "id": "sales_close_summary", "label": "売上勘定 借方摘要", "inputType": "select", "options": ["損益", "仕入", "繰越商品", "次期繰越"], "correctAnswer": "損益", "score": 1 },
-            { "id": "sales_close_amount", "label": "売上勘定 損益振替額", "inputType": "number", "correctAnswer": 4200000, "score": 2 },
-            { "id": "begin_inventory_summary", "label": "仕入勘定 借方摘要", "inputType": "select", "options": ["前期繰越", "繰越商品", "売上", "損益"], "correctAnswer": "繰越商品", "score": 1 },
-            { "id": "ending_inventory_amount", "label": "仕入勘定 期末商品棚卸高", "inputType": "number", "correctAnswer": 420000, "score": 2 },
-            { "id": "cost_of_sales", "label": "売上原価", "inputType": "number", "correctAnswer": 2690000, "score": 2 },
-            { "id": "gross_profit", "label": "売上総利益", "inputType": "number", "correctAnswer": 1510000, "score": 2 }
+            { "id": "deposit_0405", "label": "4/5 預入金額", "inputType": "number", "correctAnswer": 300000, "score": 2 },
+            { "id": "balance_0405", "label": "4/5 残高", "inputType": "number", "correctAnswer": 820000, "score": 2 },
+            { "id": "payment_0410", "label": "4/10 引出金額", "inputType": "number", "correctAnswer": 180000, "score": 2 },
+            { "id": "deposit_0418", "label": "4/18 預入金額", "inputType": "number", "correctAnswer": 250000, "score": 2 },
+            { "id": "ending_balance", "label": "4/25 残高", "inputType": "number", "correctAnswer": 680000, "score": 2 }
           ],
-          "explanation": "売上原価は期首商品360,000円＋当期仕入2,750,000円－期末商品420,000円＝2,690,000円です。売上総利益は4,200,000円－2,690,000円＝1,510,000円です。",
+          "explanation": "月初残高520,000円に4/5の預入300,000円を加えて820,000円、4/10に180,000円を引き出して640,000円、4/18に250,000円を預け入れて890,000円、4/25に210,000円を引き出すため月末残高は680,000円です。",
           "answerSheet": {
-            "type": "accounts",
-            "accounts": [
-              {
-                "title": "売上",
-                "rows": [
-                  { "debit": { "fieldId": "sales_close_summary" }, "debitAmount": { "fieldId": "sales_close_amount" }, "credit": { "text": "売掛金" }, "creditAmount": { "text": "3,300,000" } },
-                  { "debit": { "text": "" }, "debitAmount": { "text": "" }, "credit": { "text": "現金" }, "creditAmount": { "text": "900,000" } }
-                ]
-              },
-              {
-                "title": "仕入",
-                "rows": [
-                  { "debit": { "text": "買掛金" }, "debitAmount": { "text": "2,750,000" }, "credit": { "text": "繰越商品" }, "creditAmount": { "fieldId": "ending_inventory_amount" } },
-                  { "debit": { "fieldId": "begin_inventory_summary" }, "debitAmount": { "text": "360,000" }, "credit": { "text": "損益" }, "creditAmount": { "fieldId": "cost_of_sales" } }
-                ]
-              }
+            "type": "table",
+            "title": "答案用紙 当座預金出納帳",
+            "columns": ["日付", "摘要", "預入", "引出", "残高"],
+            "rows": [
+              { "cells": ["4/1", "前月繰越", "", "", "520,000"] },
+              { "cells": ["4/5", "売掛金回収", { "fieldId": "deposit_0405" }, "", { "fieldId": "balance_0405" }] },
+              { "cells": ["4/10", "買掛金支払", "", { "fieldId": "payment_0410" }, "640,000"] },
+              { "cells": ["4/18", "普通預金より振替", { "fieldId": "deposit_0418" }, "", "890,000"] },
+              { "cells": ["4/25", "給料支払", "", "210,000", { "fieldId": "ending_balance" }] }
             ]
           }
         },
@@ -348,26 +340,26 @@
           "id": "m003_s2_q02",
           "type": "account_fill",
           "score": 10,
-          "title": "小問(2) 補助簿の選択",
-          "question": "次の取引について、主として記入する補助簿を選びなさい。なお、同じ補助簿を複数回選んでもよい。",
+          "title": "小問(2) 売掛金元帳",
+          "question": "得意先A社に関する次の取引にもとづいて、売掛金元帳の空欄を埋めなさい。月初残高は ￥260,000 である。5/6 A社へ商品 ￥420,000 を掛けで売り上げた。5/15 A社から ￥300,000 が普通預金口座に入金された。5/22 A社へ売り上げた商品のうち ￥40,000 の返品を受けた。5/28 A社から得意先振出しの約束手形 ￥150,000 を受け取った。",
           "fields": [
-            { "id": "book_cash_sale", "label": "商品を現金で売り上げた取引", "inputType": "select", "options": ["現金出納帳", "当座預金出納帳", "仕入帳", "売上帳", "売掛金元帳", "買掛金元帳", "受取手形記入帳", "支払手形記入帳"], "correctAnswer": "売上帳", "score": 2 },
-            { "id": "book_credit_purchase", "label": "商品を掛けで仕入れた取引", "inputType": "select", "options": ["現金出納帳", "当座預金出納帳", "仕入帳", "売上帳", "売掛金元帳", "買掛金元帳", "受取手形記入帳", "支払手形記入帳"], "correctAnswer": "仕入帳", "score": 2 },
-            { "id": "book_note_receivable", "label": "売掛金を約束手形で回収した取引", "inputType": "select", "options": ["現金出納帳", "当座預金出納帳", "仕入帳", "売上帳", "売掛金元帳", "買掛金元帳", "受取手形記入帳", "支払手形記入帳"], "correctAnswer": "受取手形記入帳", "score": 2 },
-            { "id": "book_account_receivable", "label": "売掛金を普通預金で回収した取引", "inputType": "select", "options": ["現金出納帳", "当座預金出納帳", "仕入帳", "売上帳", "売掛金元帳", "買掛金元帳", "受取手形記入帳", "支払手形記入帳"], "correctAnswer": "売掛金元帳", "score": 2 },
-            { "id": "book_note_payable", "label": "買掛金の支払いとして約束手形を振り出した取引", "inputType": "select", "options": ["現金出納帳", "当座預金出納帳", "仕入帳", "売上帳", "売掛金元帳", "買掛金元帳", "受取手形記入帳", "支払手形記入帳"], "correctAnswer": "支払手形記入帳", "score": 2 }
+            { "id": "debit_sale", "label": "5/6 借方金額", "inputType": "number", "correctAnswer": 420000, "score": 2 },
+            { "id": "balance_after_sale", "label": "5/6 残高", "inputType": "number", "correctAnswer": 680000, "score": 2 },
+            { "id": "credit_collection", "label": "5/15 貸方金額", "inputType": "number", "correctAnswer": 300000, "score": 2 },
+            { "id": "credit_return", "label": "5/22 貸方金額", "inputType": "number", "correctAnswer": 40000, "score": 2 },
+            { "id": "ending_ar_balance", "label": "5/28 残高", "inputType": "number", "correctAnswer": 190000, "score": 2 }
           ],
-          "explanation": "商品売買は売上帳・仕入帳、得意先別の売掛金管理は売掛金元帳、手形の発生や決済管理は受取手形記入帳・支払手形記入帳に記録します。",
+          "explanation": "月初残高260,000円に5/6の売上420,000円を加えて680,000円、5/15の回収300,000円で380,000円、5/22の返品40,000円で340,000円、5/28の手形回収150,000円で月末残高は190,000円です。",
           "answerSheet": {
             "type": "table",
-            "title": "答案用紙 補助簿の選択",
-            "columns": ["取引", "主として記入する補助簿"],
+            "title": "答案用紙 売掛金元帳（A社）",
+            "columns": ["日付", "摘要", "借方", "貸方", "残高"],
             "rows": [
-              { "cells": ["商品 ￥180,000 を現金で売り上げた。", { "fieldId": "book_cash_sale" }] },
-              { "cells": ["商品 ￥240,000 を掛けで仕入れた。", { "fieldId": "book_credit_purchase" }] },
-              { "cells": ["売掛金 ￥300,000 を得意先振出しの約束手形で回収した。", { "fieldId": "book_note_receivable" }] },
-              { "cells": ["売掛金 ￥150,000 が普通預金口座に入金された。", { "fieldId": "book_account_receivable" }] },
-              { "cells": ["買掛金 ￥220,000 の支払いとして約束手形を振り出した。", { "fieldId": "book_note_payable" }] }
+              { "cells": ["5/1", "前月繰越", "260,000", "", "260,000"] },
+              { "cells": ["5/6", "売上", { "fieldId": "debit_sale" }, "", { "fieldId": "balance_after_sale" }] },
+              { "cells": ["5/15", "普通預金", "", { "fieldId": "credit_collection" }, "380,000"] },
+              { "cells": ["5/22", "売上戻り", "", { "fieldId": "credit_return" }, "340,000"] },
+              { "cells": ["5/28", "受取手形", "", "150,000", { "fieldId": "ending_ar_balance" }] }
             ]
           }
         }

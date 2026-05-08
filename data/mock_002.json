@@ -348,40 +348,34 @@
           "id": "m002_s2_q02",
           "type": "account_fill",
           "score": 10,
-          "title": "小問(2) 商品有高帳",
-          "question": "A商品について、移動平均法により商品有高帳を記入する。消費税は考慮しない。下記の取引資料にもとづき、空欄の金額を答えなさい。",
-          "sourceDocument": {
-            "title": "A商品 11月中の取引資料",
-            "summary": "期首在庫: 120個 @500円 = 60,000円",
-            "rows": [
-              { "item": "11/4 仕入", "quantity": "80個", "unitPrice": 550, "amount": 44000 },
-              { "item": "11/11 売上", "quantity": "70個", "unitPrice": 700, "amount": 49000 },
-              { "item": "11/20 仕入", "quantity": "170個", "unitPrice": 580, "amount": 98600 },
-              { "item": "11/26 売上", "quantity": "160個", "unitPrice": 720, "amount": 115200 }
-            ],
-            "total": 0,
-            "note": "売上時の払出単価は、その直前の移動平均単価による。"
-          },
+          "title": "小問(2) 商品売買の勘定記入",
+          "question": "商品売買の記録に3分法を用い、仕入勘定で売上原価を算定している。次の勘定記入の空欄を埋めなさい。期首商品棚卸高は ￥400,000、期末商品棚卸高は ￥300,000 であり、売上勘定の貸方合計は ￥4,600,000、仕入勘定の借方仕入高は ￥3,700,000 である。",
           "fields": [
-            { "id": "avg_after_purchase_1104", "label": "11/4仕入後の移動平均単価", "inputType": "number", "correctAnswer": 520, "score": 2 },
-            { "id": "cost_1111", "label": "11/11売上の払出金額", "inputType": "number", "correctAnswer": 36400, "score": 2 },
-            { "id": "balance_after_1120", "label": "11/20仕入後の残高金額", "inputType": "number", "correctAnswer": 166200, "score": 2 },
-            { "id": "cost_1126", "label": "11/26売上の払出金額", "inputType": "number", "correctAnswer": 88640, "score": 2 },
-            { "id": "gross_profit", "label": "11月の売上総利益", "inputType": "number", "correctAnswer": 39160, "score": 2 }
+            { "id": "sales_close_summary", "label": "売上勘定 借方摘要", "inputType": "select", "options": ["損益", "仕入", "繰越商品", "次期繰越"], "correctAnswer": "損益", "score": 1 },
+            { "id": "sales_close_amount", "label": "売上勘定 損益振替額", "inputType": "number", "correctAnswer": 4600000, "score": 2 },
+            { "id": "begin_inventory_summary", "label": "仕入勘定 借方摘要", "inputType": "select", "options": ["前期繰越", "繰越商品", "売上", "損益"], "correctAnswer": "繰越商品", "score": 1 },
+            { "id": "ending_inventory_amount", "label": "仕入勘定 期末商品棚卸高", "inputType": "number", "correctAnswer": 300000, "score": 2 },
+            { "id": "cost_of_sales", "label": "売上原価", "inputType": "number", "correctAnswer": 3800000, "score": 2 },
+            { "id": "gross_profit", "label": "売上総利益", "inputType": "number", "correctAnswer": 800000, "score": 2 }
           ],
-          "explanation": "11/4後は104,000円÷200個＝520円です。11/11の払出は70個×520円＝36,400円。11/20後は67,600円＋98,600円＝166,200円、300個なので単価554円です。11/26の払出は160個×554円＝88,640円。売上高164,200円－売上原価125,040円＝売上総利益39,160円です。",
+          "explanation": "売上原価は期首商品400,000円＋当期仕入3,700,000円－期末商品300,000円＝3,800,000円です。売上総利益は4,600,000円－3,800,000円＝800,000円です。",
           "answerSheet": {
-            "type": "inventory",
-            "rows": [
-              { "date": "11/1", "summary": "前月繰越", "receiptQty": "120", "receiptUnit": "500", "receiptAmount": "60,000", "balanceQty": "120", "balanceUnit": "500", "balanceAmount": "60,000" },
-              { "date": "11/4", "summary": "仕入", "receiptQty": "80", "receiptUnit": "550", "receiptAmount": "44,000", "balanceQty": "200", "balanceUnit": { "fieldId": "avg_after_purchase_1104" }, "balanceAmount": "104,000" },
-              { "date": "11/11", "summary": "売上", "issueQty": "70", "issueUnit": "520", "issueAmount": { "fieldId": "cost_1111" }, "balanceQty": "130", "balanceUnit": "520", "balanceAmount": "67,600" },
-              { "date": "11/20", "summary": "仕入", "receiptQty": "170", "receiptUnit": "580", "receiptAmount": "98,600", "balanceQty": "300", "balanceUnit": "554", "balanceAmount": { "fieldId": "balance_after_1120" } },
-              { "date": "11/26", "summary": "売上", "issueQty": "160", "issueUnit": "554", "issueAmount": { "fieldId": "cost_1126" }, "balanceQty": "140", "balanceUnit": "554", "balanceAmount": "77,560" }
-            ],
-            "summaryFields": [
-              { "label": "11月の売上高", "value": "164,200円" },
-              { "label": "11月の売上総利益", "fieldId": "gross_profit" }
+            "type": "accounts",
+            "accounts": [
+              {
+                "title": "売上",
+                "rows": [
+                  { "debit": { "fieldId": "sales_close_summary" }, "debitAmount": { "fieldId": "sales_close_amount" }, "credit": { "text": "売掛金" }, "creditAmount": { "text": "3,400,000" } },
+                  { "debit": { "text": "" }, "debitAmount": { "text": "" }, "credit": { "text": "現金" }, "creditAmount": { "text": "1,200,000" } }
+                ]
+              },
+              {
+                "title": "仕入",
+                "rows": [
+                  { "debit": { "text": "買掛金" }, "debitAmount": { "text": "3,700,000" }, "credit": { "text": "繰越商品" }, "creditAmount": { "fieldId": "ending_inventory_amount" } },
+                  { "debit": { "fieldId": "begin_inventory_summary" }, "debitAmount": { "text": "400,000" }, "credit": { "text": "損益" }, "creditAmount": { "fieldId": "cost_of_sales" } }
+                ]
+              }
             ]
           }
         }

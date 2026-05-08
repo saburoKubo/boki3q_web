@@ -930,6 +930,15 @@ input[inputmode="numeric"] {
   text-align: right;
 }
 
+.ledger-table {
+  min-width: 640px;
+}
+
+.ledger-table th:nth-child(2),
+.ledger-table td:nth-child(2) {
+  text-align: left;
+}
+
 .generic-sheet-table td:first-child {
   position: sticky;
   left: 0;
@@ -943,6 +952,31 @@ input[inputmode="numeric"] {
   left: 0;
   z-index: 2;
   background: var(--surface-2);
+}
+
+.worksheet-table th:nth-child(2),
+.worksheet-table td:nth-child(2),
+.worksheet-table th:nth-child(4),
+.worksheet-table td:nth-child(4),
+.worksheet-table th:nth-child(6),
+.worksheet-table td:nth-child(6),
+.worksheet-table th:nth-child(8),
+.worksheet-table td:nth-child(8) {
+  border-left: 3px double var(--line-strong);
+}
+
+.worksheet-table th:nth-child(1),
+.worksheet-table td:nth-child(1) {
+  border-right: 3px double var(--line-strong);
+}
+
+.worksheet-table th:nth-child(3),
+.worksheet-table td:nth-child(3),
+.worksheet-table th:nth-child(5),
+.worksheet-table td:nth-child(5),
+.worksheet-table th:nth-child(7),
+.worksheet-table td:nth-child(7) {
+  border-right: 2px solid var(--line-strong);
 }
 
 .inventory-summary-fields {

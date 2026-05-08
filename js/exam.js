@@ -556,6 +556,11 @@
     tableWrap.className = "table-scroll";
     const table = document.createElement("table");
     table.className = "answer-table generic-sheet-table";
+    if ((question.answerSheet.columns || []).length >= 9) {
+      table.classList.add("worksheet-table");
+    } else if ((question.answerSheet.columns || []).length <= 5) {
+      table.classList.add("ledger-table");
+    }
     const thead = document.createElement("thead");
     const headRow = document.createElement("tr");
     question.answerSheet.columns.forEach((column) => {

@@ -78,6 +78,10 @@
     return question.detail;
   }
 
+  function renderExplanation(question, definition) {
+    return question.explanation || definition?.explanation || question.detail || "解説は準備中です。";
+  }
+
   function questionDefinitionMap(exam) {
     const map = new Map();
     exam.sections.forEach((section) => {
@@ -267,6 +271,11 @@
     tableWrap.className = "table-scroll";
     const table = document.createElement("table");
     table.className = "answer-table generic-sheet-table";
+    if ((definition.answerSheet.columns || []).length >= 9) {
+      table.classList.add("worksheet-table");
+    } else if ((definition.answerSheet.columns || []).length <= 5) {
+      table.classList.add("ledger-table");
+    }
     const thead = document.createElement("thead");
     const headRow = document.createElement("tr");
     definition.answerSheet.columns.forEach((column) => {
@@ -338,22 +347,22 @@
       sectionNode.appendChild(head);
 
       section.questions.forEach((question, index) => {
+        const definition = definitionMap.get(question.id);
         const item = document.createElement("details");
         item.className = "review-item";
-        if (!question.isCorrect) item.open = true;
+        item.open = true;
         item.innerHTML = `
           <summary>
             <span>${index + 1}. ${question.title}</span>
             <strong class="${question.isCorrect ? "ok" : "ng"}">${scoreText(question.score, question.maxScore)}</strong>
           </summary>
           <div class="review-body">
-            <p><b>あなたの回答</b>: ${renderUserAnswer(question)}</p>
+            <p><b>ユーザーの解答</b>: ${renderUserAnswer(question)}</p>
             <p><b>正答</b>: ${renderCorrectAnswer(question)}</p>
-            <p><b>解説</b>: ${question.explanation}</p>
+            <p><b>丁寧な解説</b>: ${renderExplanation(question, definition)}</p>
           </div>
         `;
 
-        const definition = definitionMap.get(question.id);
         const structuredReview = renderStructuredReview(question, definition);
         if (structuredReview) {
           item.querySelector(".review-body").appendChild(structuredReview);
@@ -362,7 +371,7 @@
           tableWrap.className = "table-scroll";
           const table = document.createElement("table");
           table.className = "answer-table";
-          table.innerHTML = "<thead><tr><th>項目</th><th>あなたの回答</th><th>正答</th><th>結果</th></tr></thead>";
+          table.innerHTML = "<thead><tr><th>項目</th><th>ユーザーの解答</th><th>正答</th><th>結果</th></tr></thead>";
           const tbody = document.createElement("tbody");
           question.fieldResults.forEach((field) => {
             const row = document.createElement("tr");
