@@ -605,8 +605,7 @@
                       "fieldId": "retained_credit_summary"
                     },
                     "creditAmount": {
-                      "fieldId": "net_income_amount",
-                      "readonly": true
+                      "fieldId": "net_income_amount"
                     }
                   },
                   {

@@ -63,16 +63,24 @@
     return Number.isFinite(number) ? number.toLocaleString("ja-JP") : value;
   }
 
-  function formatOnEnter(input, onFormat) {
+  function commitFormattedNumber(input, onFormat) {
+    const formatted = formatNumericText(input.value);
+    input.classList.add("amount-input");
+    input.style.textAlign = "right";
+    if (formatted === input.value) return;
+    input.value = formatted;
+    onFormat(formatted);
+    saveProgress();
+  }
+
+  function formatOnCommit(input, onFormat) {
+    input.classList.add("amount-input");
     input.addEventListener("keydown", (event) => {
       if (event.key !== "Enter") return;
       event.preventDefault();
-      const formatted = formatNumericText(input.value);
-      if (formatted === input.value) return;
-      input.value = formatted;
-      onFormat(formatted);
-      saveProgress();
+      commitFormattedNumber(input, onFormat);
     });
+    input.addEventListener("blur", () => commitFormattedNumber(input, onFormat));
   }
 
   function initEmptyAnswer(question) {
@@ -199,6 +207,7 @@
     amountInput.min = "0";
     amountInput.placeholder = "金額";
     amountInput.value = answer.amount || "";
+    amountInput.className = "amount-input";
     amountInput.setAttribute("aria-label", "金額");
 
     form.append(
@@ -210,7 +219,7 @@
     debitSelect.addEventListener("change", () => updateAnswer(question.id, "debitAccount", debitSelect.value));
     creditSelect.addEventListener("change", () => updateAnswer(question.id, "creditAccount", creditSelect.value));
     amountInput.addEventListener("input", () => updateAnswer(question.id, "amount", amountInput.value));
-    formatOnEnter(amountInput, (value) => updateAnswer(question.id, "amount", value));
+    formatOnCommit(amountInput, (value) => updateAnswer(question.id, "amount", value));
 
     article.appendChild(form);
     return article;
@@ -277,6 +286,7 @@
       debitAmount.min = "0";
       debitAmount.placeholder = "金額";
       debitAmount.value = line.debitAmount || "";
+      debitAmount.className = "amount-input";
       debitAmount.setAttribute("aria-label", "借方金額");
       const creditAmount = document.createElement("input");
       creditAmount.type = "text";
@@ -285,14 +295,15 @@
       creditAmount.min = "0";
       creditAmount.placeholder = "金額";
       creditAmount.value = line.creditAmount || "";
+      creditAmount.className = "amount-input";
       creditAmount.setAttribute("aria-label", "貸方金額");
 
       debitSelect.addEventListener("change", () => updateJournalLine(question.id, index, "debitAccount", debitSelect.value));
       debitAmount.addEventListener("input", () => updateJournalLine(question.id, index, "debitAmount", debitAmount.value));
       creditSelect.addEventListener("change", () => updateJournalLine(question.id, index, "creditAccount", creditSelect.value));
       creditAmount.addEventListener("input", () => updateJournalLine(question.id, index, "creditAmount", creditAmount.value));
-      formatOnEnter(debitAmount, (value) => updateJournalLine(question.id, index, "debitAmount", value));
-      formatOnEnter(creditAmount, (value) => updateJournalLine(question.id, index, "creditAmount", value));
+      formatOnCommit(debitAmount, (value) => updateJournalLine(question.id, index, "debitAmount", value));
+      formatOnCommit(creditAmount, (value) => updateJournalLine(question.id, index, "creditAmount", value));
 
       [debitSelect, debitAmount, creditSelect, creditAmount].forEach((control) => {
         const cell = document.createElement("td");
@@ -355,6 +366,7 @@
       input.inputMode = "numeric";
       input.placeholder = "金額";
       input.value = state.answers[question.id][field.id] || "";
+      input.className = "amount-input";
       input.setAttribute("aria-label", label || field.label);
     }
 
@@ -364,7 +376,7 @@
     });
 
     if (field.inputType !== "select") {
-      formatOnEnter(input, (value) => {
+      formatOnCommit(input, (value) => {
         state.answers[question.id][field.id] = value;
       });
     }

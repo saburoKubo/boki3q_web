@@ -906,6 +906,11 @@ a:focus-visible {
   background: #ffffff;
 }
 
+.amount-input,
+input[inputmode="numeric"] {
+  text-align: right;
+}
+
 .inventory-sheet-table {
   min-width: 980px;
   font-size: 0.9rem;
