@@ -323,6 +323,72 @@
     return wrap;
   }
 
+  function renderResultStatementTable(resultQuestion, definition, statement, mode) {
+    const block = document.createElement("section");
+    block.className = "statement-block";
+    const title = document.createElement("h5");
+    title.textContent = statement.title;
+    const tableWrap = document.createElement("div");
+    tableWrap.className = "table-scroll";
+    const table = document.createElement("table");
+    table.className = "answer-table generic-sheet-table compact-sheet-table statement-table";
+    const columns = statement.columns || [];
+    if (columns.includes("負債・純資産")) {
+      table.classList.add("balance-sheet-table");
+    }
+    const thead = document.createElement("thead");
+    const headRow = document.createElement("tr");
+    columns.forEach((column) => {
+      const th = document.createElement("th");
+      th.textContent = column;
+      headRow.appendChild(th);
+    });
+    thead.appendChild(headRow);
+    const tbody = document.createElement("tbody");
+    (statement.rows || []).forEach((row) => {
+      const tr = document.createElement("tr");
+      row.cells.forEach((cell) => tr.appendChild(answerDisplayCell(resultQuestion, definition, cell, mode)));
+      tbody.appendChild(tr);
+    });
+    table.append(thead, tbody);
+    tableWrap.appendChild(table);
+    block.append(title, tableWrap);
+    return block;
+  }
+
+  function renderResultStatementsSheet(resultQuestion, definition, mode) {
+    const wrap = document.createElement("div");
+    wrap.className = "answer-sheet statements-answer-sheet result-answer-sheet";
+    const heading = document.createElement("h4");
+    const baseTitle = definition.answerSheet.title || "答案用紙";
+    heading.textContent = (mode === "user" ? "あなたの答案 " : "正答答案 ") + baseTitle.replace(/^答案用紙\s*/, "");
+    wrap.appendChild(heading);
+    (definition.answerSheet.statements || []).forEach((statement) => {
+      wrap.appendChild(renderResultStatementTable(resultQuestion, definition, statement, mode));
+    });
+
+    const summary = document.createElement("div");
+    summary.className = "inventory-summary-fields";
+    (definition.answerSheet.summaryFields || []).forEach((item) => {
+      const label = document.createElement("label");
+      label.className = "field";
+      const span = document.createElement("span");
+      span.textContent = item.label;
+      const strong = document.createElement("strong");
+      if (item.fieldId) {
+        const field = fieldResultById(resultQuestion).get(item.fieldId);
+        strong.className = field?.isCorrect ? "result-ok" : "result-ng";
+        strong.textContent = formatAnswerValue(mode === "user" ? field?.userAnswer : field?.correctAnswer);
+      } else {
+        strong.textContent = item.value;
+      }
+      label.append(span, strong);
+      summary.appendChild(label);
+    });
+    wrap.appendChild(summary);
+    return wrap;
+  }
+
   function renderStructuredReview(resultQuestion, definition) {
     if (!definition?.answerSheet) return null;
     const wrap = document.createElement("div");
@@ -336,6 +402,8 @@
           ? renderResultTrialBalanceSheet
           : type === "table"
             ? renderResultTableSheet
+            : type === "statements"
+              ? renderResultStatementsSheet
           : null;
     if (!renderer) return null;
     wrap.append(renderer(resultQuestion, definition, "user"), renderer(resultQuestion, definition, "correct"));

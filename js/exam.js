@@ -608,12 +608,78 @@
     return wrap;
   }
 
+  function renderStatementTable(question, statement) {
+    const block = document.createElement("section");
+    block.className = "statement-block";
+    const title = document.createElement("h5");
+    title.textContent = statement.title;
+    const tableWrap = document.createElement("div");
+    tableWrap.className = "table-scroll";
+    const table = document.createElement("table");
+    table.className = "answer-table generic-sheet-table compact-sheet-table statement-table";
+    const columns = statement.columns || [];
+    if (columns.includes("負債・純資産")) {
+      table.classList.add("balance-sheet-table");
+    }
+    const thead = document.createElement("thead");
+    const headRow = document.createElement("tr");
+    columns.forEach((column) => {
+      const th = document.createElement("th");
+      th.textContent = column;
+      headRow.appendChild(th);
+    });
+    thead.appendChild(headRow);
+    const tbody = document.createElement("tbody");
+    (statement.rows || []).forEach((row) => {
+      const tr = document.createElement("tr");
+      row.cells.forEach((cell, index) => {
+        tr.appendChild(answerSheetCell(question, cell, columns[index]));
+      });
+      tbody.appendChild(tr);
+    });
+    table.append(thead, tbody);
+    tableWrap.appendChild(table);
+    block.append(title, tableWrap);
+    return block;
+  }
+
+  function renderStatementsAnswerSheet(question) {
+    const wrap = document.createElement("div");
+    wrap.className = "answer-sheet statements-answer-sheet";
+    const heading = document.createElement("h4");
+    heading.textContent = question.answerSheet.title || "答案用紙";
+    wrap.appendChild(heading);
+    (question.answerSheet.statements || []).forEach((statement) => {
+      wrap.appendChild(renderStatementTable(question, statement));
+    });
+
+    const summary = document.createElement("div");
+    summary.className = "inventory-summary-fields";
+    (question.answerSheet.summaryFields || []).forEach((item) => {
+      const label = document.createElement("label");
+      label.className = "field";
+      const span = document.createElement("span");
+      span.textContent = item.label;
+      if (item.fieldId) {
+        label.append(span, createAnswerControl(question, item.fieldId, item.label));
+      } else {
+        const strong = document.createElement("strong");
+        strong.textContent = item.value;
+        label.append(span, strong);
+      }
+      summary.appendChild(label);
+    });
+    wrap.appendChild(summary);
+    return wrap;
+  }
+
   function renderStructuredAnswerSheet(question) {
     if (!question.answerSheet) return null;
     if (question.answerSheet.type === "accounts") return renderAccountsAnswerSheet(question);
     if (question.answerSheet.type === "inventory") return renderInventoryAnswerSheet(question);
     if (question.answerSheet.type === "trial_balance") return renderTrialBalanceAnswerSheet(question);
     if (question.answerSheet.type === "table") return renderTableAnswerSheet(question);
+    if (question.answerSheet.type === "statements") return renderStatementsAnswerSheet(question);
     return null;
   }
 

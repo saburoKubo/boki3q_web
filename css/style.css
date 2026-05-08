@@ -948,6 +948,21 @@ input[inputmode="numeric"] {
   text-align: left;
 }
 
+.statements-answer-sheet {
+  display: grid;
+  gap: 18px;
+}
+
+.statement-block h5 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.statement-table th:first-child,
+.statement-table td:first-child {
+  min-width: 180px;
+}
+
 .generic-sheet-table td:first-child {
   position: sticky;
   left: 0;
