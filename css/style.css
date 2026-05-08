@@ -1065,3 +1065,8 @@ input[inputmode="numeric"] {
 .result-answer-sheet td.answer-cell {
   text-align: right;
 }
+
+.result-answer-sheet .t-account-table td:nth-child(1),
+.result-answer-sheet .t-account-table td:nth-child(3) {
+  text-align: left;
+}
