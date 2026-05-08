@@ -357,6 +357,8 @@
       block.className = "account-block";
       const title = document.createElement("h5");
       title.textContent = account.title;
+      const tableWrap = document.createElement("div");
+      tableWrap.className = "table-scroll";
       const table = document.createElement("table");
       table.className = "t-account-table";
       table.innerHTML = "<thead><tr><th>借方摘要</th><th>借方金額</th><th>貸方摘要</th><th>貸方金額</th></tr></thead>";
@@ -372,7 +374,8 @@
         tbody.appendChild(tr);
       });
       table.appendChild(tbody);
-      block.append(title, table);
+      tableWrap.appendChild(table);
+      block.append(title, tableWrap);
       wrap.appendChild(block);
     });
 

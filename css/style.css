@@ -356,6 +356,7 @@ select {
 }
 
 .question-card {
+  min-width: 0;
   border: 1px solid var(--line);
   background: #ffffff;
   margin: 16px 0;
@@ -439,6 +440,7 @@ a:focus-visible {
 }
 
 .table-scroll {
+  max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -595,6 +597,7 @@ a:focus-visible {
 }
 
 .review-body {
+  min-width: 0;
   padding: 0 16px 16px;
   color: var(--muted);
 }
@@ -739,6 +742,7 @@ a:focus-visible {
 }
 
 .source-document {
+  min-width: 0;
   border: 1px solid var(--line-strong);
   background: var(--surface-2);
   margin: 12px 0 16px;
@@ -830,6 +834,7 @@ a:focus-visible {
 }
 
 .answer-sheet {
+  min-width: 0;
   border: 1px solid var(--line-strong);
   background: #ffffff;
   margin-top: 14px;
@@ -888,6 +893,35 @@ a:focus-visible {
 .inventory-sheet-table {
   min-width: 980px;
   font-size: 0.9rem;
+}
+
+.generic-sheet-table {
+  min-width: 1120px;
+  font-size: 0.86rem;
+}
+
+.generic-sheet-table th,
+.generic-sheet-table td {
+  white-space: nowrap;
+}
+
+.generic-sheet-table td:not(:first-child) {
+  text-align: right;
+}
+
+.generic-sheet-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #ffffff;
+  font-weight: 700;
+}
+
+.generic-sheet-table thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--surface-2);
 }
 
 .inventory-summary-fields {
