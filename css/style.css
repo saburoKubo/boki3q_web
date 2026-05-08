@@ -1045,6 +1045,34 @@ input[inputmode="numeric"] {
   background: var(--surface-2);
 }
 
+.statement-account-table th,
+.statement-account-table td {
+  white-space: normal;
+}
+
+.statement-account-table th:first-child,
+.statement-account-table td:first-child,
+.statement-account-table thead th:first-child {
+  position: static;
+  left: auto;
+  z-index: auto;
+  min-width: 0;
+}
+
+.statement-account-table th:nth-child(1),
+.statement-account-table td:nth-child(1),
+.statement-account-table th:nth-child(3),
+.statement-account-table td:nth-child(3) {
+  width: 34%;
+}
+
+.statement-account-table th:nth-child(2),
+.statement-account-table td:nth-child(2),
+.statement-account-table th:nth-child(4),
+.statement-account-table td:nth-child(4) {
+  width: 16%;
+}
+
 .worksheet-table th:nth-child(2),
 .worksheet-table td:nth-child(2),
 .worksheet-table th:nth-child(4),
