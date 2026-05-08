@@ -1,0 +1,400 @@
+{
+  "examId": "mock_005",
+  "title": "第5回 模擬試験",
+  "durationMinutes": 60,
+  "totalScore": 100,
+  "passScore": 70,
+  "accountOptions": [
+    "現金",
+    "小口現金",
+    "普通預金",
+    "当座預金",
+    "売掛金",
+    "クレジット売掛金",
+    "受取手形",
+    "繰越商品",
+    "消耗品",
+    "貯蔵品",
+    "備品",
+    "備品減価償却累計額",
+    "前払金",
+    "仮払金",
+    "前払保険料",
+    "未収手数料",
+    "仮払法人税等",
+    "買掛金",
+    "支払手形",
+    "借入金",
+    "未払金",
+    "未払利息",
+    "未払法人税等",
+    "前受金",
+    "仮受金",
+    "所得税預り金",
+    "社会保険料預り金",
+    "貸倒引当金",
+    "資本金",
+    "繰越利益剰余金",
+    "売上",
+    "仕入",
+    "受取手数料",
+    "給料",
+    "支払家賃",
+    "旅費交通費",
+    "通信費",
+    "保険料",
+    "消耗品費",
+    "発送費",
+    "雑費",
+    "支払利息",
+    "支払手数料",
+    "租税公課",
+    "減価償却費",
+    "固定資産除却損",
+    "貸倒引当金繰入",
+    "貸倒引当金戻入",
+    "貸倒損失",
+    "法人税、住民税及び事業税",
+    "現金過不足",
+    "損益"
+  ],
+  "sections": [
+    {
+      "sectionId": "section_1",
+      "title": "第1問 仕訳問題",
+      "score": 45,
+      "description": "各取引について、勘定科目を選び、仕訳を完成させなさい。複数行が必要な問題では、不要な行は空欄のままでよい。",
+      "questions": [
+        {
+          "id": "m005_s1_q01",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "前期末に未払計上していた支払家賃 ￥90,000 について、期首に再振替仕訳を行った。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "未払金", "debitAmount": 90000 },
+              { "creditAccount": "支払家賃", "creditAmount": 90000 }
+            ]
+          },
+          "explanation": "前期末に費用計上した未払家賃は、期首に未払金を取り消し、支払家賃を貸方に記入して再振替します。"
+        },
+        {
+          "id": "m005_s1_q02",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "前期末に前受金として処理していた受取手数料 ￥60,000 について、期首に再振替仕訳を行った。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "前受金", "debitAmount": 60000 },
+              { "creditAccount": "受取手数料", "creditAmount": 60000 }
+            ]
+          },
+          "explanation": "前期末に受取手数料を減らして前受金へ振り替えた分は、期首に前受金を借方、受取手数料を貸方として再振替します。"
+        },
+        {
+          "id": "m005_s1_q03",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "従業員へ出張旅費の概算額として ￥50,000 を普通預金口座から支払った。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "仮払金", "debitAmount": 50000 },
+              { "creditAccount": "普通預金", "creditAmount": 50000 }
+            ]
+          },
+          "explanation": "金額が確定していない概算払いは、費用ではなく仮払金として処理します。"
+        },
+        {
+          "id": "m005_s1_q04",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "出張から戻った従業員から、旅費交通費 ￥46,000 の報告を受け、残額 ￥4,000 は現金で返納された。",
+          "answerLineCount": 3,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "旅費交通費", "debitAmount": 46000 },
+              { "debitAccount": "現金", "debitAmount": 4000 },
+              { "creditAccount": "仮払金", "creditAmount": 50000 }
+            ]
+          },
+          "explanation": "仮払金を精算し、実際に発生した旅費交通費を費用計上します。未使用分は現金で戻るため現金を借方に記入します。"
+        },
+        {
+          "id": "m005_s1_q05",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "原因不明として現金過不足（借方）に処理していた ￥7,000 について、通信費の記入漏れであることが判明した。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "通信費", "debitAmount": 7000 },
+              { "creditAccount": "現金過不足", "creditAmount": 7000 }
+            ]
+          },
+          "explanation": "現金不足の原因が通信費の記入漏れと判明したため、通信費を計上し、仮勘定である現金過不足を取り消します。"
+        },
+        {
+          "id": "m005_s1_q06",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "消耗品 ￥80,000 を購入し、代金は現金で支払った。購入時には消耗品として処理する。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "消耗品", "debitAmount": 80000 },
+              { "creditAccount": "現金", "creditAmount": 80000 }
+            ]
+          },
+          "explanation": "購入時に資産処理する指示があるため、消耗品を借方、現金を貸方に記入します。"
+        },
+        {
+          "id": "m005_s1_q07",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "決算にあたり、消耗品の未使用高が ￥25,000 であることが判明した。なお、購入時には消耗品として処理している。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "消耗品費", "debitAmount": 55000 },
+              { "creditAccount": "消耗品", "creditAmount": 55000 }
+            ]
+          },
+          "explanation": "資産処理していた消耗品80,000円のうち未使用高25,000円を残し、使用済み55,000円を消耗品費へ振り替えます。"
+        },
+        {
+          "id": "m005_s1_q08",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "決算にあたり、売掛金の期末残高 ￥400,000 に対して2％の貸倒引当金を設定する。貸倒引当金の決算整理前残高は ￥12,000 であり、差額補充法による。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "貸倒引当金", "debitAmount": 4000 },
+              { "creditAccount": "貸倒引当金戻入", "creditAmount": 4000 }
+            ]
+          },
+          "explanation": "必要額は400,000円×2％＝8,000円です。既存残高12,000円の方が4,000円多いため、貸倒引当金を減らし、貸倒引当金戻入を計上します。"
+        },
+        {
+          "id": "m005_s1_q09",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "不要となった備品（取得原価 ￥300,000、減価償却累計額 ￥270,000、間接法で記帳）を除却した。処分価値はない。",
+          "answerLineCount": 3,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "備品減価償却累計額", "debitAmount": 270000 },
+              { "debitAccount": "固定資産除却損", "debitAmount": 30000 },
+              { "creditAccount": "備品", "creditAmount": 300000 }
+            ]
+          },
+          "explanation": "備品を除却する際は、取得原価と減価償却累計額を取り消し、帳簿価額30,000円を損失として処理します。"
+        },
+        {
+          "id": "m005_s1_q10",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "中間納付していた法人税等 ￥70,000 は仮払法人税等として処理している。決算にあたり、当期の法人税等が ￥180,000 と確定した。",
+          "answerLineCount": 3,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "法人税、住民税及び事業税", "debitAmount": 180000 },
+              { "creditAccount": "仮払法人税等", "creditAmount": 70000 },
+              { "creditAccount": "未払法人税等", "creditAmount": 110000 }
+            ]
+          },
+          "explanation": "確定した法人税等の総額を費用計上し、中間納付分を仮払法人税等から控除し、残額を未払法人税等にします。"
+        },
+        {
+          "id": "m005_s1_q11",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "前受金 ￥120,000 を受け取っていた商品を本日引き渡した。販売代金は ￥500,000 であり、残額はクレジット払いとした。信販会社への手数料 ￥11,400 は販売時に計上する。",
+          "answerLineCount": 4,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "前受金", "debitAmount": 120000 },
+              { "debitAccount": "クレジット売掛金", "debitAmount": 368600 },
+              { "debitAccount": "支払手数料", "debitAmount": 11400 },
+              { "creditAccount": "売上", "creditAmount": 500000 }
+            ]
+          },
+          "explanation": "前受金を取り崩し、残額380,000円からクレジット手数料11,400円を差し引いた368,600円をクレジット売掛金とします。"
+        },
+        {
+          "id": "m005_s1_q12",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "内容不明の入金 ￥45,000 が普通預金口座にあったため、いったん仮受金として処理した。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "普通預金", "debitAmount": 45000 },
+              { "creditAccount": "仮受金", "creditAmount": 45000 }
+            ]
+          },
+          "explanation": "入金の内容が判明していない場合は、判明するまで仮受金として処理します。"
+        },
+        {
+          "id": "m005_s1_q13",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "仮受金として処理していた ￥45,000 は、得意先からの売掛金回収であることが判明した。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "仮受金", "debitAmount": 45000 },
+              { "creditAccount": "売掛金", "creditAmount": 45000 }
+            ]
+          },
+          "explanation": "仮受金の内容が売掛金の回収と判明したため、仮受金を取り消し、売掛金を減少させます。"
+        },
+        {
+          "id": "m005_s1_q14",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "小口現金係から、交通費 ￥9,000、通信費 ￥4,000、雑費 ￥2,000 を支払ったとの報告を受け、ただちに同額の小切手を振り出して補給した。",
+          "answerLineCount": 5,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "旅費交通費", "debitAmount": 9000 },
+              { "debitAccount": "通信費", "debitAmount": 4000 },
+              { "debitAccount": "雑費", "debitAmount": 2000 },
+              { "creditAccount": "当座預金", "creditAmount": 15000 }
+            ]
+          },
+          "explanation": "定額資金前渡制度では、報告された支払内容を費用処理し、補給時に小切手を振り出したため当座預金を減少させます。"
+        },
+        {
+          "id": "m005_s1_q15",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "決算にあたり、役務提供済みでまだ受け取っていない手数料 ￥35,000 を計上した。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "未収手数料", "debitAmount": 35000 },
+              { "creditAccount": "受取手数料", "creditAmount": 35000 }
+            ]
+          },
+          "explanation": "当期に役務提供済みの収益で未収のものは、未収手数料を借方、受取手数料を貸方に計上します。"
+        }
+      ]
+    },
+    {
+      "sectionId": "section_2",
+      "title": "第2問 補助簿",
+      "score": 20,
+      "description": "小問(1)(2)について、資料にもとづき空欄に入る語句または金額を答えなさい。",
+      "questions": [
+        {
+          "id": "m005_s2_q01",
+          "type": "account_fill",
+          "score": 10,
+          "title": "小問(1) 小口現金出納帳",
+          "question": "定額資金前渡制度を採用している。小口現金の前週繰越額は￥100,000である。今週、交通費￥12,000、郵便切手代￥8,000、事務用品代￥5,000、得意先への発送費￥7,000、雑費￥3,000を小口現金から支払った。週末に支払報告を受け、ただちに小切手を振り出して補給した。小口現金出納帳の空欄を埋めなさい。",
+          "fields": [
+            { "id": "travel_payment", "label": "交通費支払額", "inputType": "number", "correctAnswer": 12000, "score": 2 },
+            { "id": "communication_payment", "label": "通信費支払額", "inputType": "number", "correctAnswer": 8000, "score": 2 },
+            { "id": "ending_cash", "label": "補給前残高", "inputType": "number", "correctAnswer": 65000, "score": 2 },
+            { "id": "replenishment", "label": "補給額", "inputType": "number", "correctAnswer": 35000, "score": 2 },
+            { "id": "after_replenishment", "label": "補給後残高", "inputType": "number", "correctAnswer": 100000, "score": 2 }
+          ],
+          "explanation": "支払合計は12,000円＋8,000円＋5,000円＋7,000円＋3,000円＝35,000円です。補給前残高は100,000円－35,000円＝65,000円、定額資金前渡制度なので同額35,000円を補給し、補給後残高は100,000円に戻ります。",
+          "answerSheet": {
+            "type": "table",
+            "title": "答案用紙 小口現金出納帳",
+            "columns": ["日付", "摘要", "受入", "支払", "内訳", "残高"],
+            "rows": [
+              { "cells": ["月初", "前週繰越", "100,000", "", "", "100,000"] },
+              { "cells": ["今週", "交通費", "", { "fieldId": "travel_payment" }, "旅費交通費", "88,000"] },
+              { "cells": ["今週", "郵便切手代", "", { "fieldId": "communication_payment" }, "通信費", "80,000"] },
+              { "cells": ["今週", "事務用品代", "", "5,000", "消耗品費", "75,000"] },
+              { "cells": ["今週", "発送費", "", "7,000", "発送費", "68,000"] },
+              { "cells": ["今週", "雑費", "", "3,000", "雑費", { "fieldId": "ending_cash" }] },
+              { "cells": ["週末", "補給", { "fieldId": "replenishment" }, "", "", { "fieldId": "after_replenishment" }] }
+            ]
+          }
+        },
+        {
+          "id": "m005_s2_q02",
+          "type": "account_fill",
+          "score": 10,
+          "title": "小問(2) 仕入帳",
+          "question": "次の取引にもとづいて、仕入帳の空欄を埋めなさい。7/4 A商品を掛けで￥250,000仕入れた。7/12 B商品を掛けで￥180,000仕入れた。7/18 7/4に仕入れたA商品のうち￥30,000を返品した。7/25 7/12に仕入れたB商品について￥12,000の値引きを受けた。",
+          "fields": [
+            { "id": "purchase_a", "label": "7/4 仕入金額", "inputType": "number", "correctAnswer": 250000, "score": 2 },
+            { "id": "purchase_b", "label": "7/12 仕入金額", "inputType": "number", "correctAnswer": 180000, "score": 2 },
+            { "id": "purchase_return", "label": "7/18 返品金額", "inputType": "number", "correctAnswer": 30000, "score": 2 },
+            { "id": "purchase_allowance", "label": "7/25 値引金額", "inputType": "number", "correctAnswer": 12000, "score": 2 },
+            { "id": "net_purchases", "label": "純仕入高", "inputType": "number", "correctAnswer": 388000, "score": 2 }
+          ],
+          "explanation": "総仕入高は250,000円＋180,000円＝430,000円です。返品30,000円と値引12,000円を控除するため、純仕入高は430,000円－42,000円＝388,000円です。",
+          "answerSheet": {
+            "type": "table",
+            "title": "答案用紙 仕入帳",
+            "columns": ["日付", "摘要", "総仕入", "返品・値引", "純仕入"],
+            "rows": [
+              { "cells": ["7/4", "A商品 掛仕入", { "fieldId": "purchase_a" }, "", "250,000"] },
+              { "cells": ["7/12", "B商品 掛仕入", { "fieldId": "purchase_b" }, "", "180,000"] },
+              { "cells": ["7/18", "A商品 返品", "", { "fieldId": "purchase_return" }, "-30,000"] },
+              { "cells": ["7/25", "B商品 値引", "", { "fieldId": "purchase_allowance" }, "-12,000"] },
+              { "cells": ["7/31", "純仕入高", "430,000", "42,000", { "fieldId": "net_purchases" }] }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "section_3",
+      "title": "第3問 決算総合問題",
+      "score": 35,
+      "description": "決算整理前残高試算表と決算整理事項にもとづき、貸借対照表を完成させなさい。",
+      "questions": [
+        {
+          "id": "m005_s3_q01",
+          "type": "financial_statement_fill",
+          "score": 35,
+          "title": "貸借対照表",
+          "question": "次の決算整理前残高試算表および決算整理事項にもとづき、答案用紙の貸借対照表を完成させなさい。決算整理前残高試算表: 現金180,000、普通預金820,000、売掛金620,000、貸倒引当金10,000、繰越商品240,000、消耗品60,000、備品1,000,000、備品減価償却累計額300,000、買掛金350,000、借入金500,000、資本金1,000,000、繰越利益剰余金250,000、売上2,600,000、受取手数料310,000、仕入1,500,000、給料420,000、保険料120,000、支払家賃360,000。決算整理事項: 1. 期末商品棚卸高は280,000円である。2. 消耗品の期末未使用高は18,000円である。3. 保険料のうち30,000円は次期分である。4. 備品について100,000円の減価償却を行う。5. 売掛金期末残高に対して3％の貸倒引当金を差額補充法で設定する。6. 借入金の未払利息5,000円を計上する。7. 税引前当期純利益の30％を法人税、住民税及び事業税として計上する。",
+          "fields": [
+            { "id": "cash", "label": "現金", "inputType": "number", "correctAnswer": 180000, "score": 2 },
+            { "id": "bank", "label": "普通預金", "inputType": "number", "correctAnswer": 820000, "score": 2 },
+            { "id": "accounts_receivable", "label": "売掛金", "inputType": "number", "correctAnswer": 620000, "score": 2 },
+            { "id": "allowance", "label": "貸倒引当金", "inputType": "number", "correctAnswer": 18600, "score": 3 },
+            { "id": "ending_inventory", "label": "繰越商品", "inputType": "number", "correctAnswer": 280000, "score": 3 },
+            { "id": "supplies", "label": "消耗品", "inputType": "number", "correctAnswer": 18000, "score": 2 },
+            { "id": "prepaid_insurance", "label": "前払保険料", "inputType": "number", "correctAnswer": 30000, "score": 2 },
+            { "id": "accumulated_depreciation", "label": "備品減価償却累計額", "inputType": "number", "correctAnswer": 400000, "score": 3 },
+            { "id": "accrued_interest", "label": "未払利息", "inputType": "number", "correctAnswer": 5000, "score": 2 },
+            { "id": "unpaid_taxes", "label": "未払法人税等", "inputType": "number", "correctAnswer": 127320, "score": 3 },
+            { "id": "retained_earnings", "label": "繰越利益剰余金", "inputType": "number", "correctAnswer": 547080, "score": 3 },
+            { "id": "total_assets", "label": "資産合計", "inputType": "number", "correctAnswer": 2529400, "score": 4 },
+            { "id": "total_liabilities_equity", "label": "負債・純資産合計", "inputType": "number", "correctAnswer": 2529400, "score": 4 }
+          ],
+          "explanation": "貸倒引当金は620,000円×3％＝18,600円、備品減価償却累計額は300,000円＋100,000円＝400,000円です。税引前当期純利益は424,400円で、法人税等はその30％の127,320円、当期純利益は297,080円です。繰越利益剰余金は250,000円＋297,080円＝547,080円となり、資産合計と負債・純資産合計はいずれも2,529,400円です。",
+          "answerSheet": {
+            "type": "table",
+            "title": "答案用紙 貸借対照表",
+            "columns": ["資産", "金額", "負債・純資産", "金額"],
+            "rows": [
+              { "cells": ["現金", { "fieldId": "cash" }, "買掛金", "350,000"] },
+              { "cells": ["普通預金", { "fieldId": "bank" }, "借入金", "500,000"] },
+              { "cells": ["売掛金", { "fieldId": "accounts_receivable" }, "未払利息", { "fieldId": "accrued_interest" }] },
+              { "cells": ["貸倒引当金（控除）", { "fieldId": "allowance" }, "未払法人税等", { "fieldId": "unpaid_taxes" }] },
+              { "cells": ["繰越商品", { "fieldId": "ending_inventory" }, "資本金", "1,000,000"] },
+              { "cells": ["消耗品", { "fieldId": "supplies" }, "繰越利益剰余金", { "fieldId": "retained_earnings" }] },
+              { "cells": ["前払保険料", { "fieldId": "prepaid_insurance" }, "", ""] },
+              { "cells": ["備品", "1,000,000", "", ""] },
+              { "cells": ["備品減価償却累計額（控除）", { "fieldId": "accumulated_depreciation" }, "", ""] },
+              { "cells": ["資産合計", { "fieldId": "total_assets" }, "負債・純資産合計", { "fieldId": "total_liabilities_equity" }] }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

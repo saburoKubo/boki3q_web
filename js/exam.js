@@ -565,6 +565,9 @@
     if (columns.includes("摘要")) {
       table.classList.add("ledger-table");
     }
+    if (columns.includes("負債・純資産")) {
+      table.classList.add("balance-sheet-table");
+    }
     const thead = document.createElement("thead");
     const headRow = document.createElement("tr");
     columns.forEach((column) => {

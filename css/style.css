@@ -943,6 +943,11 @@ input[inputmode="numeric"] {
   text-align: left;
 }
 
+.balance-sheet-table th:nth-child(3),
+.balance-sheet-table td:nth-child(3) {
+  text-align: left;
+}
+
 .generic-sheet-table td:first-child {
   position: sticky;
   left: 0;
