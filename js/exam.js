@@ -34,6 +34,47 @@
     confirmSubmit: document.getElementById("confirm-submit")
   };
 
+  const accountGroupOrder = [
+    ["現金", "普通預金", "当座預金", "売掛金", "クレジット売掛金", "受取手形", "電子記録債権", "受取商品券", "繰越商品", "前払金", "前払家賃", "前払保険料", "仮払金", "未収入金", "未収手数料", "貯蔵品", "差入保証金", "備品", "備品減価償却累計額", "建物", "土地", "貸倒引当金"],
+    ["買掛金", "支払手形", "電子記録債務", "未払金", "未払給料", "未払利息", "未払法人税等", "未払配当金", "前受金", "前受手数料", "所得税預り金", "住民税預り金", "社会保険料預り金", "借入金", "手形借入金", "当座借越"],
+    ["資本金", "繰越利益剰余金", "利益準備金"],
+    ["仕入", "給料", "支払家賃", "旅費交通費", "通信費", "消耗品費", "保険料", "法定福利費", "租税公課", "修繕費", "発送費", "支払手数料", "支払利息", "減価償却費", "貸倒引当金繰入", "貸倒損失", "貯蔵品消耗費", "固定資産売却損", "法人税、住民税及び事業税"],
+    ["売上", "受取手数料", "償却債権取立益", "固定資産売却益"]
+  ];
+
+  const accountOrderMap = new Map();
+  accountGroupOrder.flat().forEach((account, index) => {
+    accountOrderMap.set(account, index);
+  });
+
+  function orderedOptions(options) {
+    return [...options].sort((a, b) => {
+      const rankA = accountOrderMap.has(a) ? accountOrderMap.get(a) : Number.MAX_SAFE_INTEGER;
+      const rankB = accountOrderMap.has(b) ? accountOrderMap.get(b) : Number.MAX_SAFE_INTEGER;
+      if (rankA !== rankB) return rankA - rankB;
+      return options.indexOf(a) - options.indexOf(b);
+    });
+  }
+
+  function formatNumericText(value) {
+    const normalized = String(value || "").replace(/[,\s￥¥]/g, "");
+    if (normalized === "") return "";
+    const number = Number(normalized);
+    return Number.isFinite(number) ? number.toLocaleString("ja-JP") : value;
+  }
+
+  function formatOnEnter(input, onFormat) {
+    input.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter") return;
+      event.preventDefault();
+      const formatted = formatNumericText(input.value);
+      if (formatted === input.value) return;
+      input.value = formatted;
+      onFormat(formatted);
+      saveProgress();
+    });
+  }
+
   function initEmptyAnswer(question) {
     if (question.type === "journal_dropdown") {
       const current = state.answers[question.id];
@@ -131,7 +172,7 @@
     empty.textContent = "選択";
     select.appendChild(empty);
 
-    options.forEach((optionValue) => {
+    orderedOptions(options).forEach((optionValue) => {
       const option = document.createElement("option");
       option.value = optionValue;
       option.textContent = optionValue;
@@ -169,6 +210,7 @@
     debitSelect.addEventListener("change", () => updateAnswer(question.id, "debitAccount", debitSelect.value));
     creditSelect.addEventListener("change", () => updateAnswer(question.id, "creditAccount", creditSelect.value));
     amountInput.addEventListener("input", () => updateAnswer(question.id, "amount", amountInput.value));
+    formatOnEnter(amountInput, (value) => updateAnswer(question.id, "amount", value));
 
     article.appendChild(form);
     return article;
@@ -249,6 +291,8 @@
       debitAmount.addEventListener("input", () => updateJournalLine(question.id, index, "debitAmount", debitAmount.value));
       creditSelect.addEventListener("change", () => updateJournalLine(question.id, index, "creditAccount", creditSelect.value));
       creditAmount.addEventListener("input", () => updateJournalLine(question.id, index, "creditAmount", creditAmount.value));
+      formatOnEnter(debitAmount, (value) => updateJournalLine(question.id, index, "debitAmount", value));
+      formatOnEnter(creditAmount, (value) => updateJournalLine(question.id, index, "creditAmount", value));
 
       [debitSelect, debitAmount, creditSelect, creditAmount].forEach((control) => {
         const cell = document.createElement("td");
@@ -319,6 +363,12 @@
       saveProgress();
     });
 
+    if (field.inputType !== "select") {
+      formatOnEnter(input, (value) => {
+        state.answers[question.id][field.id] = value;
+      });
+    }
+
     return input;
   }
 
@@ -335,7 +385,7 @@
     }
     if (cell.fieldId && cell.readonly) {
       const source = state.answers[question.id][cell.fieldId];
-      td.textContent = source ? Number(source).toLocaleString("ja-JP") : "";
+      td.textContent = source ? formatNumericText(source) : "";
       return td;
     }
     if (cell.fieldId) {
