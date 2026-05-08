@@ -1,0 +1,411 @@
+{
+  "examId": "mock_004",
+  "title": "第4回 模擬試験",
+  "durationMinutes": 60,
+  "totalScore": 100,
+  "passScore": 70,
+  "accountOptions": [
+    "現金",
+    "小口現金",
+    "普通預金",
+    "当座預金",
+    "当座借越",
+    "売掛金",
+    "クレジット売掛金",
+    "受取手形",
+    "電子記録債権",
+    "繰越商品",
+    "貯蔵品",
+    "備品",
+    "備品減価償却累計額",
+    "建物",
+    "土地",
+    "前払金",
+    "前払保険料",
+    "未収入金",
+    "仮払消費税",
+    "買掛金",
+    "支払手形",
+    "電子記録債務",
+    "借入金",
+    "手形借入金",
+    "未払金",
+    "未払利息",
+    "未払消費税",
+    "前受金",
+    "所得税預り金",
+    "社会保険料預り金",
+    "貸倒引当金",
+    "仮受消費税",
+    "資本金",
+    "繰越利益剰余金",
+    "売上",
+    "受取手数料",
+    "償却債権取立益",
+    "仕入割引",
+    "仕入",
+    "給料",
+    "支払家賃",
+    "通信費",
+    "保険料",
+    "消耗品費",
+    "支払利息",
+    "支払手数料",
+    "手形売却損",
+    "売上割引",
+    "租税公課",
+    "減価償却費",
+    "貸倒損失",
+    "貸倒引当金繰入",
+    "現金過不足",
+    "損益"
+  ],
+  "sections": [
+    {
+      "sectionId": "section_1",
+      "title": "第1問 仕訳問題",
+      "score": 45,
+      "description": "各取引について、勘定科目を選び、仕訳を完成させなさい。複数行が必要な問題では、不要な行は空欄のままでよい。",
+      "questions": [
+        {
+          "id": "m004_s1_q01",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "現金の実際有高を調べたところ、帳簿残高より ￥8,000 多かった。原因はまだ判明していない。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "現金", "debitAmount": 8000 },
+              { "creditAccount": "現金過不足", "creditAmount": 8000 }
+            ]
+          },
+          "explanation": "実際有高が帳簿残高より多い場合は、現金を増加させ、原因不明分をいったん現金過不足で処理します。"
+        },
+        {
+          "id": "m004_s1_q02",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "前期末に貯蔵品として処理していた郵便切手 ￥12,000 を当期にすべて使用した。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "通信費", "debitAmount": 12000 },
+              { "creditAccount": "貯蔵品", "creditAmount": 12000 }
+            ]
+          },
+          "explanation": "未使用切手を使用したため、資産である貯蔵品を減らし、通信費を計上します。"
+        },
+        {
+          "id": "m004_s1_q03",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "得意先から商品注文の内金として ￥200,000 が普通預金口座に振り込まれた。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "普通預金", "debitAmount": 200000 },
+              { "creditAccount": "前受金", "creditAmount": 200000 }
+            ]
+          },
+          "explanation": "商品引渡し前に受け取った内金は、売上ではなく前受金として処理します。"
+        },
+        {
+          "id": "m004_s1_q04",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "商品 ￥660,000 をクレジット払いの条件で売り上げた。信販会社への手数料は販売代金の3％であり、販売時に計上する。",
+          "answerLineCount": 3,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "クレジット売掛金", "debitAmount": 640200 },
+              { "debitAccount": "支払手数料", "debitAmount": 19800 },
+              { "creditAccount": "売上", "creditAmount": 660000 }
+            ]
+          },
+          "explanation": "クレジット売上では、信販会社手数料を支払手数料として差し引き、残額をクレジット売掛金に計上します。"
+        },
+        {
+          "id": "m004_s1_q05",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "保有していた約束手形 ￥500,000 を銀行で割り引き、割引料 ￥6,000 を差し引かれた残額が普通預金口座に入金された。",
+          "answerLineCount": 3,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "普通預金", "debitAmount": 494000 },
+              { "debitAccount": "手形売却損", "debitAmount": 6000 },
+              { "creditAccount": "受取手形", "creditAmount": 500000 }
+            ]
+          },
+          "explanation": "手形を割り引いた場合、入金額は普通預金、割引料は手形売却損、減少する手形は受取手形で処理します。"
+        },
+        {
+          "id": "m004_s1_q06",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "店舗の火災保険料1年分 ￥240,000 を普通預金口座から支払った。なお、支払時には全額を費用として処理する。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "保険料", "debitAmount": 240000 },
+              { "creditAccount": "普通預金", "creditAmount": 240000 }
+            ]
+          },
+          "explanation": "支払時に全額費用処理する指示があるため、保険料を借方、普通預金を貸方に記入します。"
+        },
+        {
+          "id": "m004_s1_q07",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "買掛金 ￥300,000 を支払期日前に普通預金口座から支払い、￥2,000 の割引を受けた。",
+          "answerLineCount": 3,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "買掛金", "debitAmount": 300000 },
+              { "creditAccount": "普通預金", "creditAmount": 298000 },
+              { "creditAccount": "仕入割引", "creditAmount": 2000 }
+            ]
+          },
+          "explanation": "買掛金は全額減少し、実際の支払額との差額は仕入割引として収益処理します。"
+        },
+        {
+          "id": "m004_s1_q08",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "売掛金 ￥250,000 について、得意先から期日前に普通預金口座へ入金があり、￥5,000 の割引を認めた。",
+          "answerLineCount": 3,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "普通預金", "debitAmount": 245000 },
+              { "debitAccount": "売上割引", "debitAmount": 5000 },
+              { "creditAccount": "売掛金", "creditAmount": 250000 }
+            ]
+          },
+          "explanation": "売掛金は全額減少し、入金額との差額は売上割引として費用処理します。"
+        },
+        {
+          "id": "m004_s1_q09",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "会社設立にあたり株式を発行し、払込金 ￥2,000,000 が普通預金口座に入金された。全額を資本金とする。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "普通預金", "debitAmount": 2000000 },
+              { "creditAccount": "資本金", "creditAmount": 2000000 }
+            ]
+          },
+          "explanation": "株式発行による払込金を全額資本金とするため、普通預金を増やし、資本金を計上します。"
+        },
+        {
+          "id": "m004_s1_q10",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "当月分の電話代およびインターネット利用料 ￥36,000 の請求書を受け取った。支払いは翌月である。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "通信費", "debitAmount": 36000 },
+              { "creditAccount": "未払金", "creditAmount": 36000 }
+            ]
+          },
+          "explanation": "当月分の費用でまだ支払っていないため、通信費を計上し、未払金を認識します。"
+        },
+        {
+          "id": "m004_s1_q11",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "掛けで仕入れた商品のうち、品違いのため ￥40,000 を仕入先に返品した。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "買掛金", "debitAmount": 40000 },
+              { "creditAccount": "仕入", "creditAmount": 40000 }
+            ]
+          },
+          "explanation": "掛け仕入れの返品では買掛金を減少させ、仕入を取り消します。"
+        },
+        {
+          "id": "m004_s1_q12",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "掛けで売り上げた商品のうち、品違いのため ￥55,000 の返品を受けた。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "売上", "debitAmount": 55000 },
+              { "creditAccount": "売掛金", "creditAmount": 55000 }
+            ]
+          },
+          "explanation": "掛け売上の返品では売上を取り消し、売掛金を減少させます。"
+        },
+        {
+          "id": "m004_s1_q13",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "決算にあたり、売掛金の期末残高 ￥900,000 に対して2％の貸倒引当金を設定する。貸倒引当金の決算整理前残高は ￥4,000 であり、差額補充法による。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "貸倒引当金繰入", "debitAmount": 14000 },
+              { "creditAccount": "貸倒引当金", "creditAmount": 14000 }
+            ]
+          },
+          "explanation": "必要な貸倒引当金は900,000円×2％＝18,000円です。すでに4,000円の残高があるため、差額14,000円を貸倒引当金繰入として追加計上します。"
+        },
+        {
+          "id": "m004_s1_q14",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "決算にあたり、借入金に対する当期分の利息 ￥9,000 が未払いであることが判明した。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "支払利息", "debitAmount": 9000 },
+              { "creditAccount": "未払利息", "creditAmount": 9000 }
+            ]
+          },
+          "explanation": "当期に発生した未払いの利息は、支払利息を計上し、未払利息として負債にします。"
+        },
+        {
+          "id": "m004_s1_q15",
+          "type": "journal_dropdown_multi",
+          "score": 3,
+          "question": "定額資金前渡制度により、小口現金係へ小切手 ￥100,000 を振り出して資金を前渡しした。",
+          "answerLineCount": 2,
+          "correctAnswer": {
+            "lines": [
+              { "debitAccount": "小口現金", "debitAmount": 100000 },
+              { "creditAccount": "当座預金", "creditAmount": 100000 }
+            ]
+          },
+          "explanation": "小口現金係へ前渡しした資金は小口現金として処理し、小切手振出しにより当座預金を減少させます。"
+        }
+      ]
+    },
+    {
+      "sectionId": "section_2",
+      "title": "第2問 補助簿・勘定記入",
+      "score": 20,
+      "description": "小問(1)(2)について、資料にもとづき空欄に入る語句または金額を答えなさい。",
+      "questions": [
+        {
+          "id": "m004_s2_q01",
+          "type": "account_fill",
+          "score": 10,
+          "title": "小問(1) 受取手形記入帳",
+          "question": "次の資料にもとづいて、受取手形記入帳の空欄を埋めなさい。6/1時点で、東都商店振出し、満期日7月31日、金額￥300,000の受取手形を保有している。6/5 青葉商事株式会社に対する売掛金￥420,000について、同社振出し、満期日8月31日の約束手形を受け取った。6/18 6月1日に保有していた手形を銀行で割り引き、割引料￥6,000を差し引かれた残額が普通預金口座へ入金された。",
+          "fields": [
+            { "id": "note_amount_0605", "label": "6/5 手形金額", "inputType": "number", "correctAnswer": 420000, "score": 2 },
+            { "id": "note_due_0605", "label": "6/5 満期日", "inputType": "select", "options": ["7月31日", "8月31日", "9月30日"], "correctAnswer": "8月31日", "score": 2 },
+            { "id": "discounted_amount", "label": "6/18 割引した手形金額", "inputType": "number", "correctAnswer": 300000, "score": 2 },
+            { "id": "discount_proceeds", "label": "6/18 入金額", "inputType": "number", "correctAnswer": 294000, "score": 2 },
+            { "id": "ending_note_balance", "label": "6月末 受取手形残高", "inputType": "number", "correctAnswer": 420000, "score": 2 }
+          ],
+          "explanation": "6/5に新たに420,000円の受取手形が増加します。6/18には既存の300,000円の手形を割り引くため、受取手形の残高から外れ、普通預金への入金額は300,000円－6,000円＝294,000円です。したがって6月末の受取手形残高は420,000円です。",
+          "answerSheet": {
+            "type": "table",
+            "title": "答案用紙 受取手形記入帳",
+            "columns": ["日付", "摘要", "振出人", "満期日", "手形金額", "てん末", "入金額"],
+            "rows": [
+              { "cells": ["6/1", "前月繰越", "東都商店", "7月31日", "300,000", "", ""] },
+              { "cells": ["6/5", "売掛金回収", "青葉商事株式会社", { "fieldId": "note_due_0605" }, { "fieldId": "note_amount_0605" }, "", ""] },
+              { "cells": ["6/18", "割引", "東都商店", "7月31日", { "fieldId": "discounted_amount" }, "割引済", { "fieldId": "discount_proceeds" }] },
+              { "cells": ["6/30", "月末残高", "", "", { "fieldId": "ending_note_balance" }, "", ""] }
+            ]
+          }
+        },
+        {
+          "id": "m004_s2_q02",
+          "type": "account_fill",
+          "score": 10,
+          "title": "小問(2) 仮払消費税・仮受消費税の勘定記入",
+          "question": "税抜方式で記帳している。期中に発生した仮払消費税の借方合計は￥96,000、仮受消費税の貸方合計は￥154,000であった。決算にあたり、仮払消費税と仮受消費税を相殺し、差額を未払消費税として処理する。次の勘定記入の空欄を埋めなさい。",
+          "fields": [
+            { "id": "output_tax_total", "label": "仮受消費税 貸方合計", "inputType": "number", "correctAnswer": 154000, "score": 2 },
+            { "id": "input_tax_close", "label": "仮受消費税 借方 仮払消費税", "inputType": "number", "correctAnswer": 96000, "score": 2 },
+            { "id": "payable_summary", "label": "仮受消費税 借方摘要", "inputType": "select", "options": ["未払消費税", "仮払消費税", "損益"], "correctAnswer": "未払消費税", "score": 2 },
+            { "id": "payable_tax", "label": "未払消費税", "inputType": "number", "correctAnswer": 58000, "score": 2 },
+            { "id": "input_credit_summary", "label": "仮払消費税 貸方摘要", "inputType": "select", "options": ["仮受消費税", "未払消費税", "損益"], "correctAnswer": "仮受消費税", "score": 2 }
+          ],
+          "explanation": "仮受消費税154,000円から仮払消費税96,000円を差し引いた58,000円が未払消費税です。決算では、仮受消費税を借方に振り替え、仮払消費税と未払消費税を貸方側で整理します。",
+          "answerSheet": {
+            "type": "accounts",
+            "accounts": [
+              {
+                "title": "仮受消費税",
+                "rows": [
+                  { "debit": { "text": "仮払消費税" }, "debitAmount": { "fieldId": "input_tax_close" }, "credit": { "text": "売上等" }, "creditAmount": { "fieldId": "output_tax_total" } },
+                  { "debit": { "fieldId": "payable_summary" }, "debitAmount": { "fieldId": "payable_tax" }, "credit": { "text": "" }, "creditAmount": { "text": "" } }
+                ]
+              },
+              {
+                "title": "仮払消費税",
+                "rows": [
+                  { "debit": { "text": "仕入等" }, "debitAmount": { "text": "96,000" }, "credit": { "fieldId": "input_credit_summary" }, "creditAmount": { "text": "96,000" } }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "section_3",
+      "title": "第3問 合計残高試算表",
+      "score": 35,
+      "description": "月初残高と月中取引にもとづき、合計残高試算表を完成させなさい。",
+      "questions": [
+        {
+          "id": "m004_s3_q01",
+          "type": "financial_statement_fill",
+          "score": 35,
+          "title": "合計残高試算表",
+          "question": "次の5月1日現在の残高と5月中の取引にもとづいて、5月31日の合計残高試算表を完成させなさい。5月1日現在の残高: 現金120,000、普通預金500,000、売掛金300,000、繰越商品200,000、備品800,000、買掛金250,000、借入金400,000、資本金800,000、繰越利益剰余金470,000。5月中の取引: 1. 商品を現金で180,000円売り上げた。2. 商品を掛けで420,000円売り上げた。3. 売掛金250,000円を普通預金で回収した。4. 商品360,000円を掛けで仕入れた。5. 買掛金300,000円を普通預金から支払った。6. 給料160,000円を普通預金から支払った。7. 家賃90,000円を現金で支払った。8. 借入金100,000円を返済し、利息5,000円とともに普通預金から支払った。9. 備品150,000円を購入し、代金は未払いである。10. 受取手数料70,000円が普通預金に入金された。",
+          "fields": [
+            { "id": "cash_debit_balance", "label": "現金 借方残高", "inputType": "number", "correctAnswer": 210000, "score": 3 },
+            { "id": "bank_debit_total", "label": "普通預金 借方合計", "inputType": "number", "correctAnswer": 820000, "score": 3 },
+            { "id": "bank_credit_total", "label": "普通預金 貸方合計", "inputType": "number", "correctAnswer": 565000, "score": 3 },
+            { "id": "ar_debit_balance", "label": "売掛金 借方残高", "inputType": "number", "correctAnswer": 470000, "score": 3 },
+            { "id": "equipment_debit_total", "label": "備品 借方合計", "inputType": "number", "correctAnswer": 950000, "score": 3 },
+            { "id": "purchases_debit_balance", "label": "仕入 借方残高", "inputType": "number", "correctAnswer": 360000, "score": 2 },
+            { "id": "salary_debit_balance", "label": "給料 借方残高", "inputType": "number", "correctAnswer": 160000, "score": 2 },
+            { "id": "ap_credit_balance", "label": "買掛金 貸方残高", "inputType": "number", "correctAnswer": 310000, "score": 2 },
+            { "id": "loan_credit_balance", "label": "借入金 貸方残高", "inputType": "number", "correctAnswer": 300000, "score": 2 },
+            { "id": "unpaid_credit_balance", "label": "未払金 貸方残高", "inputType": "number", "correctAnswer": 150000, "score": 2 },
+            { "id": "sales_credit_total", "label": "売上 貸方合計", "inputType": "number", "correctAnswer": 600000, "score": 2 },
+            { "id": "fee_credit_balance", "label": "受取手数料 貸方残高", "inputType": "number", "correctAnswer": 70000, "score": 2 },
+            { "id": "total_debit", "label": "借方合計欄 合計", "inputType": "number", "correctAnswer": 4005000, "score": 2 },
+            { "id": "total_credit", "label": "貸方合計欄 合計", "inputType": "number", "correctAnswer": 4005000, "score": 2 },
+            { "id": "total_debit_balance", "label": "借方残高欄 合計", "inputType": "number", "correctAnswer": 2700000, "score": 2 }
+          ],
+          "explanation": "合計残高試算表では、各勘定について期首残高と当月取引を借方・貸方に集計し、その差額を残高欄に記入します。たとえば普通預金の借方合計は500,000円＋250,000円＋70,000円＝820,000円、貸方合計は300,000円＋160,000円＋105,000円＝565,000円、借方残高は255,000円です。借方合計欄と貸方合計欄はいずれも4,005,000円、借方残高欄と貸方残高欄はいずれも2,700,000円になります。",
+          "answerSheet": {
+            "type": "table",
+            "title": "答案用紙 合計残高試算表",
+            "columns": ["勘定科目", "借方合計", "貸方合計", "借方残高", "貸方残高"],
+            "rows": [
+              { "cells": ["現金", "300,000", "90,000", { "fieldId": "cash_debit_balance" }, ""] },
+              { "cells": ["普通預金", { "fieldId": "bank_debit_total" }, { "fieldId": "bank_credit_total" }, "255,000", ""] },
+              { "cells": ["売掛金", "720,000", "250,000", { "fieldId": "ar_debit_balance" }, ""] },
+              { "cells": ["繰越商品", "200,000", "", "200,000", ""] },
+              { "cells": ["備品", { "fieldId": "equipment_debit_total" }, "", "950,000", ""] },
+              { "cells": ["仕入", "360,000", "", { "fieldId": "purchases_debit_balance" }, ""] },
+              { "cells": ["給料", "160,000", "", { "fieldId": "salary_debit_balance" }, ""] },
+              { "cells": ["支払家賃", "90,000", "", "90,000", ""] },
+              { "cells": ["支払利息", "5,000", "", "5,000", ""] },
+              { "cells": ["買掛金", "300,000", "610,000", "", { "fieldId": "ap_credit_balance" }] },
+              { "cells": ["借入金", "100,000", "400,000", "", { "fieldId": "loan_credit_balance" }] },
+              { "cells": ["未払金", "", "150,000", "", { "fieldId": "unpaid_credit_balance" }] },
+              { "cells": ["資本金", "", "800,000", "", "800,000"] },
+              { "cells": ["繰越利益剰余金", "", "470,000", "", "470,000"] },
+              { "cells": ["売上", "", { "fieldId": "sales_credit_total" }, "", "600,000"] },
+              { "cells": ["受取手数料", "", "70,000", "", { "fieldId": "fee_credit_balance" }] },
+              { "cells": ["合計", { "fieldId": "total_debit" }, { "fieldId": "total_credit" }, { "fieldId": "total_debit_balance" }, "2,700,000"] }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -930,6 +930,10 @@ input[inputmode="numeric"] {
   text-align: right;
 }
 
+.compact-sheet-table {
+  min-width: 720px;
+}
+
 .ledger-table {
   min-width: 640px;
 }

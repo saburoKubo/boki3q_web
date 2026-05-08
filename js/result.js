@@ -271,14 +271,18 @@
     tableWrap.className = "table-scroll";
     const table = document.createElement("table");
     table.className = "answer-table generic-sheet-table";
-    if ((definition.answerSheet.columns || []).length >= 9) {
+    const columns = definition.answerSheet.columns || [];
+    if (columns.length >= 9) {
       table.classList.add("worksheet-table");
-    } else if ((definition.answerSheet.columns || []).length <= 5) {
+    } else if (columns.length <= 5) {
+      table.classList.add("compact-sheet-table");
+    }
+    if (columns.includes("摘要")) {
       table.classList.add("ledger-table");
     }
     const thead = document.createElement("thead");
     const headRow = document.createElement("tr");
-    definition.answerSheet.columns.forEach((column) => {
+    columns.forEach((column) => {
       const th = document.createElement("th");
       th.textContent = column;
       headRow.appendChild(th);

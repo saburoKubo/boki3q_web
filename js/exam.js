@@ -556,14 +556,18 @@
     tableWrap.className = "table-scroll";
     const table = document.createElement("table");
     table.className = "answer-table generic-sheet-table";
-    if ((question.answerSheet.columns || []).length >= 9) {
+    const columns = question.answerSheet.columns || [];
+    if (columns.length >= 9) {
       table.classList.add("worksheet-table");
-    } else if ((question.answerSheet.columns || []).length <= 5) {
+    } else if (columns.length <= 5) {
+      table.classList.add("compact-sheet-table");
+    }
+    if (columns.includes("摘要")) {
       table.classList.add("ledger-table");
     }
     const thead = document.createElement("thead");
     const headRow = document.createElement("tr");
-    question.answerSheet.columns.forEach((column) => {
+    columns.forEach((column) => {
       const th = document.createElement("th");
       th.textContent = column;
       headRow.appendChild(th);
