@@ -401,8 +401,11 @@
                 "title": "損益計算書",
                 "columns": ["科目", "金額"],
                 "rows": [
-                  { "cells": ["売上", "2,400,000"] },
-                  { "cells": ["仕入", { "fieldId": "purchases" }] },
+                  { "className": "statement-total", "cells": ["売上高", "2,400,000"] },
+                  { "className": "statement-subsection", "cells": ["売上原価", ""] },
+                  { "cells": ["売上原価", { "fieldId": "purchases" }] },
+                  { "className": "statement-total", "cells": ["売上総利益", "1,050,000"] },
+                  { "className": "statement-subsection", "cells": ["販売費及び一般管理費", ""] },
                   { "cells": ["給料", { "fieldId": "salary_expense" }] },
                   { "cells": ["支払家賃", "240,000"] },
                   { "cells": ["保険料", { "fieldId": "insurance_expense" }] },
@@ -410,23 +413,38 @@
                   { "cells": ["貯蔵品消耗費", "16,000"] },
                   { "cells": ["貸倒引当金繰入", "4,600"] },
                   { "cells": ["支払利息", { "fieldId": "accrued_interest" }] },
+                  { "className": "statement-total", "cells": ["税引前当期純利益", "193,400"] },
                   { "cells": ["法人税、住民税及び事業税", { "fieldId": "income_taxes" }] },
-                  { "cells": ["当期純利益", { "fieldId": "net_income" }] }
+                  { "className": "statement-grand-total", "cells": ["当期純利益", { "fieldId": "net_income" }] }
                 ]
               },
               {
                 "title": "貸借対照表",
-                "columns": ["資産", "金額", "負債・純資産", "金額"],
+                "columns": ["科目", "金額"],
                 "rows": [
-                  { "cells": ["現金", "150,000", "買掛金", "280,000"] },
-                  { "cells": ["普通預金", "720,000", "借入金", "600,000"] },
-                  { "cells": ["売掛金", "420,000", "未払給料", { "fieldId": "unpaid_salary" }] },
-                  { "cells": ["貸倒引当金（控除）", { "fieldId": "allowance" }, "未払利息", { "fieldId": "accrued_interest" }] },
-                  { "cells": ["繰越商品", { "fieldId": "ending_inventory" }, "未払法人税等", { "fieldId": "unpaid_taxes" }] },
-                  { "cells": ["貯蔵品", { "fieldId": "supplies" }, "資本金", "1,000,000"] },
-                  { "cells": ["前払保険料", { "fieldId": "prepaid_insurance" }, "繰越利益剰余金", "157,000"] },
-                  { "cells": ["備品", "1,000,000", "", ""] },
-                  { "cells": ["備品減価償却累計額（控除）", { "fieldId": "accumulated_depreciation" }, "", ""] }
+                  { "className": "statement-section", "cells": ["資産の部", ""] },
+                  { "className": "statement-subsection", "cells": ["流動資産", ""] },
+                  { "cells": ["現金", "150,000"] },
+                  { "cells": ["普通預金", "720,000"] },
+                  { "cells": ["売掛金", "420,000"] },
+                  { "cells": ["貸倒引当金（控除）", { "fieldId": "allowance" }] },
+                  { "cells": ["繰越商品", { "fieldId": "ending_inventory" }] },
+                  { "cells": ["貯蔵品", { "fieldId": "supplies" }] },
+                  { "cells": ["前払保険料", { "fieldId": "prepaid_insurance" }] },
+                  { "className": "statement-subsection", "cells": ["固定資産", ""] },
+                  { "cells": ["備品", "1,000,000"] },
+                  { "cells": ["備品減価償却累計額（控除）", { "fieldId": "accumulated_depreciation" }] },
+                  { "className": "statement-section", "cells": ["負債の部", ""] },
+                  { "className": "statement-subsection", "cells": ["流動負債", ""] },
+                  { "cells": ["買掛金", "280,000"] },
+                  { "cells": ["未払給料", { "fieldId": "unpaid_salary" }] },
+                  { "cells": ["未払利息", { "fieldId": "accrued_interest" }] },
+                  { "cells": ["未払法人税等", { "fieldId": "unpaid_taxes" }] },
+                  { "className": "statement-subsection", "cells": ["固定負債", ""] },
+                  { "cells": ["借入金", "600,000"] },
+                  { "className": "statement-section", "cells": ["純資産の部", ""] },
+                  { "cells": ["資本金", "1,000,000"] },
+                  { "cells": ["繰越利益剰余金", "157,000"] }
                 ]
               }
             ],

@@ -963,6 +963,30 @@ input[inputmode="numeric"] {
   min-width: 180px;
 }
 
+.statement-section td {
+  background: var(--surface-2);
+  font-weight: 800;
+  text-align: left;
+}
+
+.statement-subsection td:first-child {
+  font-weight: 800;
+}
+
+.statement-subsection td:last-child {
+  background: #ffffff;
+}
+
+.statement-total td,
+.statement-grand-total td {
+  border-top: 2px solid var(--line-strong);
+  font-weight: 800;
+}
+
+.statement-grand-total td {
+  border-bottom: 3px double var(--line-strong);
+}
+
 .generic-sheet-table td:first-child {
   position: sticky;
   left: 0;

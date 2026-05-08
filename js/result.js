@@ -347,6 +347,7 @@
     const tbody = document.createElement("tbody");
     (statement.rows || []).forEach((row) => {
       const tr = document.createElement("tr");
+      if (row.className) tr.className = row.className;
       row.cells.forEach((cell) => tr.appendChild(answerDisplayCell(resultQuestion, definition, cell, mode)));
       tbody.appendChild(tr);
     });
