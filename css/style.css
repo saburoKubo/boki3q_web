@@ -970,6 +970,25 @@ input[inputmode="numeric"] {
   text-align: left;
 }
 
+.statement-account-table {
+  table-layout: fixed;
+  min-width: 880px;
+}
+
+.statement-account-table th:nth-child(1),
+.statement-account-table td:nth-child(1),
+.statement-account-table th:nth-child(3),
+.statement-account-table td:nth-child(3) {
+  width: 34%;
+}
+
+.statement-account-table th:nth-child(2),
+.statement-account-table td:nth-child(2),
+.statement-account-table th:nth-child(4),
+.statement-account-table td:nth-child(4) {
+  width: 16%;
+}
+
 .statement-account-table th:nth-child(2),
 .statement-account-table td:nth-child(2) {
   border-right: 3px double var(--line-strong);
