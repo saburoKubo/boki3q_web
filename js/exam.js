@@ -618,6 +618,9 @@
     const table = document.createElement("table");
     table.className = "answer-table generic-sheet-table compact-sheet-table statement-table";
     const columns = statement.columns || [];
+    if (statement.format === "account") {
+      table.classList.add("statement-account-table");
+    }
     if (columns.includes("負債・純資産")) {
       table.classList.add("balance-sheet-table");
     }
