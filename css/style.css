@@ -1004,6 +1004,11 @@ input[inputmode="numeric"] {
   font-size: 1rem;
 }
 
+.statement-block {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .statement-table th:first-child,
 .statement-table td:first-child {
   min-width: 180px;
@@ -1163,6 +1168,21 @@ input[inputmode="numeric"] {
 @media (max-width: 760px) {
   .answer-sheet {
     padding: 10px;
+  }
+
+  .statement-account-table {
+    min-width: 720px;
+    font-size: 0.8rem;
+  }
+
+  .statement-account-table th,
+  .statement-account-table td {
+    padding: 7px 6px;
+  }
+
+  .statement-account-table .answer-cell input {
+    min-width: 0;
+    padding: 6px;
   }
 
   .t-account-table {
