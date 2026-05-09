@@ -591,15 +591,6 @@
     if (columns.includes("負債・純資産")) {
       table.classList.add("balance-sheet-table");
     }
-    if (statement.format === "account") {
-      const colgroup = document.createElement("colgroup");
-      ["34%", "16%", "34%", "16%"].forEach((width) => {
-        const col = document.createElement("col");
-        col.style.width = width;
-        colgroup.appendChild(col);
-      });
-      table.appendChild(colgroup);
-    }
     const thead = document.createElement("thead");
     const headRow = document.createElement("tr");
     columns.forEach((column) => {
@@ -652,6 +643,13 @@
     const columns = statement.columns || [];
     if (statement.format === "account") {
       table.classList.add("statement-account-table");
+      const colgroup = document.createElement("colgroup");
+      ["34%", "16%", "34%", "16%"].forEach((width) => {
+        const col = document.createElement("col");
+        col.style.width = width;
+        colgroup.appendChild(col);
+      });
+      table.appendChild(colgroup);
     }
     if (columns.includes("負債・純資産")) {
       table.classList.add("balance-sheet-table");
