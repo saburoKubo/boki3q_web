@@ -1082,18 +1082,7 @@ input[inputmode="numeric"] {
 }
 
 .generic-sheet-table td:first-child {
-  position: sticky;
-  left: 0;
-  z-index: 1;
-  background: #ffffff;
   font-weight: 700;
-}
-
-.generic-sheet-table thead th:first-child {
-  position: sticky;
-  left: 0;
-  z-index: 2;
-  background: var(--surface-2);
 }
 
 .statement-account-table th,
