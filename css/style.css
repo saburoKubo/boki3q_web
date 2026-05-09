@@ -621,6 +621,52 @@ a:focus-visible {
   margin: 8px 0;
 }
 
+.journal-result-block {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.journal-result-table {
+  width: min(100%, 720px);
+  border-collapse: collapse;
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.journal-result-table th,
+.journal-result-table td {
+  width: 50%;
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  vertical-align: top;
+}
+
+.journal-result-table th {
+  background: var(--surface-2);
+  text-align: center;
+}
+
+.journal-result-table td {
+  text-align: left;
+}
+
+.journal-result-table td + td {
+  border-left: 3px double var(--line-strong);
+}
+
+.journal-result-table td span {
+  display: inline-block;
+}
+
+.journal-result-table td span:first-child {
+  min-width: 9em;
+}
+
+.journal-result-table td span:last-child {
+  text-align: right;
+}
+
 .ok {
   color: var(--ok);
 }

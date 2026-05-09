@@ -55,6 +55,62 @@
     return `借方 ${answer.debitAccount || "未選択"} / 貸方 ${answer.creditAccount || "未選択"} / ${formatAnswerValue(answer.amount)}`;
   }
 
+  function journalEntries(answer) {
+    if (!answer) return { debits: [], credits: [] };
+    if (Array.isArray(answer.lines)) {
+      return answer.lines.reduce((entries, line) => {
+        if (line.debitAccount || line.debitAmount !== null) {
+          entries.debits.push({ account: line.debitAccount || "未選択", amount: line.debitAmount });
+        }
+        if (line.creditAccount || line.creditAmount !== null) {
+          entries.credits.push({ account: line.creditAccount || "未選択", amount: line.creditAmount });
+        }
+        return entries;
+      }, { debits: [], credits: [] });
+    }
+    return {
+      debits: [{ account: answer.debitAccount || "未選択", amount: answer.amount }],
+      credits: [{ account: answer.creditAccount || "未選択", amount: answer.amount }]
+    };
+  }
+
+  function renderJournalAnswerTable(answer, titleText) {
+    const entries = journalEntries(answer);
+    if (entries.debits.length === 0 && entries.credits.length === 0) {
+      const p = document.createElement("p");
+      p.innerHTML = `<b>${titleText}</b>: 未回答`;
+      return p;
+    }
+
+    const wrap = document.createElement("div");
+    wrap.className = "journal-result-block";
+    const title = document.createElement("p");
+    title.innerHTML = `<b>${titleText}</b>`;
+    const table = document.createElement("table");
+    table.className = "journal-result-table";
+    table.innerHTML = "<thead><tr><th>借方</th><th>貸方</th></tr></thead>";
+    const tbody = document.createElement("tbody");
+    const rowCount = Math.max(entries.debits.length, entries.credits.length);
+    for (let index = 0; index < rowCount; index += 1) {
+      const tr = document.createElement("tr");
+      [entries.debits[index], entries.credits[index]].forEach((entry) => {
+        const td = document.createElement("td");
+        if (entry) {
+          const account = document.createElement("span");
+          account.textContent = entry.account;
+          const amount = document.createElement("span");
+          amount.textContent = formatAnswerValue(entry.amount);
+          td.append(account, amount);
+        }
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    wrap.append(title, table);
+    return wrap;
+  }
+
   function renderUserAnswer(question) {
     if (question.type === "journal_dropdown" || question.type === "journal_dropdown_multi") {
       return renderJournalAnswer(question.userAnswer);
@@ -436,15 +492,27 @@
             <strong class="${question.isCorrect ? "ok" : "ng"}">${scoreText(question.score, question.maxScore)}</strong>
           </summary>
           <div class="review-body">
-            <p><b>ユーザーの解答</b>: ${renderUserAnswer(question)}</p>
-            <p><b>正答</b>: ${renderCorrectAnswer(question)}</p>
             <p><b>丁寧な解説</b>: ${renderExplanation(question, definition)}</p>
           </div>
         `;
 
+        const reviewBody = item.querySelector(".review-body");
+        if (question.type === "journal_dropdown" || question.type === "journal_dropdown_multi") {
+          reviewBody.prepend(
+            renderJournalAnswerTable(question.correctAnswer, "正答"),
+            renderJournalAnswerTable(question.userAnswer, "ユーザーの解答")
+          );
+        } else {
+          const correct = document.createElement("p");
+          correct.innerHTML = `<b>正答</b>: ${renderCorrectAnswer(question)}`;
+          const user = document.createElement("p");
+          user.innerHTML = `<b>ユーザーの解答</b>: ${renderUserAnswer(question)}`;
+          reviewBody.prepend(user, correct);
+        }
+
         const structuredReview = renderStructuredReview(question, definition);
         if (structuredReview) {
-          item.querySelector(".review-body").appendChild(structuredReview);
+          reviewBody.appendChild(structuredReview);
         } else if (question.fieldResults && question.fieldResults.length > 0) {
           const tableWrap = document.createElement("div");
           tableWrap.className = "table-scroll";
@@ -461,7 +529,7 @@
           });
           table.appendChild(tbody);
           tableWrap.appendChild(table);
-          item.querySelector(".review-body").appendChild(tableWrap);
+          reviewBody.appendChild(tableWrap);
         }
 
         sectionNode.appendChild(item);
