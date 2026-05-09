@@ -391,7 +391,7 @@
             { "id": "insurance_expense", "label": "保険料 借方", "correctAnswer": 90000, "score": 2 },
             { "id": "depreciation_expense", "label": "減価償却費 借方", "correctAnswer": 100000, "score": 2 },
             { "id": "income_taxes", "label": "法人税、住民税及び事業税 借方", "correctAnswer": 58020, "score": 3 },
-            { "id": "net_income", "label": "当期純利益", "correctAnswer": 135380, "score": 3 }
+            { "id": "retained_earnings", "label": "繰越利益剰余金", "correctAnswer": 292380, "score": 3 }
           ],
           "answerSheet": {
             "type": "statements",
@@ -411,7 +411,7 @@
                   { "cells": ["貸倒引当金繰入", "4,600", "", ""] },
                   { "cells": ["支払利息", { "fieldId": "accrued_interest" }, "", ""] },
                   { "cells": ["法人税、住民税及び事業税", { "fieldId": "income_taxes" }, "", ""] },
-                  { "className": "statement-grand-total", "cells": ["当期純利益", { "fieldId": "net_income" }, "", ""] },
+                  { "className": "statement-grand-total", "cells": ["当期純利益", "135,380", "", ""] },
                   { "className": "statement-grand-total", "cells": ["合計", "2,400,000", "合計", "2,400,000"] }
                 ]
               },
@@ -426,15 +426,12 @@
                   { "cells": ["貸倒引当金（控除）", { "fieldId": "allowance" }, "未払利息", { "fieldId": "accrued_interest" }] },
                   { "cells": ["繰越商品", { "fieldId": "ending_inventory" }, "未払法人税等", { "fieldId": "unpaid_taxes" }] },
                   { "cells": ["貯蔵品", { "fieldId": "supplies" }, "資本金", "1,000,000"] },
-                  { "cells": ["前払保険料", { "fieldId": "prepaid_insurance" }, "繰越利益剰余金", "292,380"] },
+                  { "cells": ["前払保険料", { "fieldId": "prepaid_insurance" }, "繰越利益剰余金", { "fieldId": "retained_earnings" }] },
                   { "cells": ["備品", "1,000,000", "", ""] },
                   { "cells": ["備品減価償却累計額（控除）", { "fieldId": "accumulated_depreciation" }, "", ""] },
                   { "className": "statement-grand-total", "cells": ["合計", "2,276,400", "合計", "2,276,400"] }
                 ]
               }
-            ],
-            "summaryFields": [
-              { "label": "当期純利益", "fieldId": "net_income" }
             ]
           },
           "explanation": "まず損益計算書を作ります。売上原価は、期首商品160,000円＋当期仕入1,380,000円－期末商品190,000円＝1,350,000円です。費用は、給料360,000円に未払給料40,000円を加えて400,000円、保険料120,000円から次期分30,000円を控除して90,000円、備品の減価償却費100,000円、貯蔵品消耗費16,000円、貸倒引当金繰入4,600円、未払利息6,000円を計上します。貸倒引当金は売掛金420,000円×3％＝12,600円が必要額で、整理前残高8,000円との差額4,600円を繰り入れます。税引前当期純利益は193,400円、法人税等は193,400円×30％＝58,020円、当期純利益は135,380円です。次に貸借対照表では、当期純利益という科目を独立して表示せず、繰越利益剰余金に含めます。そのため繰越利益剰余金は157,000円＋135,380円＝292,380円です。貸借対照表の借方合計と貸方合計は、どちらも2,276,400円で一致します。"

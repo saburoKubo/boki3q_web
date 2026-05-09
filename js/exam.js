@@ -121,7 +121,7 @@
       if (!current || typeof current !== "object" || Array.isArray(current)) {
         state.answers[question.id] = {};
       }
-      question.fields.forEach((field) => {
+      (question.fields || []).forEach((field) => {
         if (state.answers[question.id][field.id] === undefined) {
           state.answers[question.id][field.id] = "";
         }
@@ -150,8 +150,13 @@
     if (!session || session.examId !== state.exam.examId) return;
 
     state.currentSectionIndex = Number.isInteger(session.currentSectionIndex) ? session.currentSectionIndex : 0;
+    if (state.currentSectionIndex < 0 || state.currentSectionIndex >= state.exam.sections.length) {
+      state.currentSectionIndex = 0;
+    }
     state.remainingSeconds = Number(session.remainingSeconds) || state.exam.durationMinutes * 60;
-    state.answers = session.answers || {};
+    state.answers = session.answers && typeof session.answers === "object" && !Array.isArray(session.answers)
+      ? session.answers
+      : {};
   }
 
   function renderTabs() {
@@ -488,7 +493,7 @@
 
     const summary = document.createElement("div");
     summary.className = "inventory-summary-fields";
-    question.answerSheet.summaryFields.forEach((item) => {
+    (question.answerSheet.summaryFields || []).forEach((item) => {
       const label = document.createElement("label");
       label.className = "field";
       const span = document.createElement("span");
@@ -786,11 +791,21 @@
 
     section.questions.forEach((question, index) => {
       let node;
-      if (question.type === "journal_dropdown") node = renderJournal(question, index + 1);
-      if (question.type === "journal_dropdown_multi") node = renderJournalMulti(question, index + 1);
-      if (question.type === "term_fill") node = renderTerm(question, index + 1);
-      if (question.type === "account_fill") node = renderFieldQuestion(question, index + 1, "answer-table account-table");
-      if (question.type === "financial_statement_fill") node = renderFieldQuestion(question, index + 1, "answer-table statement-table");
+      try {
+        if (question.type === "journal_dropdown") node = renderJournal(question, index + 1);
+        if (question.type === "journal_dropdown_multi") node = renderJournalMulti(question, index + 1);
+        if (question.type === "term_fill") node = renderTerm(question, index + 1);
+        if (question.type === "account_fill") node = renderFieldQuestion(question, index + 1, "answer-table account-table");
+        if (question.type === "financial_statement_fill") node = renderFieldQuestion(question, index + 1, "answer-table statement-table");
+      } catch (error) {
+        console.error("question render error", question.id, error);
+        node = questionShell(question, index + 1);
+        const message = document.createElement("p");
+        message.className = "error-message";
+        message.textContent = "この問題の表示中にエラーが発生しました。途中保存データを初期化して再読み込みしてください。";
+        node.appendChild(message);
+      }
+      if (!node) return;
       elements.area.appendChild(node);
     });
   }
