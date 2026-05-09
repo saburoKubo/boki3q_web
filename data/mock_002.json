@@ -328,10 +328,10 @@
             { "id": "asset_a_depr", "label": "備品A 当期減価償却費", "inputType": "number", "correctAnswer": 684000, "score": 2 },
             { "id": "asset_b_begin_accum", "label": "備品B 期首減価償却累計額", "inputType": "number", "correctAnswer": 1760000, "score": 2 },
             { "id": "asset_b_begin_book", "label": "備品B 期首帳簿価額", "inputType": "number", "correctAnswer": 2200000, "score": 2 },
-            { "id": "asset_c_depr", "label": "備品C 当期減価償却費", "inputType": "number", "correctAnswer": 900000, "score": 2 },
-            { "id": "total_depr", "label": "当期減価償却費 合計", "inputType": "number", "correctAnswer": 2244000, "score": 2 }
+            { "id": "asset_c_depr", "label": "備品C 当期減価償却費", "inputType": "number", "correctAnswer": 1012500, "score": 2 },
+            { "id": "total_depr", "label": "当期減価償却費 合計", "inputType": "number", "correctAnswer": 2356500, "score": 2 }
           ],
-          "explanation": "備品Aは6,840,000円÷10年＝684,000円です。備品Bは3,960,000円÷6年＝660,000円、X4年8月からX7年3月まで32か月分で期首累計額は1,760,000円、期首帳簿価額は2,200,000円です。備品CはX7年7月取得なので5,400,000円÷4年×8か月/12か月＝900,000円です。当期減価償却費の合計は2,244,000円です。",
+          "explanation": "備品Aは6,840,000円÷10年＝684,000円です。備品Bは3,960,000円÷6年＝660,000円、X4年8月からX7年3月まで32か月分で期首累計額は1,760,000円、期首帳簿価額は2,200,000円です。備品CはX7年7月1日取得なので、当期は7月から3月までの9か月分を月割計算します。5,400,000円÷4年×9か月/12か月＝1,012,500円です。当期減価償却費の合計は684,000円＋660,000円＋1,012,500円＝2,356,500円です。",
           "answerSheet": {
             "type": "table",
             "title": "答案用紙 固定資産台帳（備品）",
@@ -372,10 +372,13 @@
               {
                 "title": "仕入",
                 "rows": [
-                  { "debit": { "text": "買掛金" }, "debitAmount": { "text": "3,700,000" }, "credit": { "text": "繰越商品" }, "creditAmount": { "fieldId": "ending_inventory_amount" } },
-                  { "debit": { "fieldId": "begin_inventory_summary" }, "debitAmount": { "text": "400,000" }, "credit": { "text": "損益" }, "creditAmount": { "fieldId": "cost_of_sales" } }
+                  { "debit": { "fieldId": "begin_inventory_summary" }, "debitAmount": { "text": "400,000" }, "credit": { "text": "繰越商品" }, "creditAmount": { "fieldId": "ending_inventory_amount" } },
+                  { "debit": { "text": "買掛金" }, "debitAmount": { "text": "3,700,000" }, "credit": { "text": "損益" }, "creditAmount": { "fieldId": "cost_of_sales" } }
                 ]
               }
+            ],
+            "summaryFields": [
+              { "label": "売上総利益", "fieldId": "gross_profit" }
             ]
           }
         }

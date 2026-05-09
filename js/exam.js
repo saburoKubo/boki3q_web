@@ -446,6 +446,24 @@
       wrap.appendChild(block);
     });
 
+    const summary = document.createElement("div");
+    summary.className = "inventory-summary-fields";
+    (question.answerSheet.summaryFields || []).forEach((item) => {
+      const label = document.createElement("label");
+      label.className = "field";
+      const span = document.createElement("span");
+      span.textContent = item.label;
+      if (item.fieldId) {
+        label.append(span, createAnswerControl(question, item.fieldId, item.label));
+      } else {
+        const strong = document.createElement("strong");
+        strong.textContent = item.value;
+        label.append(span, strong);
+      }
+      summary.appendChild(label);
+    });
+    if (summary.children.length > 0) wrap.appendChild(summary);
+
     return wrap;
   }
 

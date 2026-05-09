@@ -44,7 +44,7 @@
   function renderJournalAnswer(answer) {
     if (!answer) return "未回答";
     if (Array.isArray(answer.lines)) {
-      const lines = answer.lines.filter((line) => line.debitAccount || line.debitAmount !== null || line.creditAccount || line.creditAmount !== null);
+      const lines = answer.lines.filter((line) => line.debitAccount || line.debitAmount != null || line.creditAccount || line.creditAmount != null);
       if (lines.length === 0) return "未回答";
       return lines.map((line) => {
         const debit = line.debitAccount ? "借方 " + line.debitAccount + " " + formatAnswerValue(line.debitAmount) : "";
@@ -59,18 +59,18 @@
     if (!answer) return { debits: [], credits: [] };
     if (Array.isArray(answer.lines)) {
       return answer.lines.reduce((entries, line) => {
-        if (line.debitAccount || line.debitAmount !== null) {
-          entries.debits.push({ account: line.debitAccount || "未選択", amount: line.debitAmount });
+        if (line.debitAccount || line.debitAmount != null) {
+          entries.debits.push({ account: line.debitAccount || "", amount: line.debitAmount });
         }
-        if (line.creditAccount || line.creditAmount !== null) {
-          entries.credits.push({ account: line.creditAccount || "未選択", amount: line.creditAmount });
+        if (line.creditAccount || line.creditAmount != null) {
+          entries.credits.push({ account: line.creditAccount || "", amount: line.creditAmount });
         }
         return entries;
       }, { debits: [], credits: [] });
     }
     return {
-      debits: [{ account: answer.debitAccount || "未選択", amount: answer.amount }],
-      credits: [{ account: answer.creditAccount || "未選択", amount: answer.amount }]
+      debits: answer.debitAccount || answer.amount != null ? [{ account: answer.debitAccount || "", amount: answer.amount }] : [],
+      credits: answer.creditAccount || answer.amount != null ? [{ account: answer.creditAccount || "", amount: answer.amount }] : []
     };
   }
 
@@ -205,6 +205,27 @@
       block.append(title, tableWrap);
       wrap.appendChild(block);
     });
+
+    const summary = document.createElement("div");
+    summary.className = "inventory-summary-fields";
+    (definition.answerSheet.summaryFields || []).forEach((item) => {
+      const label = document.createElement("label");
+      label.className = "field";
+      const span = document.createElement("span");
+      span.textContent = item.label;
+      const strong = document.createElement("strong");
+      if (item.fieldId) {
+        const field = fieldResultById(resultQuestion).get(item.fieldId);
+        strong.className = field?.isCorrect ? "result-ok" : "result-ng";
+        strong.textContent = formatAnswerValue(mode === "user" ? field?.userAnswer : field?.correctAnswer);
+      } else {
+        strong.textContent = item.value;
+      }
+      label.append(span, strong);
+      summary.appendChild(label);
+    });
+    if (summary.children.length > 0) wrap.appendChild(summary);
+
     return wrap;
   }
 
