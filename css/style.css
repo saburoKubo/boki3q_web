@@ -25,6 +25,7 @@
 
 html {
   font-size: 16px;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -95,6 +96,12 @@ select {
   padding: 32px 0 48px;
 }
 
+.home-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+}
+
 .section-heading {
   margin-bottom: 16px;
 }
@@ -118,6 +125,51 @@ select {
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
   padding: 24px;
+}
+
+.exam-list + .exam-list {
+  margin-top: 28px;
+}
+
+.home-layout .exam-card {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.home-layout .exam-card + .exam-card {
+  margin-top: 16px;
+}
+
+.home-layout .exam-card-actions {
+  justify-content: flex-end;
+}
+
+.home-layout .meta-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.home-section {
+  scroll-margin-top: 24px;
+}
+
+.home-section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 14px;
+}
+
+.section-jump-link {
+  flex: 0 0 auto;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--primary-dark);
+  padding: 7px 12px;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 700;
 }
 
 .exam-card h3 {
@@ -219,7 +271,53 @@ select {
   font-size: 0.86rem;
 }
 
+.chapter-list {
+  display: grid;
+  gap: 16px;
+}
+
+.chapter-card {
+  border-left: 6px solid var(--accent);
+}
+
+.chapter-practice .start-panel {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.chapter-practice,
+.chapter-practice .start-panel > *,
+#practice-form,
+#practice-answer-area {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.chapter-note {
+  border-left: 4px solid var(--accent);
+  background: var(--surface-2);
+  padding: 12px 14px;
+  color: var(--text);
+}
+
+.chapter-materials {
+  margin: 0;
+  padding-left: 1.4rem;
+}
+
+.chapter-materials li + li {
+  margin-top: 6px;
+}
+
+.chapter-actions {
+  margin: 6px 0 0;
+  border: 1px solid var(--line);
+  justify-content: flex-end;
+}
+
 .start-panel {
+  min-width: 0;
   background: #ffffff;
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
@@ -440,6 +538,7 @@ a:focus-visible {
 }
 
 .table-scroll {
+  min-width: 0;
   max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -697,6 +796,21 @@ a:focus-visible {
     width: min(100% - 20px, 100%);
   }
 
+  .home-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .home-section-heading {
+    display: grid;
+    gap: 10px;
+  }
+
+  .section-jump-link {
+    justify-self: start;
+  }
+
   .header-inner,
   .exam-topbar-inner {
     align-items: flex-start;
@@ -788,6 +902,10 @@ a:focus-visible {
     padding: 12px 14px;
   }
 
+  .chapter-actions {
+    margin: 6px 0 0;
+  }
+
   .timer-box {
     min-width: 104px;
     padding: 6px 8px;
@@ -802,8 +920,17 @@ a:focus-visible {
   }
 }
 
+@media (max-width: 640px) {
+  .home-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
 .source-document {
   min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   border: 1px solid var(--line-strong);
   background: var(--surface-2);
   margin: 12px 0 16px;
@@ -896,6 +1023,7 @@ a:focus-visible {
 
 .answer-sheet {
   min-width: 0;
+  max-width: 100%;
   border: 1px solid var(--line-strong);
   background: #ffffff;
   margin-top: 14px;
@@ -982,6 +1110,33 @@ input[inputmode="numeric"] {
 
 .ledger-table {
   min-width: 640px;
+}
+
+.chapter-ledger-table td:first-child {
+  width: 80px;
+  text-align: center;
+}
+
+.chapter-ledger-table td:nth-child(2) {
+  width: 160px;
+}
+
+.chapter-ledger-table input,
+.chapter-inventory-table input {
+  min-width: 92px;
+}
+
+.static-cell {
+  background: #f3f5f7;
+}
+
+.miss-list {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.miss-list li + li {
+  margin-top: 8px;
 }
 
 .ledger-table th:nth-child(2),
@@ -1138,6 +1293,29 @@ input[inputmode="numeric"] {
   border-right: 2px solid var(--line-strong);
 }
 
+.chapter-worksheet-table {
+  table-layout: fixed;
+  min-width: 1120px;
+  font-size: 0.86rem;
+}
+
+.chapter-worksheet-table th,
+.chapter-worksheet-table td {
+  padding: 7px 8px;
+}
+
+.chapter-worksheet-table th:first-child,
+.chapter-worksheet-table td:first-child {
+  width: 170px;
+  white-space: normal;
+  text-align: left;
+}
+
+.chapter-worksheet-table .answer-cell input {
+  min-width: 0;
+  padding: 6px 7px;
+}
+
 .inventory-summary-fields {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1264,6 +1442,33 @@ input[inputmode="numeric"] {
 .result-answer-sheet .result-ng {
   color: var(--danger);
   font-weight: 700;
+}
+
+.result-hint {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
+.result-ok-cell {
+  color: var(--text);
+}
+
+.result-ng-cell {
+  color: var(--danger);
+  background: #fff2f0;
+  font-weight: 800;
+}
+
+.result-summary-fields {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.result-summary-fields p {
+  margin: 0;
+  border: 1px solid var(--line);
+  padding: 9px 10px;
 }
 
 .result-answer-sheet .answer-cell {

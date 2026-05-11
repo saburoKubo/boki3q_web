@@ -266,6 +266,23 @@
     return box;
   }
 
+  function renderMaterialsDocument(question) {
+    if (!Array.isArray(question.materials) || question.materials.length === 0) return null;
+    const box = document.createElement("div");
+    box.className = "source-document";
+    const title = document.createElement("h4");
+    title.textContent = question.materialsTitle || "資料";
+    const list = document.createElement("ol");
+    list.className = "chapter-materials";
+    question.materials.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      list.appendChild(li);
+    });
+    box.append(title, list);
+    return box;
+  }
+
   function renderJournalMulti(question, number) {
     initEmptyAnswer(question);
     const answer = state.answers[question.id];
@@ -779,6 +796,8 @@
     body.className = "question-text";
     body.textContent = question.question;
     article.append(head, body);
+    const materials = renderMaterialsDocument(question);
+    if (materials) article.appendChild(materials);
     return article;
   }
 

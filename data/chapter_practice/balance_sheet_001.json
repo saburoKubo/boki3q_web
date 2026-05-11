@@ -1,0 +1,47 @@
+{
+  "id": "balance_sheet_001",
+  "mode": "chapterPractice",
+  "category": "決算",
+  "chapterTitle": "貸借対照表",
+  "title": "貸借対照表 完成問題",
+  "description": "次の決算整理後の資料にもとづいて、貸借対照表を完成させなさい。",
+  "estimatedMinutes": 15,
+  "totalScore": 25,
+  "intro": "資産を左側、負債・純資産を右側に記入する形式です。貸倒引当金・減価償却累計額の控除表示にも注意します。",
+  "materials": [
+    "整理後残高: 現金100,000、普通預金500,000、売掛金300,000、貸倒引当金9,000、商品150,000、貯蔵品5,000、前払保険料20,000、備品800,000、備品減価償却累計額280,000。",
+    "負債は、買掛金180,000、借入金400,000、未払利息4,000、未払法人税等38,400である。",
+    "資本金は774,000円、決算整理前の繰越利益剰余金は100,000円、当期純利益は89,600円である。"
+  ],
+  "tables": [
+    {
+      "id": "balance_sheet",
+      "title": "貸借対照表",
+      "format": "account",
+      "answerKeys": ["asset_amount", "liability_equity_amount"],
+      "columns": [
+        { "key": "asset", "label": "資産", "type": "static" },
+        { "key": "asset_amount", "label": "金額", "type": "answer" },
+        { "key": "liability_equity", "label": "負債・純資産", "type": "static" },
+        { "key": "liability_equity_amount", "label": "金額", "type": "answer" }
+      ],
+      "rows": [
+        { "values": { "asset": "現金", "liability_equity": "買掛金" }, "cells": { "asset_amount": 100000, "liability_equity_amount": 180000 } },
+        { "values": { "asset": "普通預金", "liability_equity": "借入金" }, "cells": { "asset_amount": 500000, "liability_equity_amount": 400000 } },
+        { "values": { "asset": "売掛金", "liability_equity": "未払利息" }, "cells": { "asset_amount": 300000, "liability_equity_amount": 4000 } },
+        { "values": { "asset": "貸倒引当金（控除）", "liability_equity": "未払法人税等" }, "cells": { "asset_amount": 9000, "liability_equity_amount": 38400 } },
+        { "values": { "asset": "商品", "liability_equity": "資本金" }, "cells": { "asset_amount": 150000, "liability_equity_amount": 774000 } },
+        { "values": { "asset": "貯蔵品", "liability_equity": "繰越利益剰余金" }, "cells": { "asset_amount": 5000, "liability_equity_amount": 189600 } },
+        { "values": { "asset": "前払保険料", "liability_equity": "" }, "cells": { "asset_amount": 20000, "liability_equity_amount": null } },
+        { "values": { "asset": "備品", "liability_equity": "" }, "cells": { "asset_amount": 800000, "liability_equity_amount": null } },
+        { "values": { "asset": "備品減価償却累計額（控除）", "liability_equity": "" }, "cells": { "asset_amount": 280000, "liability_equity_amount": null } },
+        { "values": { "asset": "資産合計", "liability_equity": "負債・純資産合計" }, "cells": { "asset_amount": 1586000, "liability_equity_amount": 1586000 } }
+      ]
+    }
+  ],
+  "explanation": [
+    "売掛金300,000円から貸倒引当金9,000円を控除するため、売掛金の正味額は291,000円です。",
+    "備品800,000円から備品減価償却累計額280,000円を控除するため、備品の正味額は520,000円です。",
+    "繰越利益剰余金は100,000円+当期純利益89,600円=189,600円です。"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "moving_average_inventory_ledger_001",
+  "mode": "chapterPractice",
+  "category": "帳簿",
+  "chapterTitle": "商品有高帳（移動平均法）",
+  "title": "商品有高帳 移動平均法 完成問題",
+  "description": "次の取引にもとづいて、移動平均法により商品有高帳を完成させなさい。",
+  "estimatedMinutes": 15,
+  "totalScore": 20,
+  "intro": "移動平均法では、仕入れのたびに残高の平均単価を計算し、その後の払出単価として用います。",
+  "materials": [
+    "7月1日 前月繰越 商品B 20個、単価1,000円。",
+    "7月4日 商品B 30個を単価1,100円で仕入れた。",
+    "7月10日 商品B 35個を売り上げた。",
+    "7月15日 商品B 25個を単価1,220円で仕入れた。",
+    "7月22日 商品B 20個を売り上げた。",
+    "7月26日 商品B 10個を単価1,160円で仕入れた。"
+  ],
+  "tables": [
+    {
+      "id": "inventory",
+      "title": "商品B 商品有高帳（移動平均法）",
+      "columns": ["日付", "摘要", "受入 数量", "受入 単価", "受入 金額", "払出 数量", "払出 単価", "払出 金額", "残高 数量", "残高 単価", "残高 金額"],
+      "rows": [
+        { "date": "7/1", "description": "前月繰越", "cells": { "in_qty": 20, "in_unit": 1000, "in_amount": 20000, "out_qty": null, "out_unit": null, "out_amount": null, "balance_qty": 20, "balance_unit": 1000, "balance_amount": 20000 } },
+        { "date": "7/4", "description": "仕入", "cells": { "in_qty": 30, "in_unit": 1100, "in_amount": 33000, "out_qty": null, "out_unit": null, "out_amount": null, "balance_qty": 50, "balance_unit": 1060, "balance_amount": 53000 } },
+        { "date": "7/10", "description": "売上", "cells": { "in_qty": null, "in_unit": null, "in_amount": null, "out_qty": 35, "out_unit": 1060, "out_amount": 37100, "balance_qty": 15, "balance_unit": 1060, "balance_amount": 15900 } },
+        { "date": "7/15", "description": "仕入", "cells": { "in_qty": 25, "in_unit": 1220, "in_amount": 30500, "out_qty": null, "out_unit": null, "out_amount": null, "balance_qty": 40, "balance_unit": 1160, "balance_amount": 46400 } },
+        { "date": "7/22", "description": "売上", "cells": { "in_qty": null, "in_unit": null, "in_amount": null, "out_qty": 20, "out_unit": 1160, "out_amount": 23200, "balance_qty": 20, "balance_unit": 1160, "balance_amount": 23200 } },
+        { "date": "7/26", "description": "仕入", "cells": { "in_qty": 10, "in_unit": 1160, "in_amount": 11600, "out_qty": null, "out_unit": null, "out_amount": null, "balance_qty": 30, "balance_unit": 1160, "balance_amount": 34800 } }
+      ]
+    }
+  ],
+  "summary": [
+    { "id": "ending_inventory", "label": "期末商品棚卸高", "correctAnswer": 34800, "score": 2 }
+  ],
+  "explanation": [
+    "7月4日の仕入後は、20,000円+33,000円=53,000円、数量50個なので平均単価は1,060円です。",
+    "7月10日の払出は35個×1,060円=37,100円、残高は15個、15,900円です。",
+    "7月15日の仕入後は、15,900円+30,500円=46,400円、数量40個なので平均単価は1,160円です。"
+  ]
+}

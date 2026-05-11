@@ -1,0 +1,53 @@
+{
+  "id": "income_statement_001",
+  "mode": "chapterPractice",
+  "category": "決算",
+  "chapterTitle": "損益計算書",
+  "title": "損益計算書 完成問題",
+  "description": "次の決算整理後の資料にもとづいて、損益計算書を完成させなさい。",
+  "estimatedMinutes": 15,
+  "totalScore": 25,
+  "intro": "費用を左側、収益を右側に記入する勘定式の損益計算書です。差額として税引前当期純利益、法人税等、当期純利益を求めます。",
+  "materials": [
+    "売上高は1,500,000円である。",
+    "仕入勘定の整理後金額は870,000円であり、これを売上原価とする。",
+    "整理後の費用は、給料240,000円、支払家賃120,000円、保険料40,000円、消耗品費15,000円、貸倒引当金繰入3,000円、減価償却費80,000円、支払利息4,000円である。",
+    "法人税、住民税及び事業税は38,400円である。"
+  ],
+  "tables": [
+    {
+      "id": "income_statement",
+      "title": "損益計算書",
+      "format": "account",
+      "answerKeys": ["expense_amount", "revenue_amount"],
+      "columns": [
+        { "key": "expense", "label": "費用", "type": "static" },
+        { "key": "expense_amount", "label": "金額", "type": "answer" },
+        { "key": "revenue", "label": "収益", "type": "static" },
+        { "key": "revenue_amount", "label": "金額", "type": "answer" }
+      ],
+      "rows": [
+        { "values": { "expense": "売上原価", "revenue": "売上高" }, "cells": { "expense_amount": 870000, "revenue_amount": 1500000 } },
+        { "values": { "expense": "給料", "revenue": "" }, "cells": { "expense_amount": 240000, "revenue_amount": null } },
+        { "values": { "expense": "支払家賃", "revenue": "" }, "cells": { "expense_amount": 120000, "revenue_amount": null } },
+        { "values": { "expense": "保険料", "revenue": "" }, "cells": { "expense_amount": 40000, "revenue_amount": null } },
+        { "values": { "expense": "消耗品費", "revenue": "" }, "cells": { "expense_amount": 15000, "revenue_amount": null } },
+        { "values": { "expense": "貸倒引当金繰入", "revenue": "" }, "cells": { "expense_amount": 3000, "revenue_amount": null } },
+        { "values": { "expense": "減価償却費", "revenue": "" }, "cells": { "expense_amount": 80000, "revenue_amount": null } },
+        { "values": { "expense": "支払利息", "revenue": "" }, "cells": { "expense_amount": 4000, "revenue_amount": null } },
+        { "values": { "expense": "税引前当期純利益", "revenue": "" }, "cells": { "expense_amount": 128000, "revenue_amount": null } },
+        { "values": { "expense": "法人税、住民税及び事業税", "revenue": "" }, "cells": { "expense_amount": 38400, "revenue_amount": null } },
+        { "values": { "expense": "当期純利益", "revenue": "" }, "cells": { "expense_amount": 89600, "revenue_amount": null } }
+      ]
+    }
+  ],
+  "summary": [
+    { "id": "expense_total", "label": "費用・利益合計", "correctAnswer": 1500000, "score": 2 },
+    { "id": "revenue_total", "label": "収益合計", "correctAnswer": 1500000, "score": 2 }
+  ],
+  "explanation": [
+    "費用合計は売上原価870,000円を含めて1,372,000円です。",
+    "税引前当期純利益は1,500,000円-1,372,000円=128,000円です。",
+    "当期純利益は128,000円-38,400円=89,600円です。"
+  ]
+}

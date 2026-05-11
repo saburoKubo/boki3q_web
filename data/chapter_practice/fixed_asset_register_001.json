@@ -1,0 +1,57 @@
+{
+  "id": "fixed_asset_register_001",
+  "mode": "chapterPractice",
+  "category": "決算",
+  "chapterTitle": "固定資産台帳",
+  "title": "固定資産台帳 完成問題",
+  "description": "次の資料にもとづいて、固定資産台帳の空欄を完成させなさい。",
+  "estimatedMinutes": 15,
+  "totalScore": 20,
+  "intro": "定額法により減価償却費を計算します。残存価額は0円、記帳方法は間接法とします。当期はX6年4月1日からX7年3月31日までです。",
+  "materials": [
+    "備品AはX4年4月1日に600,000円で取得した。耐用年数は6年である。",
+    "備品BはX5年10月1日に480,000円で取得した。耐用年数は4年である。",
+    "備品CはX6年7月1日に360,000円で取得した。耐用年数は3年である。",
+    "いずれも定額法、残存価額0円で減価償却を行う。"
+  ],
+  "tables": [
+    {
+      "id": "fixed_assets",
+      "title": "固定資産台帳",
+      "answerKeys": ["begin_accum", "begin_book", "current_dep", "end_accum", "end_book"],
+      "columns": [
+        { "key": "name", "label": "名称", "type": "static" },
+        { "key": "acquired", "label": "取得年月日", "type": "static" },
+        { "key": "cost", "label": "取得原価", "type": "static" },
+        { "key": "life", "label": "耐用年数", "type": "static" },
+        { "key": "begin_accum", "label": "期首減価償却累計額", "type": "answer" },
+        { "key": "begin_book", "label": "期首帳簿価額", "type": "answer" },
+        { "key": "current_dep", "label": "当期減価償却費", "type": "answer" },
+        { "key": "end_accum", "label": "期末減価償却累計額", "type": "answer" },
+        { "key": "end_book", "label": "期末帳簿価額", "type": "answer" }
+      ],
+      "rows": [
+        {
+          "values": { "name": "備品A", "acquired": "X4/4/1", "cost": "600,000", "life": "6年" },
+          "cells": { "begin_accum": 200000, "begin_book": 400000, "current_dep": 100000, "end_accum": 300000, "end_book": 300000 }
+        },
+        {
+          "values": { "name": "備品B", "acquired": "X5/10/1", "cost": "480,000", "life": "4年" },
+          "cells": { "begin_accum": 60000, "begin_book": 420000, "current_dep": 120000, "end_accum": 180000, "end_book": 300000 }
+        },
+        {
+          "values": { "name": "備品C", "acquired": "X6/7/1", "cost": "360,000", "life": "3年" },
+          "cells": { "begin_accum": 0, "begin_book": 360000, "current_dep": 90000, "end_accum": 90000, "end_book": 270000 }
+        }
+      ]
+    }
+  ],
+  "summary": [
+    { "id": "total_depreciation", "label": "当期減価償却費合計", "correctAnswer": 310000, "score": 2 }
+  ],
+  "explanation": [
+    "備品Aは600,000円÷6年=100,000円です。期首までに2年分償却しているため、期首累計額は200,000円です。",
+    "備品Bは480,000円÷4年=120,000円です。取得年度は6か月分の60,000円を償却済みです。",
+    "備品Cは当期中のX6年7月1日取得なので、360,000円÷3年×9か月/12か月=90,000円です。"
+  ]
+}

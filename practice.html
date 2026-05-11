@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>帳簿と決算の仕上げ問題 | 簿記3級</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <header class="site-header compact">
+      <div class="container header-inner">
+        <div>
+          <p class="eyebrow">帳簿と決算</p>
+          <h1 id="chapter-page-title">仕上げ問題</h1>
+        </div>
+        <a class="button secondary" href="index.html">戻る</a>
+      </div>
+    </header>
+
+    <main class="container page-main">
+      <section id="chapter-list-view" class="exam-list" aria-labelledby="chapter-list-title" hidden>
+        <div class="section-heading">
+          <h2 id="chapter-list-title">チャプター仕上げ問題</h2>
+          <p>テキストで学んだ帳簿のテーマを、1チャプター1問の実戦形式で確認します。</p>
+        </div>
+        <div id="chapter-list" class="chapter-list"></div>
+      </section>
+
+      <section id="chapter-practice-view" class="chapter-practice">
+        <div class="start-panel">
+          <div class="section-heading">
+            <p class="eyebrow" id="practice-category"></p>
+            <h2 id="practice-title">読み込み中</h2>
+            <p id="practice-description"></p>
+          </div>
+
+          <dl id="practice-meta" class="meta-grid"></dl>
+
+          <div class="chapter-note" id="practice-intro"></div>
+
+          <section class="source-document">
+            <h4>資料</h4>
+            <ol id="practice-materials" class="chapter-materials"></ol>
+          </section>
+
+          <form id="practice-form">
+            <div id="practice-answer-area"></div>
+
+            <div class="exam-actions chapter-actions">
+              <a class="button secondary" href="index.html">トップへ戻る</a>
+              <button id="clear-button" class="button secondary" type="button">入力をクリア</button>
+              <button class="button primary" type="submit">採点する</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/common.js"></script>
+    <script src="js/chapter.js"></script>
+  </body>
+</html>

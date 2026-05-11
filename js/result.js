@@ -31,7 +31,7 @@
       </dl>
       <div class="result-actions">
         <a class="button primary" href="exam.html?examId=${encodeURIComponent(result.examId)}">もう一度受ける</a>
-        <a class="button secondary" href="index.html">模試一覧へ</a>
+        <a class="button secondary" href="index.html">トップへ戻る</a>
       </div>
     `;
   }

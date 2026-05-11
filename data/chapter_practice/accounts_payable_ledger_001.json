@@ -1,0 +1,51 @@
+{
+  "id": "accounts_payable_ledger_001",
+  "mode": "chapterPractice",
+  "category": "帳簿",
+  "chapterTitle": "買掛金元帳",
+  "title": "買掛金元帳 完成問題",
+  "description": "次の取引にもとづいて、C商店およびD商店の買掛金元帳を完成させなさい。",
+  "estimatedMinutes": 10,
+  "totalScore": 15,
+  "intro": "買掛金は、掛けで仕入れたときに貸方、支払・返品・値引きがあったときに借方へ記入します。",
+  "materials": [
+    "5月1日 C商店への買掛金前月繰越は90,000円、D商店への買掛金前月繰越は110,000円である。",
+    "5月4日 C商店から商品160,000円を掛けで仕入れた。",
+    "5月9日 D商店へ買掛金70,000円を普通預金から支払った。",
+    "5月12日 C商店へ、5月4日に仕入れた商品のうち30,000円を返品した。",
+    "5月18日 D商店から商品140,000円を掛けで仕入れた。",
+    "5月24日 C商店へ買掛金150,000円を普通預金から支払った。",
+    "5月27日 D商店から買掛金10,000円の値引きを受けた。"
+  ],
+  "tables": [
+    {
+      "id": "c_shop",
+      "title": "C商店 買掛金元帳",
+      "columns": ["日付", "摘要", "借方", "貸方", "残高"],
+      "rows": [
+        { "date": "5/1", "description": "前月繰越", "cells": { "debit": null, "credit": 90000, "balance": 90000 } },
+        { "date": "5/4", "description": "仕入", "cells": { "debit": null, "credit": 160000, "balance": 250000 } },
+        { "date": "5/12", "description": "仕入戻し", "cells": { "debit": 30000, "credit": null, "balance": 220000 } },
+        { "date": "5/24", "description": "普通預金", "cells": { "debit": 150000, "credit": null, "balance": 70000 } },
+        { "date": "5/31", "description": "次月繰越", "cells": { "debit": null, "credit": null, "balance": 70000 } }
+      ]
+    },
+    {
+      "id": "d_shop",
+      "title": "D商店 買掛金元帳",
+      "columns": ["日付", "摘要", "借方", "貸方", "残高"],
+      "rows": [
+        { "date": "5/1", "description": "前月繰越", "cells": { "debit": null, "credit": 110000, "balance": 110000 } },
+        { "date": "5/9", "description": "普通預金", "cells": { "debit": 70000, "credit": null, "balance": 40000 } },
+        { "date": "5/18", "description": "仕入", "cells": { "debit": null, "credit": 140000, "balance": 180000 } },
+        { "date": "5/27", "description": "仕入値引", "cells": { "debit": 10000, "credit": null, "balance": 170000 } },
+        { "date": "5/31", "description": "次月繰越", "cells": { "debit": null, "credit": null, "balance": 170000 } }
+      ]
+    }
+  ],
+  "explanation": [
+    "買掛金元帳は仕入先ごとに記入します。掛仕入は買掛金の増加なので貸方、支払・返品・値引きは買掛金の減少なので借方です。",
+    "C商店の残高は90,000円+160,000円-30,000円-150,000円=70,000円です。",
+    "D商店の残高は110,000円-70,000円+140,000円-10,000円=170,000円です。"
+  ]
+}

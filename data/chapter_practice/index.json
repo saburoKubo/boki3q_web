@@ -1,0 +1,86 @@
+{
+  "title": "チャプター仕上げ問題",
+  "description": "帳簿と決算の各チャプターを、1テーマ1問の実戦形式で確認します。",
+  "practices": [
+    {
+      "id": "accounts_receivable_ledger_001",
+      "category": "帳簿",
+      "chapterTitle": "売掛金元帳",
+      "title": "売掛金元帳 完成問題",
+      "description": "得意先別に売掛金の増減を記録し、月末残高を求めます。",
+      "difficulty": "標準",
+      "estimatedMinutes": 10,
+      "totalScore": 15
+    },
+    {
+      "id": "accounts_payable_ledger_001",
+      "category": "帳簿",
+      "chapterTitle": "買掛金元帳",
+      "title": "買掛金元帳 完成問題",
+      "description": "仕入先別に買掛金の増減を記録し、月末残高を求めます。",
+      "difficulty": "標準",
+      "estimatedMinutes": 10,
+      "totalScore": 15
+    },
+    {
+      "id": "merchandise_inventory_ledger_001",
+      "category": "帳簿",
+      "chapterTitle": "商品有高帳",
+      "title": "商品有高帳 完成問題",
+      "description": "先入先出法により、商品の受入・払出・残高を記録します。",
+      "difficulty": "標準",
+      "estimatedMinutes": 15,
+      "totalScore": 20
+    },
+    {
+      "id": "moving_average_inventory_ledger_001",
+      "category": "帳簿",
+      "chapterTitle": "商品有高帳（移動平均法）",
+      "title": "商品有高帳 移動平均法 完成問題",
+      "description": "移動平均法により、商品の受入・払出・残高を記録します。",
+      "difficulty": "標準",
+      "estimatedMinutes": 15,
+      "totalScore": 20
+    },
+    {
+      "id": "fixed_asset_register_001",
+      "category": "決算",
+      "chapterTitle": "固定資産台帳",
+      "title": "固定資産台帳 完成問題",
+      "description": "取得原価、耐用年数、期首累計額から当期償却費と期末帳簿価額を求めます。",
+      "difficulty": "標準",
+      "estimatedMinutes": 15,
+      "totalScore": 20
+    },
+    {
+      "id": "worksheet_001",
+      "category": "決算",
+      "chapterTitle": "精算表",
+      "title": "精算表 完成問題",
+      "description": "決算整理事項を反映し、精算表の修正記入・損益計算書・貸借対照表欄を完成させます。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 25,
+      "totalScore": 35
+    },
+    {
+      "id": "income_statement_001",
+      "category": "決算",
+      "chapterTitle": "損益計算書",
+      "title": "損益計算書 完成問題",
+      "description": "決算整理後の金額から損益計算書を完成させます。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 15,
+      "totalScore": 25
+    },
+    {
+      "id": "balance_sheet_001",
+      "category": "決算",
+      "chapterTitle": "貸借対照表",
+      "title": "貸借対照表 完成問題",
+      "description": "決算整理後の金額から貸借対照表を完成させます。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 15,
+      "totalScore": 25
+    }
+  ]
+}

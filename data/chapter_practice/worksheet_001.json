@@ -1,0 +1,73 @@
+{
+  "id": "worksheet_001",
+  "mode": "chapterPractice",
+  "category": "決算",
+  "chapterTitle": "精算表",
+  "title": "精算表 完成問題",
+  "description": "次の決算整理前残高試算表および決算整理事項にもとづいて、精算表を完成させなさい。",
+  "estimatedMinutes": 25,
+  "totalScore": 35,
+  "intro": "修正記入欄には決算整理事項の増減額を記入し、損益計算書欄・貸借対照表欄には整理後の金額を記入します。金額がない欄は空欄のままでかまいません。",
+  "materials": [
+    "決算整理前残高試算表: 現金100,000、普通預金500,000、売掛金300,000、貸倒引当金6,000、繰越商品120,000、貯蔵品20,000、備品800,000、備品減価償却累計額200,000、買掛金180,000、借入金400,000、資本金774,000、繰越利益剰余金100,000、売上1,500,000、仕入900,000、給料240,000、支払家賃120,000、保険料60,000。",
+    "期末商品棚卸高は150,000円である。",
+    "貯蔵品の期末未使用高は5,000円である。",
+    "保険料のうち20,000円は次期分である。",
+    "備品について80,000円の減価償却を行う。",
+    "売掛金期末残高に対して3%の貸倒引当金を差額補充法で設定する。",
+    "借入金の未払利息4,000円を計上する。",
+    "税引前当期純利益の30%を法人税、住民税及び事業税として計上する。"
+  ],
+  "tables": [
+    {
+      "id": "worksheet",
+      "title": "精算表",
+      "hideZeroCells": true,
+      "answerKeys": ["adj_debit", "adj_credit", "pl_debit", "pl_credit", "bs_debit", "bs_credit"],
+      "columns": [
+        { "key": "account", "label": "勘定科目", "type": "static" },
+        { "key": "tb_debit", "label": "残高試算表 借方", "type": "static" },
+        { "key": "tb_credit", "label": "残高試算表 貸方", "type": "static" },
+        { "key": "adj_debit", "label": "修正記入 借方", "type": "answer" },
+        { "key": "adj_credit", "label": "修正記入 貸方", "type": "answer" },
+        { "key": "pl_debit", "label": "損益計算書 借方", "type": "answer" },
+        { "key": "pl_credit", "label": "損益計算書 貸方", "type": "answer" },
+        { "key": "bs_debit", "label": "貸借対照表 借方", "type": "answer" },
+        { "key": "bs_credit", "label": "貸借対照表 貸方", "type": "answer" }
+      ],
+      "rows": [
+        { "values": { "account": "現金", "tb_debit": "100,000", "tb_credit": "" }, "cells": { "adj_debit": 0, "adj_credit": 0, "pl_debit": 0, "pl_credit": 0, "bs_debit": 100000, "bs_credit": 0 } },
+        { "values": { "account": "普通預金", "tb_debit": "500,000", "tb_credit": "" }, "cells": { "adj_debit": 0, "adj_credit": 0, "pl_debit": 0, "pl_credit": 0, "bs_debit": 500000, "bs_credit": 0 } },
+        { "values": { "account": "売掛金", "tb_debit": "300,000", "tb_credit": "" }, "cells": { "adj_debit": 0, "adj_credit": 0, "pl_debit": 0, "pl_credit": 0, "bs_debit": 300000, "bs_credit": 0 } },
+        { "values": { "account": "貸倒引当金", "tb_debit": "", "tb_credit": "6,000" }, "cells": { "adj_debit": 0, "adj_credit": 3000, "pl_debit": 0, "pl_credit": 0, "bs_debit": 0, "bs_credit": 9000 } },
+        { "values": { "account": "繰越商品", "tb_debit": "120,000", "tb_credit": "" }, "cells": { "adj_debit": 30000, "adj_credit": 0, "pl_debit": 0, "pl_credit": 0, "bs_debit": 150000, "bs_credit": 0 } },
+        { "values": { "account": "貯蔵品", "tb_debit": "20,000", "tb_credit": "" }, "cells": { "adj_debit": 0, "adj_credit": 15000, "pl_debit": 0, "pl_credit": 0, "bs_debit": 5000, "bs_credit": 0 } },
+        { "values": { "account": "前払保険料", "tb_debit": "", "tb_credit": "" }, "cells": { "adj_debit": 20000, "adj_credit": 0, "pl_debit": 0, "pl_credit": 0, "bs_debit": 20000, "bs_credit": 0 } },
+        { "values": { "account": "備品", "tb_debit": "800,000", "tb_credit": "" }, "cells": { "adj_debit": 0, "adj_credit": 0, "pl_debit": 0, "pl_credit": 0, "bs_debit": 800000, "bs_credit": 0 } },
+        { "values": { "account": "備品減価償却累計額", "tb_debit": "", "tb_credit": "200,000" }, "cells": { "adj_debit": 0, "adj_credit": 80000, "pl_debit": 0, "pl_credit": 0, "bs_debit": 0, "bs_credit": 280000 } },
+        { "values": { "account": "買掛金", "tb_debit": "", "tb_credit": "180,000" }, "cells": { "adj_debit": 0, "adj_credit": 0, "pl_debit": 0, "pl_credit": 0, "bs_debit": 0, "bs_credit": 180000 } },
+        { "values": { "account": "借入金", "tb_debit": "", "tb_credit": "400,000" }, "cells": { "adj_debit": 0, "adj_credit": 0, "pl_debit": 0, "pl_credit": 0, "bs_debit": 0, "bs_credit": 400000 } },
+        { "values": { "account": "未払利息", "tb_debit": "", "tb_credit": "" }, "cells": { "adj_debit": 0, "adj_credit": 4000, "pl_debit": 0, "pl_credit": 0, "bs_debit": 0, "bs_credit": 4000 } },
+        { "values": { "account": "未払法人税等", "tb_debit": "", "tb_credit": "" }, "cells": { "adj_debit": 0, "adj_credit": 38400, "pl_debit": 0, "pl_credit": 0, "bs_debit": 0, "bs_credit": 38400 } },
+        { "values": { "account": "資本金", "tb_debit": "", "tb_credit": "774,000" }, "cells": { "adj_debit": 0, "adj_credit": 0, "pl_debit": 0, "pl_credit": 0, "bs_debit": 0, "bs_credit": 774000 } },
+        { "values": { "account": "繰越利益剰余金", "tb_debit": "", "tb_credit": "100,000" }, "cells": { "adj_debit": 0, "adj_credit": 0, "pl_debit": 0, "pl_credit": 0, "bs_debit": 0, "bs_credit": 100000 } },
+        { "values": { "account": "売上", "tb_debit": "", "tb_credit": "1,500,000" }, "cells": { "adj_debit": 0, "adj_credit": 0, "pl_debit": 0, "pl_credit": 1500000, "bs_debit": 0, "bs_credit": 0 } },
+        { "values": { "account": "仕入", "tb_debit": "900,000", "tb_credit": "" }, "cells": { "adj_debit": 0, "adj_credit": 30000, "pl_debit": 870000, "pl_credit": 0, "bs_debit": 0, "bs_credit": 0 } },
+        { "values": { "account": "給料", "tb_debit": "240,000", "tb_credit": "" }, "cells": { "adj_debit": 0, "adj_credit": 0, "pl_debit": 240000, "pl_credit": 0, "bs_debit": 0, "bs_credit": 0 } },
+        { "values": { "account": "支払家賃", "tb_debit": "120,000", "tb_credit": "" }, "cells": { "adj_debit": 0, "adj_credit": 0, "pl_debit": 120000, "pl_credit": 0, "bs_debit": 0, "bs_credit": 0 } },
+        { "values": { "account": "保険料", "tb_debit": "60,000", "tb_credit": "" }, "cells": { "adj_debit": 0, "adj_credit": 20000, "pl_debit": 40000, "pl_credit": 0, "bs_debit": 0, "bs_credit": 0 } },
+        { "values": { "account": "消耗品費", "tb_debit": "", "tb_credit": "" }, "cells": { "adj_debit": 15000, "adj_credit": 0, "pl_debit": 15000, "pl_credit": 0, "bs_debit": 0, "bs_credit": 0 } },
+        { "values": { "account": "貸倒引当金繰入", "tb_debit": "", "tb_credit": "" }, "cells": { "adj_debit": 3000, "adj_credit": 0, "pl_debit": 3000, "pl_credit": 0, "bs_debit": 0, "bs_credit": 0 } },
+        { "values": { "account": "減価償却費", "tb_debit": "", "tb_credit": "" }, "cells": { "adj_debit": 80000, "adj_credit": 0, "pl_debit": 80000, "pl_credit": 0, "bs_debit": 0, "bs_credit": 0 } },
+        { "values": { "account": "支払利息", "tb_debit": "", "tb_credit": "" }, "cells": { "adj_debit": 4000, "adj_credit": 0, "pl_debit": 4000, "pl_credit": 0, "bs_debit": 0, "bs_credit": 0 } },
+        { "values": { "account": "法人税、住民税及び事業税", "tb_debit": "", "tb_credit": "" }, "cells": { "adj_debit": 38400, "adj_credit": 0, "pl_debit": 38400, "pl_credit": 0, "bs_debit": 0, "bs_credit": 0 } },
+        { "values": { "account": "当期純利益", "tb_debit": "", "tb_credit": "" }, "cells": { "adj_debit": 0, "adj_credit": 0, "pl_debit": 89600, "pl_credit": 0, "bs_debit": 0, "bs_credit": 89600 } }
+      ]
+    }
+  ],
+  "explanation": [
+    "仕入は期末商品棚卸高の反映により900,000円-30,000円=870,000円となります。",
+    "貸倒引当金は売掛金300,000円×3%=9,000円です。既存残高6,000円との差額3,000円を繰り入れます。",
+    "税引前当期純利益は128,000円、法人税等は38,400円、当期純利益は89,600円です。"
+  ]
+}

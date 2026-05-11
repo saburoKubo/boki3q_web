@@ -1,0 +1,51 @@
+{
+  "id": "accounts_receivable_ledger_001",
+  "mode": "chapterPractice",
+  "category": "帳簿",
+  "chapterTitle": "売掛金元帳",
+  "title": "売掛金元帳 完成問題",
+  "description": "次の取引にもとづいて、A商店およびB商店の売掛金元帳を完成させなさい。",
+  "estimatedMinutes": 10,
+  "totalScore": 15,
+  "intro": "売掛金は、掛けで売り上げたときに借方、回収・返品・値引きがあったときに貸方へ記入します。",
+  "materials": [
+    "4月1日 A商店への売掛金前月繰越は120,000円、B商店への売掛金前月繰越は80,000円である。",
+    "4月5日 A商店へ商品150,000円を掛けで売り上げた。",
+    "4月10日 B商店から売掛金50,000円が普通預金に入金された。",
+    "4月15日 A商店から、4月5日に販売した商品のうち20,000円の返品を受けた。",
+    "4月20日 B商店へ商品100,000円を掛けで売り上げた。",
+    "4月25日 A商店から売掛金180,000円が普通預金に入金された。",
+    "4月28日 B商店に対し、売掛金5,000円の値引きを行った。"
+  ],
+  "tables": [
+    {
+      "id": "a_shop",
+      "title": "A商店 売掛金元帳",
+      "columns": ["日付", "摘要", "借方", "貸方", "残高"],
+      "rows": [
+        { "date": "4/1", "description": "前月繰越", "cells": { "debit": 120000, "credit": null, "balance": 120000 } },
+        { "date": "4/5", "description": "売上", "cells": { "debit": 150000, "credit": null, "balance": 270000 } },
+        { "date": "4/15", "description": "売上戻り", "cells": { "debit": null, "credit": 20000, "balance": 250000 } },
+        { "date": "4/25", "description": "普通預金", "cells": { "debit": null, "credit": 180000, "balance": 70000 } },
+        { "date": "4/30", "description": "次月繰越", "cells": { "debit": null, "credit": null, "balance": 70000 } }
+      ]
+    },
+    {
+      "id": "b_shop",
+      "title": "B商店 売掛金元帳",
+      "columns": ["日付", "摘要", "借方", "貸方", "残高"],
+      "rows": [
+        { "date": "4/1", "description": "前月繰越", "cells": { "debit": 80000, "credit": null, "balance": 80000 } },
+        { "date": "4/10", "description": "普通預金", "cells": { "debit": null, "credit": 50000, "balance": 30000 } },
+        { "date": "4/20", "description": "売上", "cells": { "debit": 100000, "credit": null, "balance": 130000 } },
+        { "date": "4/28", "description": "売上値引", "cells": { "debit": null, "credit": 5000, "balance": 125000 } },
+        { "date": "4/30", "description": "次月繰越", "cells": { "debit": null, "credit": null, "balance": 125000 } }
+      ]
+    }
+  ],
+  "explanation": [
+    "売掛金元帳は得意先ごとに記入します。掛売上は売掛金の増加なので借方、回収・返品・値引きは売掛金の減少なので貸方です。",
+    "A商店の残高は120,000円+150,000円-20,000円-180,000円=70,000円です。",
+    "B商店の残高は80,000円-50,000円+100,000円-5,000円=125,000円です。"
+  ]
+}

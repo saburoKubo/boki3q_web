@@ -1,0 +1,44 @@
+{
+  "id": "merchandise_inventory_ledger_001",
+  "mode": "chapterPractice",
+  "category": "帳簿",
+  "chapterTitle": "商品有高帳",
+  "title": "商品有高帳 完成問題",
+  "description": "次の取引にもとづいて、先入先出法により商品有高帳を完成させなさい。",
+  "estimatedMinutes": 15,
+  "totalScore": 20,
+  "intro": "商品有高帳では、商品の数量・単価・金額を受入、払出、残高に分けて記録します。この問題では先入先出法を用います。",
+  "materials": [
+    "6月1日 前月繰越 商品A 30個、単価1,000円。",
+    "6月3日 商品A 40個を単価1,100円で仕入れた。",
+    "6月8日 商品A 45個を売り上げた。",
+    "6月12日 商品A 30個を単価1,200円で仕入れた。",
+    "6月18日 商品A 25個を売り上げた。",
+    "6月22日 6月12日に仕入れた商品のうち5個を返品した。",
+    "6月26日 商品A 10個を売り上げた。"
+  ],
+  "tables": [
+    {
+      "id": "inventory",
+      "title": "商品A 商品有高帳",
+      "columns": ["日付", "摘要", "受入 数量", "受入 単価", "受入 金額", "払出 数量", "払出 単価", "払出 金額", "残高 数量", "残高 単価", "残高 金額"],
+      "rows": [
+        { "date": "6/1", "description": "前月繰越", "cells": { "in_qty": 30, "in_unit": 1000, "in_amount": 30000, "out_qty": null, "out_unit": null, "out_amount": null, "balance_qty": 30, "balance_unit": 1000, "balance_amount": 30000 } },
+        { "date": "6/3", "description": "仕入", "cells": { "in_qty": 40, "in_unit": 1100, "in_amount": 44000, "out_qty": null, "out_unit": null, "out_amount": null, "balance_qty": 70, "balance_unit": null, "balance_amount": 74000 } },
+        { "date": "6/8", "description": "売上", "cells": { "in_qty": null, "in_unit": null, "in_amount": null, "out_qty": 45, "out_unit": null, "out_amount": 46500, "balance_qty": 25, "balance_unit": 1100, "balance_amount": 27500 } },
+        { "date": "6/12", "description": "仕入", "cells": { "in_qty": 30, "in_unit": 1200, "in_amount": 36000, "out_qty": null, "out_unit": null, "out_amount": null, "balance_qty": 55, "balance_unit": null, "balance_amount": 63500 } },
+        { "date": "6/18", "description": "売上", "cells": { "in_qty": null, "in_unit": null, "in_amount": null, "out_qty": 25, "out_unit": 1100, "out_amount": 27500, "balance_qty": 30, "balance_unit": 1200, "balance_amount": 36000 } },
+        { "date": "6/22", "description": "仕入戻し", "cells": { "in_qty": null, "in_unit": null, "in_amount": null, "out_qty": 5, "out_unit": 1200, "out_amount": 6000, "balance_qty": 25, "balance_unit": 1200, "balance_amount": 30000 } },
+        { "date": "6/26", "description": "売上", "cells": { "in_qty": null, "in_unit": null, "in_amount": null, "out_qty": 10, "out_unit": 1200, "out_amount": 12000, "balance_qty": 15, "balance_unit": 1200, "balance_amount": 18000 } }
+      ]
+    }
+  ],
+  "summary": [
+    { "id": "ending_inventory", "label": "期末商品棚卸高", "correctAnswer": 18000, "score": 2 }
+  ],
+  "explanation": [
+    "先入先出法では、先に仕入れた商品から先に払い出したものとして計算します。",
+    "6月8日の45個の払出は、前月繰越30個を単価1,000円、6月3日仕入分15個を単価1,100円で計算するため、払出金額は46,500円です。",
+    "6月26日後の残高は15個、単価1,200円、金額18,000円です。"
+  ]
+}
