@@ -3,6 +3,16 @@
   "description": "帳簿と決算の各チャプターを、1テーマ1問の実戦形式で確認します。",
   "practices": [
     {
+      "id": "general_ledger_001",
+      "category": "帳簿",
+      "chapterTitle": "総勘定元帳",
+      "title": "総勘定元帳 完成問題",
+      "description": "仕訳日記帳の取引を指定勘定へ転記し、月末残高を求めます。",
+      "difficulty": "標準",
+      "estimatedMinutes": 15,
+      "totalScore": 25
+    },
+    {
       "id": "accounts_receivable_ledger_001",
       "category": "帳簿",
       "chapterTitle": "売掛金元帳",
@@ -51,6 +61,16 @@
       "difficulty": "標準",
       "estimatedMinutes": 15,
       "totalScore": 20
+    },
+    {
+      "id": "trial_balance_001",
+      "category": "帳簿",
+      "chapterTitle": "残高試算表",
+      "title": "残高試算表 完成問題",
+      "description": "月初残高と月中取引から、月末の残高試算表を完成させます。",
+      "difficulty": "標準",
+      "estimatedMinutes": 15,
+      "totalScore": 25
     },
     {
       "id": "worksheet_001",

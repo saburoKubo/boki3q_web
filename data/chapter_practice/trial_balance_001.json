@@ -1,0 +1,61 @@
+{
+  "id": "trial_balance_001",
+  "mode": "chapterPractice",
+  "category": "帳簿",
+  "chapterTitle": "残高試算表",
+  "title": "残高試算表 完成問題",
+  "description": "次の月初残高と月中取引にもとづいて、5月31日の残高試算表を完成させなさい。",
+  "estimatedMinutes": 15,
+  "totalScore": 25,
+  "intro": "残高試算表では、各勘定の借方残高または貸方残高だけを記入します。残高がない欄は空欄のままでかまいません。",
+  "materials": [
+    "5月1日現在の残高: 現金120,000、普通預金500,000、売掛金300,000、繰越商品200,000、備品800,000、買掛金250,000、借入金400,000、資本金800,000、繰越利益剰余金470,000。",
+    "商品を現金で180,000円売り上げた。",
+    "商品を掛けで420,000円売り上げた。",
+    "売掛金250,000円を普通預金で回収した。",
+    "商品360,000円を掛けで仕入れた。",
+    "買掛金300,000円を普通預金から支払った。",
+    "給料160,000円を普通預金から支払った。",
+    "家賃90,000円を現金で支払った。",
+    "借入金100,000円を返済し、利息5,000円とともに普通預金から支払った。",
+    "備品150,000円を購入し、代金は未払いである。",
+    "受取手数料70,000円が普通預金に入金された。"
+  ],
+  "tables": [
+    {
+      "id": "trial_balance",
+      "title": "残高試算表",
+      "hideZeroCells": true,
+      "answerKeys": ["debit", "credit"],
+      "columns": [
+        { "key": "account", "label": "勘定科目", "type": "static" },
+        { "key": "debit", "label": "借方残高", "type": "answer" },
+        { "key": "credit", "label": "貸方残高", "type": "answer" }
+      ],
+      "rows": [
+        { "values": { "account": "現金" }, "cells": { "debit": 210000, "credit": 0 } },
+        { "values": { "account": "普通預金" }, "cells": { "debit": 255000, "credit": 0 } },
+        { "values": { "account": "売掛金" }, "cells": { "debit": 470000, "credit": 0 } },
+        { "values": { "account": "繰越商品" }, "cells": { "debit": 200000, "credit": 0 } },
+        { "values": { "account": "備品" }, "cells": { "debit": 950000, "credit": 0 } },
+        { "values": { "account": "仕入" }, "cells": { "debit": 360000, "credit": 0 } },
+        { "values": { "account": "給料" }, "cells": { "debit": 160000, "credit": 0 } },
+        { "values": { "account": "支払家賃" }, "cells": { "debit": 90000, "credit": 0 } },
+        { "values": { "account": "支払利息" }, "cells": { "debit": 5000, "credit": 0 } },
+        { "values": { "account": "買掛金" }, "cells": { "debit": 0, "credit": 310000 } },
+        { "values": { "account": "借入金" }, "cells": { "debit": 0, "credit": 300000 } },
+        { "values": { "account": "未払金" }, "cells": { "debit": 0, "credit": 150000 } },
+        { "values": { "account": "資本金" }, "cells": { "debit": 0, "credit": 800000 } },
+        { "values": { "account": "繰越利益剰余金" }, "cells": { "debit": 0, "credit": 470000 } },
+        { "values": { "account": "売上" }, "cells": { "debit": 0, "credit": 600000 } },
+        { "values": { "account": "受取手数料" }, "cells": { "debit": 0, "credit": 70000 } },
+        { "values": { "account": "合計" }, "cells": { "debit": 2700000, "credit": 2700000 } }
+      ]
+    }
+  ],
+  "explanation": [
+    "残高試算表では、各勘定について借方合計と貸方合計の差額を残高欄に記入します。",
+    "普通預金は、月初500,000円に売掛金回収250,000円と受取手数料70,000円を加え、買掛金支払300,000円、給料160,000円、借入金返済と利息105,000円を差し引くため、借方残高255,000円です。",
+    "借方残高合計と貸方残高合計はいずれも2,700,000円で一致します。"
+  ]
+}
