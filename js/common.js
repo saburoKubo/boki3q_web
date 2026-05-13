@@ -281,6 +281,7 @@
     loadExam,
     formatTime,
     formatYen,
+    normalizeText,
     normalizeNumber,
     gradeExam,
     getSession,

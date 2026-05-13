@@ -1,0 +1,107 @@
+{
+  "id": "journal_receivables_payables_001",
+  "mode": "journalPractice",
+  "category": "仕訳",
+  "chapterTitle": "債権・債務の仕訳",
+  "title": "債権・債務の仕訳 仕上げ問題",
+  "description": "売掛金・買掛金、貸付金・借入金、仮払金、貸倒れ、前払・前受を含む取引を仕訳します。",
+  "estimatedMinutes": 18,
+  "totalScore": 20,
+  "intro": "各取引について仕訳しなさい。解答欄は本番形式に合わせて5行あります。使用しない行は空欄のままでかまいません。",
+  "accountOptions": [
+    "現金",
+    "普通預金",
+    "売掛金",
+    "買掛金",
+    "貸付金",
+    "借入金",
+    "受取利息",
+    "支払利息",
+    "貸倒引当金",
+    "貸倒損失",
+    "仮払金",
+    "旅費交通費",
+    "支払家賃",
+    "前払家賃",
+    "受取手数料",
+    "前受手数料"
+  ],
+  "materials": [
+    "勘定科目は選択肢から選び、金額は円単位で入力すること。",
+    "複合仕訳では、借方・貸方それぞれ必要な科目を複数行に分けて入力すること。",
+    "同じ借方内または同じ貸方内の行順は問わない。"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "text": "取引先に500,000円を貸し付け、利息6,000円を差し引いた残額を普通預金から振り込んだ。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "貸付金", "debitAmount": 500000, "creditAccount": "普通預金", "creditAmount": 494000 },
+          { "creditAccount": "受取利息", "creditAmount": 6000 }
+        ]
+      },
+      "explanation": "貸付金は元本500,000円で記録し、差し引いた利息6,000円は受取利息として処理します。実際に支払った普通預金は494,000円です。"
+    },
+    {
+      "id": "q2",
+      "text": "銀行から800,000円を借り入れ、利息12,000円を差し引かれた残額が普通預金に入金された。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "普通預金", "debitAmount": 788000, "creditAccount": "借入金", "creditAmount": 800000 },
+          { "debitAccount": "支払利息", "debitAmount": 12000 }
+        ]
+      },
+      "explanation": "借入金は元本800,000円で記録します。差し引かれた利息12,000円は支払利息、実際の入金額788,000円は普通預金です。"
+    },
+    {
+      "id": "q3",
+      "text": "得意先が倒産し、売掛金400,000円のうち50,000円を現金で回収したが、残額は貸倒れとなった。なお、貸倒引当金の残高は30,000円である。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "現金", "debitAmount": 50000, "creditAccount": "売掛金", "creditAmount": 400000 },
+          { "debitAccount": "貸倒引当金", "debitAmount": 30000 },
+          { "debitAccount": "貸倒損失", "debitAmount": 320000 }
+        ]
+      },
+      "explanation": "回収できた50,000円は現金で処理します。回収不能額350,000円のうち貸倒引当金30,000円を取り崩し、不足分320,000円を貸倒損失にします。"
+    },
+    {
+      "id": "q4",
+      "text": "出張旅費の概算額として従業員へ80,000円を渡していたが、旅費交通費73,000円で精算し、残額7,000円を現金で受け取った。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "旅費交通費", "debitAmount": 73000, "creditAccount": "仮払金", "creditAmount": 80000 },
+          { "debitAccount": "現金", "debitAmount": 7000 }
+        ]
+      },
+      "explanation": "概算払いした仮払金80,000円を取り消し、実際の旅費交通費73,000円と返金された現金7,000円に振り替えます。"
+    },
+    {
+      "id": "q5",
+      "text": "受取手数料120,000円を現金で受け取った。このうち50,000円は翌月分である。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "現金", "debitAmount": 120000, "creditAccount": "受取手数料", "creditAmount": 70000 },
+          { "creditAccount": "前受手数料", "creditAmount": 50000 }
+        ]
+      },
+      "explanation": "当月分70,000円は受取手数料、翌月分50,000円はまだ収益にしないため前受手数料として処理します。"
+    }
+  ],
+  "explanation": [
+    "貸付金・借入金は元本金額で記録し、利息が差し引かれる場合は受取利息または支払利息を分けて処理します。",
+    "貸倒れでは、貸倒引当金がある場合は先に取り崩し、不足額を貸倒損失にします。",
+    "仮払金や前受手数料は、内容が確定した時点で正しい科目へ振り替えます。"
+  ]
+}

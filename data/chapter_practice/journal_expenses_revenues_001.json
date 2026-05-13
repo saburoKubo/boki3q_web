@@ -1,0 +1,121 @@
+{
+  "id": "journal_expenses_revenues_001",
+  "mode": "journalPractice",
+  "category": "仕訳",
+  "chapterTitle": "費用・収益の仕訳",
+  "title": "費用・収益の仕訳 仕上げ問題",
+  "description": "給料、家賃、保険料、手数料、前払・未払・前受・未収を含む取引を仕訳します。",
+  "estimatedMinutes": 18,
+  "totalScore": 20,
+  "intro": "各取引について仕訳しなさい。解答欄は本番形式に合わせて5行あります。使用しない行は空欄のままでかまいません。",
+  "accountOptions": [
+    "現金",
+    "普通預金",
+    "給料",
+    "所得税預り金",
+    "社会保険料預り金",
+    "法定福利費",
+    "社会保険料",
+    "支払家賃",
+    "前払家賃",
+    "未払家賃",
+    "保険料",
+    "前払保険料",
+    "受取手数料",
+    "前受手数料",
+    "未収手数料",
+    "支払手数料",
+    "仮払金",
+    "旅費交通費",
+    "通信費",
+    "雑費"
+  ],
+  "materials": [
+    "勘定科目は選択肢から選び、金額は円単位で入力すること。",
+    "給料から控除する所得税や社会保険料は預り金で処理すること。",
+    "決算整理では、当期分と次期分、当期分と未収・未払分を区別すること。",
+    "同じ借方内または同じ貸方内の行順は問わない。"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "text": "従業員の給料500,000円について、所得税30,000円、社会保険料40,000円を差し引き、残額を普通預金から支払った。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "給料", "debitAmount": 500000, "creditAccount": "所得税預り金", "creditAmount": 30000 },
+          { "creditAccount": "社会保険料預り金", "creditAmount": 40000 },
+          { "creditAccount": "普通預金", "creditAmount": 430000 }
+        ]
+      },
+      "explanation": "給料総額500,000円を費用計上し、控除した所得税・社会保険料は預り金、差引支給額430,000円は普通預金の減少として処理します。"
+    },
+    {
+      "id": "q2",
+      "text": "社会保険料の会社負担分45,000円と、従業員から預かっていた社会保険料40,000円をあわせて、普通預金から納付した。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "法定福利費", "debitAmount": 45000, "creditAccount": "普通預金", "creditAmount": 85000 },
+          { "debitAccount": "社会保険料預り金", "debitAmount": 40000 }
+        ]
+      },
+      "explanation": "会社負担分45,000円は法定福利費、従業員負担分は預り金の取り崩しです。普通預金の支払額は合計85,000円です。"
+    },
+    {
+      "id": "q3",
+      "text": "決算にあたり、当期に支払った家賃360,000円のうち、60,000円は次期分であることが判明した。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "前払家賃", "debitAmount": 60000, "creditAccount": "支払家賃", "creditAmount": 60000 }
+        ]
+      },
+      "explanation": "次期分の家賃は当期の費用ではないため、支払家賃から前払家賃へ振り替えます。"
+    },
+    {
+      "id": "q4",
+      "text": "決算にあたり、当期分の受取手数料35,000円が未収であることが判明した。また、すでに受け取っていた受取手数料120,000円のうち50,000円は次期分である。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "未収手数料", "debitAmount": 35000, "creditAccount": "前受手数料", "creditAmount": 50000 },
+          { "debitAccount": "受取手数料", "debitAmount": 15000 }
+        ]
+      },
+      "alternativeAnswers": [
+        {
+          "lines": [
+            { "debitAccount": "未収手数料", "debitAmount": 35000, "creditAccount": "受取手数料", "creditAmount": 35000 },
+            { "debitAccount": "受取手数料", "debitAmount": 50000, "creditAccount": "前受手数料", "creditAmount": 50000 }
+          ]
+        }
+      ],
+      "explanation": "当期分でまだ受け取っていない35,000円は未収手数料を計上します。次期分として受け取っている50,000円は前受手数料へ振り替えます。"
+    },
+    {
+      "id": "q5",
+      "text": "出張旅費の概算額として仮払金100,000円を渡していたが、旅費交通費82,000円、通信費6,000円、雑費4,000円として精算し、残額8,000円を現金で受け取った。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "旅費交通費", "debitAmount": 82000, "creditAccount": "仮払金", "creditAmount": 100000 },
+          { "debitAccount": "通信費", "debitAmount": 6000 },
+          { "debitAccount": "雑費", "debitAmount": 4000 },
+          { "debitAccount": "現金", "debitAmount": 8000 }
+        ]
+      },
+      "explanation": "仮払金100,000円を取り消し、実際の費用92,000円と返金された現金8,000円に振り替えます。"
+    }
+  ],
+  "explanation": [
+    "給料から控除した税金や社会保険料は、会社が一時的に預かっているため預り金で処理します。",
+    "決算整理では、当期に属する費用・収益だけが損益計算書に残るよう、前払・前受・未収・未払を使います。",
+    "仮払金は、内容が確定した時点で実際の費用や返金された現金に振り替えます。"
+  ]
+}

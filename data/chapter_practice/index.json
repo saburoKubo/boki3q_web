@@ -3,6 +3,76 @@
   "description": "帳簿と決算の各チャプターを、1テーマ1問の実戦形式で確認します。",
   "practices": [
     {
+      "id": "journal_cash_deposits_001",
+      "category": "仕訳",
+      "chapterTitle": "現金・預金の仕訳",
+      "title": "現金・預金の仕訳 仕上げ問題",
+      "description": "現金過不足、普通預金、小口現金、当座借越など、現金・預金まわりの取引を仕訳します。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 12,
+      "totalScore": 20
+    },
+    {
+      "id": "journal_merchandise_sales_001",
+      "category": "仕訳",
+      "chapterTitle": "商品売買の仕訳",
+      "title": "商品売買の仕訳 仕上げ問題",
+      "description": "消費税、内金、返品、諸掛り、クレジット売上を含む商品売買の取引を仕訳します。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 18,
+      "totalScore": 20
+    },
+    {
+      "id": "journal_receivables_payables_001",
+      "category": "仕訳",
+      "chapterTitle": "債権・債務の仕訳",
+      "title": "債権・債務の仕訳 仕上げ問題",
+      "description": "売掛金・買掛金、貸付金・借入金、仮払金、貸倒れ、前払・前受を含む取引を仕訳します。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 18,
+      "totalScore": 20
+    },
+    {
+      "id": "journal_notes_electronic_001",
+      "category": "仕訳",
+      "chapterTitle": "手形・電子記録債権債務",
+      "title": "手形・電子記録債権債務 仕上げ問題",
+      "description": "約束手形、手形の裏書、電子記録債権・電子記録債務の発生と決済を仕訳します。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 15,
+      "totalScore": 20
+    },
+    {
+      "id": "journal_fixed_assets_001",
+      "category": "仕訳",
+      "chapterTitle": "固定資産の仕訳",
+      "title": "固定資産の仕訳 仕上げ問題",
+      "description": "固定資産の取得、改良と修繕、減価償却、売却、除却を仕訳します。売却時の減価償却費も計算します。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 20,
+      "totalScore": 20
+    },
+    {
+      "id": "journal_expenses_revenues_001",
+      "category": "仕訳",
+      "chapterTitle": "費用・収益の仕訳",
+      "title": "費用・収益の仕訳 仕上げ問題",
+      "description": "給料、家賃、保険料、手数料、前払・未払・前受・未収を含む取引を仕訳します。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 18,
+      "totalScore": 20
+    },
+    {
+      "id": "journal_taxes_equity_001",
+      "category": "仕訳",
+      "chapterTitle": "税金・純資産の仕訳",
+      "title": "税金・純資産の仕訳 仕上げ問題",
+      "description": "租税公課、消費税、法人税等、資本金、配当と利益準備金を仕訳します。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 18,
+      "totalScore": 20
+    },
+    {
       "id": "general_ledger_001",
       "category": "帳簿",
       "chapterTitle": "総勘定元帳",

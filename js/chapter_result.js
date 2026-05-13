@@ -134,6 +134,142 @@
     return actual === expectedNumber || (expectedNumber === 0 && actual === null);
   }
 
+  function journalName(questionId, lineIndex, key) {
+    return `journal.${questionId}.${lineIndex}.${key}`;
+  }
+
+  function normalizeJournalLines(lines = []) {
+    return lines
+      .map((line) => ({
+        debitAccount: window.BokiMock.normalizeText(line.debitAccount),
+        debitAmount: window.BokiMock.normalizeNumber(line.debitAmount),
+        creditAccount: window.BokiMock.normalizeText(line.creditAccount),
+        creditAmount: window.BokiMock.normalizeNumber(line.creditAmount)
+      }))
+      .filter((line) => line.debitAccount || line.debitAmount !== null || line.creditAccount || line.creditAmount !== null);
+  }
+
+  function journalAnswerLines(question, answers) {
+    const lineCount = question.maxLines || 5;
+    return Array.from({ length: lineCount }, (_, lineIndex) => ({
+      debitAccount: answers?.[journalName(question.id, lineIndex, "debitAccount")] || "",
+      debitAmount: answers?.[journalName(question.id, lineIndex, "debitAmount")] || "",
+      creditAccount: answers?.[journalName(question.id, lineIndex, "creditAccount")] || "",
+      creditAmount: answers?.[journalName(question.id, lineIndex, "creditAmount")] || ""
+    }));
+  }
+
+  function sideEntries(lines, side) {
+    const accountKey = side === "debit" ? "debitAccount" : "creditAccount";
+    const amountKey = side === "debit" ? "debitAmount" : "creditAmount";
+    return lines
+      .filter((line) => line[accountKey] || line[amountKey] !== null)
+      .map((line) => ({ account: line[accountKey], amount: line[amountKey] }))
+      .sort((a, b) => String(`${a.account}:${a.amount}`).localeCompare(String(`${b.account}:${b.amount}`), "ja"));
+  }
+
+  function sameEntries(actual, expected) {
+    if (actual.length !== expected.length) return false;
+    return actual.every((entry, index) => entry.account === expected[index].account && entry.amount === expected[index].amount);
+  }
+
+  function isJournalQuestionCorrect(question, answers) {
+    const actualLines = normalizeJournalLines(journalAnswerLines(question, answers));
+    const correctAnswers = [question.correctAnswer, ...(question.alternativeAnswers || [])];
+    return correctAnswers.some((correctAnswer) => {
+      const correctLines = normalizeJournalLines(correctAnswer?.lines || []);
+      return sameEntries(sideEntries(actualLines, "debit"), sideEntries(correctLines, "debit")) &&
+        sameEntries(sideEntries(actualLines, "credit"), sideEntries(correctLines, "credit"));
+    });
+  }
+
+  function formatJournalAmount(value) {
+    const number = window.BokiMock.normalizeNumber(value);
+    if (number === null) return "";
+    return window.BokiMock.formatYen(number);
+  }
+
+  function renderJournalLineTable(lines, className = "") {
+    const safeLines = lines.length ? lines : [{ debitAccount: "", debitAmount: "", creditAccount: "", creditAmount: "" }];
+    return `
+      <div class="table-scroll">
+        <table class="journal-multi-table chapter-journal-table ${className}">
+          <thead>
+            <tr>
+              <th>借方科目</th>
+              <th>借方金額</th>
+              <th>貸方科目</th>
+              <th>貸方金額</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${safeLines.map((line) => `
+              <tr>
+                <td>${escapeHtml(line.debitAccount || "")}</td>
+                <td>${escapeHtml(formatJournalAmount(line.debitAmount))}</td>
+                <td>${escapeHtml(line.creditAccount || "")}</td>
+                <td>${escapeHtml(formatJournalAmount(line.creditAmount))}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  function renderJournalDetails(practice, result) {
+    const misses = result.misses || [];
+    elements.details.innerHTML = `
+      <article class="result-section">
+        <div class="result-section-head">
+          <h2>あなたの答案</h2>
+          <strong>${misses.length}件</strong>
+        </div>
+        <div class="review-body">
+          <p class="result-hint">赤字の表は正答と異なる問題です。借方内・貸方内の行順は採点で問いません。</p>
+          ${practice.questions.map((question, index) => {
+            const correct = isJournalQuestionCorrect(question, result.answers || {});
+            const lines = journalAnswerLines(question, result.answers || {});
+            return `
+              <section class="answer-sheet result-answer-sheet">
+                <h4>第${index + 1}問</h4>
+                <p class="question-text">${escapeHtml(question.text)}</p>
+                ${renderJournalLineTable(lines, correct ? "result-ok-row" : "result-ng-cell")}
+              </section>
+            `;
+          }).join("")}
+        </div>
+      </article>
+
+      <article class="result-section">
+        <div class="result-section-head">
+          <h2>正答答案</h2>
+        </div>
+        <div class="review-body">
+          ${practice.questions.map((question, index) => `
+            <section class="answer-sheet result-answer-sheet">
+              <h4>第${index + 1}問</h4>
+              <p class="question-text">${escapeHtml(question.text)}</p>
+              ${renderJournalLineTable(normalizeJournalLines(question.correctAnswer?.lines || []))}
+            </section>
+          `).join("")}
+        </div>
+      </article>
+
+      <article class="result-section">
+        <div class="result-section-head">
+          <h2>解説</h2>
+        </div>
+        <div class="review-body">
+          ${practice.questions.map((question, index) => `
+            <p><strong>第${index + 1}問:</strong> ${escapeHtml(question.explanation || "")}</p>
+          `).join("")}
+          ${(practice.explanation || []).map((line) => `<p>${escapeHtml(line)}</p>`).join("")}
+        </div>
+      </article>
+    `;
+  }
+
   function renderUserTable(table, result) {
     const keys = tableAnswerKeys(table);
     const generic = Array.isArray(table.answerKeys);
@@ -202,6 +338,11 @@
   }
 
   function renderDetails(practice, result) {
+    if (practice.mode === "journalPractice") {
+      renderJournalDetails(practice, result);
+      return;
+    }
+
     const misses = result.misses || [];
     elements.details.innerHTML = `
       <article class="result-section">

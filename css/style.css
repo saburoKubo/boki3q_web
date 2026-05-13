@@ -172,6 +172,14 @@ select {
   font-weight: 700;
 }
 
+.section-jump-group {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .exam-card h3 {
   margin: 0 0 16px;
   font-size: 1.35rem;
@@ -826,23 +834,31 @@ a:focus-visible {
   }
 
   .exam-card,
+  .home-layout .exam-card,
   .start-panel,
   .result-summary {
     grid-template-columns: 1fr;
     padding: 18px;
   }
 
-  .meta-grid {
+  .exam-card-main {
+    min-width: 0;
+  }
+
+  .meta-grid,
+  .home-layout .meta-grid {
     grid-template-columns: 1fr;
   }
 
   .exam-card-actions,
+  .home-layout .exam-card-actions,
   .start-actions,
   .result-actions {
     justify-content: stretch;
   }
 
   .exam-card-actions .button,
+  .home-layout .exam-card-actions .button,
   .start-actions .button,
   .result-actions .button,
   .exam-actions .button {

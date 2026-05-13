@@ -149,6 +149,73 @@
     return `<input class="amount-input" name="${escapeHtml(name)}" inputmode="numeric" autocomplete="off" aria-label="${escapeHtml(aria)}" value="${escapeHtml(saved)}">`;
   }
 
+  function orderedOptions(options = []) {
+    return [...options].sort((a, b) => String(a).localeCompare(String(b), "ja"));
+  }
+
+  function renderAccountSelect(name, value, options = [], label) {
+    return `
+      <select name="${escapeHtml(name)}" aria-label="${escapeHtml(label)}">
+        <option value="">選択</option>
+        ${orderedOptions(options).map((option) => `
+          <option value="${escapeHtml(option)}" ${option === value ? "selected" : ""}>${escapeHtml(option)}</option>
+        `).join("")}
+      </select>
+    `;
+  }
+
+  function journalName(questionId, lineIndex, key) {
+    return `journal.${questionId}.${lineIndex}.${key}`;
+  }
+
+  function renderJournalPractice(practice) {
+    const options = practice.accountOptions || [];
+    return `
+      <section class="journal-practice-answer">
+        ${practice.questions.map((question, questionIndex) => {
+          const lineCount = question.maxLines || 5;
+          return `
+            <article class="question-card journal-question-card">
+              <div class="question-head">
+                <h3>第${questionIndex + 1}問</h3>
+                <span class="score-chip">${question.score}点</span>
+              </div>
+              <p class="question-text">${escapeHtml(question.text)}</p>
+              <div class="table-scroll">
+                <table class="journal-multi-table chapter-journal-table">
+                  <thead>
+                    <tr>
+                      <th>借方科目</th>
+                      <th>借方金額</th>
+                      <th>貸方科目</th>
+                      <th>貸方金額</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${Array.from({ length: lineCount }, (_, lineIndex) => {
+                      const debitAccountName = journalName(question.id, lineIndex, "debitAccount");
+                      const debitAmountName = journalName(question.id, lineIndex, "debitAmount");
+                      const creditAccountName = journalName(question.id, lineIndex, "creditAccount");
+                      const creditAmountName = journalName(question.id, lineIndex, "creditAmount");
+                      return `
+                        <tr>
+                          <td>${renderAccountSelect(debitAccountName, state.answers[debitAccountName] || "", options, "借方科目")}</td>
+                          <td>${renderInput(debitAmountName, null)}</td>
+                          <td>${renderAccountSelect(creditAccountName, state.answers[creditAccountName] || "", options, "貸方科目")}</td>
+                          <td>${renderInput(creditAmountName, null)}</td>
+                        </tr>
+                      `;
+                    }).join("")}
+                  </tbody>
+                </table>
+              </div>
+            </article>
+          `;
+        }).join("")}
+      </section>
+    `;
+  }
+
   function renderLedgerTable(table) {
     return `
       <section class="answer-sheet">
@@ -274,7 +341,11 @@
       <div><dt>形式</dt><dd>チャプター仕上げ</dd></div>
     `;
     elements.intro.textContent = practice.intro || "";
-    elements.materials.innerHTML = practice.materials.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+    elements.materials.innerHTML = (practice.materials || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+    if (practice.mode === "journalPractice") {
+      elements.answerArea.innerHTML = renderJournalPractice(practice);
+      return;
+    }
     elements.answerArea.innerHTML = practice.tables.map((table) => {
       if (Array.isArray(table.answerKeys)) return renderGenericTable(table);
       return table.columns.length > 5 ? renderInventoryTable(table) : renderLedgerTable(table);
@@ -290,7 +361,92 @@
     return actual === expectedNumber || (expectedNumber === 0 && actual === null);
   }
 
+  function normalizeJournalLines(lines = []) {
+    return lines
+      .map((line) => ({
+        debitAccount: window.BokiMock.normalizeText(line.debitAccount),
+        debitAmount: normalizedNumber(line.debitAmount),
+        creditAccount: window.BokiMock.normalizeText(line.creditAccount),
+        creditAmount: normalizedNumber(line.creditAmount)
+      }))
+      .filter((line) => line.debitAccount || line.debitAmount !== null || line.creditAccount || line.creditAmount !== null);
+  }
+
+  function journalAnswerLines(question, answers) {
+    const lineCount = question.maxLines || 5;
+    return Array.from({ length: lineCount }, (_, lineIndex) => ({
+      debitAccount: answers[journalName(question.id, lineIndex, "debitAccount")] || "",
+      debitAmount: answers[journalName(question.id, lineIndex, "debitAmount")] || "",
+      creditAccount: answers[journalName(question.id, lineIndex, "creditAccount")] || "",
+      creditAmount: answers[journalName(question.id, lineIndex, "creditAmount")] || ""
+    }));
+  }
+
+  function sideEntries(lines, side) {
+    const accountKey = side === "debit" ? "debitAccount" : "creditAccount";
+    const amountKey = side === "debit" ? "debitAmount" : "creditAmount";
+    return lines
+      .filter((line) => line[accountKey] || line[amountKey] !== null)
+      .map((line) => ({ account: line[accountKey], amount: line[amountKey] }))
+      .sort((a, b) => String(`${a.account}:${a.amount}`).localeCompare(String(`${b.account}:${b.amount}`), "ja"));
+  }
+
+  function sameEntries(actual, expected) {
+    if (actual.length !== expected.length) return false;
+    return actual.every((entry, index) => entry.account === expected[index].account && entry.amount === expected[index].amount);
+  }
+
+  function isJournalQuestionCorrect(question, answers) {
+    const actualLines = normalizeJournalLines(journalAnswerLines(question, answers));
+    const correctAnswers = [question.correctAnswer, ...(question.alternativeAnswers || [])];
+    return correctAnswers.some((correctAnswer) => {
+      const correctLines = normalizeJournalLines(correctAnswer?.lines || []);
+      return sameEntries(sideEntries(actualLines, "debit"), sideEntries(correctLines, "debit")) &&
+        sameEntries(sideEntries(actualLines, "credit"), sideEntries(correctLines, "credit"));
+    });
+  }
+
+  function scoreJournalPractice(practice, answers) {
+    const misses = [];
+    let score = 0;
+    let maxScore = 0;
+    let correctCount = 0;
+
+    practice.questions.forEach((question, index) => {
+      maxScore += question.score;
+      if (isJournalQuestionCorrect(question, answers)) {
+        score += question.score;
+        correctCount += 1;
+      } else {
+        misses.push({
+          tableTitle: `第${index + 1}問`,
+          rowLabel: question.text,
+          field: "journal",
+          expected: question.correctAnswer,
+          actual: journalAnswerLines(question, answers)
+        });
+      }
+    });
+
+    const totalCount = practice.questions.length;
+    const rate = totalCount ? Math.round((correctCount / totalCount) * 100) : 0;
+    return {
+      practiceId: practice.id,
+      title: practice.title,
+      score,
+      maxScore: practice.totalScore || maxScore,
+      rate,
+      correctCount,
+      totalCount,
+      misses,
+      answers,
+      submittedAt: new Date().toISOString()
+    };
+  }
+
   function scorePractice(practice, answers) {
+    if (practice.mode === "journalPractice") return scoreJournalPractice(practice, answers);
+
     const misses = [];
     let correctCount = 0;
     let totalCount = 0;
@@ -369,6 +525,7 @@
       saveAnswers();
     }, true);
     elements.form.addEventListener("input", saveAnswers);
+    elements.form.addEventListener("change", saveAnswers);
     elements.form.addEventListener("submit", (event) => {
       event.preventDefault();
       if (Date.now() < state.ignoreSubmitUntil) return;
@@ -381,9 +538,9 @@
       if (!state.practice) return;
       state.answers = {};
       clearSavedAnswers(state.practice.id);
-      elements.form.querySelectorAll("input").forEach((input) => {
-        input.value = "";
-        input.defaultValue = "";
+      elements.form.querySelectorAll("input, select").forEach((control) => {
+        control.value = "";
+        control.defaultValue = "";
       });
     });
   }
