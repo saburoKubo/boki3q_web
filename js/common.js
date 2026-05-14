@@ -45,6 +45,10 @@
             <span>パスコード</span>
             <input id="access-code" type="password" autocomplete="current-password" inputmode="text" required>
           </label>
+          <label class="access-toggle">
+            <input id="access-code-visible" type="checkbox">
+            <span>パスコードを表示する</span>
+          </label>
           <p id="access-error" class="access-error" role="alert" hidden>パスコードが違います。</p>
           <button class="button primary" type="submit">開く</button>
         </form>
@@ -54,7 +58,12 @@
 
     const form = gate.querySelector("#access-form");
     const input = gate.querySelector("#access-code");
+    const visibleToggle = gate.querySelector("#access-code-visible");
     const error = gate.querySelector("#access-error");
+    visibleToggle.addEventListener("change", () => {
+      input.type = visibleToggle.checked ? "text" : "password";
+      input.focus();
+    });
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       if (normalizeText(input.value) === ACCESS_CODE) {
