@@ -23,6 +23,17 @@
   display: none !important;
 }
 
+body.auth-pending > :not(.access-gate) {
+  display: none !important;
+}
+
+body.auth-pending {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+}
+
 html {
   font-size: 16px;
   scroll-behavior: smooth;
@@ -257,6 +268,39 @@ select {
 .button.danger {
   background: var(--danger);
   color: #ffffff;
+}
+
+.access-gate {
+  width: min(100%, 520px);
+  padding: 24px;
+}
+
+.access-card {
+  border: 1px solid var(--line-strong);
+  background: #ffffff;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.access-card h1 {
+  margin: 4px 0 10px;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+}
+
+.access-card p {
+  color: var(--muted);
+}
+
+.access-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.access-error {
+  margin: 0;
+  color: var(--danger);
+  font-weight: 700;
 }
 
 .future-list {

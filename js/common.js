@@ -1,6 +1,89 @@
 (function () {
   const APP_PREFIX = "boki3_mock";
   const DEFAULT_EXAM_ID = "mock_001";
+  const ACCESS_CODE = "boki3plus2026";
+  const ACCESS_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+  const ACCESS_KEY = `${APP_PREFIX}:access`;
+
+  function authState() {
+    return readJson(ACCESS_KEY, null);
+  }
+
+  function hasValidAccess() {
+    const state = authState();
+    return Boolean(state?.expiresAt && Number(state.expiresAt) > Date.now());
+  }
+
+  function grantAccess() {
+    writeJson(ACCESS_KEY, {
+      grantedAt: Date.now(),
+      expiresAt: Date.now() + ACCESS_TTL_MS
+    });
+  }
+
+  function nextUrl() {
+    const params = new URLSearchParams(location.search);
+    const next = params.get("next");
+    if (!next || next.includes(":") || next.startsWith("/") || next.startsWith("//")) return "index.html";
+    return next;
+  }
+
+  function unlockPage() {
+    document.body.classList.remove("auth-pending");
+  }
+
+  function renderAccessGate() {
+    const gate = document.createElement("main");
+    gate.className = "access-gate";
+    gate.innerHTML = `
+      <section class="access-card" aria-labelledby="access-title">
+        <p class="eyebrow">有料版ユーザー向け</p>
+        <h1 id="access-title">簿記3級 補完サイト</h1>
+        <p>アプリ有料版に記載されているパスコードを入力してください。認証後は30日間この端末に保存されます。</p>
+        <form id="access-form" class="access-form">
+          <label class="field">
+            <span>パスコード</span>
+            <input id="access-code" type="password" autocomplete="current-password" inputmode="text" required>
+          </label>
+          <p id="access-error" class="access-error" role="alert" hidden>パスコードが違います。</p>
+          <button class="button primary" type="submit">開く</button>
+        </form>
+      </section>
+    `;
+    document.body.prepend(gate);
+
+    const form = gate.querySelector("#access-form");
+    const input = gate.querySelector("#access-code");
+    const error = gate.querySelector("#access-error");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (normalizeText(input.value) === ACCESS_CODE) {
+        grantAccess();
+        location.href = nextUrl();
+        return;
+      }
+      error.hidden = false;
+      input.select();
+      input.focus();
+    });
+    input.focus();
+  }
+
+  function requireAccess() {
+    if (!document.body.classList.contains("auth-pending")) return;
+    if (hasValidAccess()) {
+      unlockPage();
+      return;
+    }
+
+    const path = location.pathname.split("/").pop() || "index.html";
+    if (path !== "index.html") {
+      const current = `${path}${location.search}${location.hash}`;
+      location.replace(`index.html?next=${encodeURIComponent(current)}`);
+      return;
+    }
+    renderAccessGate();
+  }
 
   function storageKey(name, examId = DEFAULT_EXAM_ID) {
     return `${APP_PREFIX}:${examId}:${name}`;
@@ -289,6 +372,13 @@
     getResult,
     saveResult,
     clearSession,
-    getExamIdFromUrl
+    getExamIdFromUrl,
+    hasValidAccess
   };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", requireAccess, { once: true });
+  } else {
+    requireAccess();
+  }
 })();
