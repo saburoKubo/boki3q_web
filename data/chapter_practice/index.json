@@ -153,6 +153,26 @@
       "totalScore": 20
     },
     {
+      "id": "sales_purchase_books_001",
+      "category": "帳簿",
+      "chapterTitle": "売上帳・仕入帳",
+      "title": "売上帳・仕入帳 完成問題",
+      "description": "売上帳と仕入帳に、売上・仕入、返品、値引を記入し、純売上高と純仕入高を求めます。",
+      "difficulty": "標準",
+      "estimatedMinutes": 18,
+      "totalScore": 30
+    },
+    {
+      "id": "notes_books_001",
+      "category": "帳簿",
+      "chapterTitle": "受取手形記入帳・支払手形記入帳",
+      "title": "受取手形記入帳・支払手形記入帳 完成問題",
+      "description": "受取手形と支払手形について、相手先、満期日、金額、てん末を記入します。",
+      "difficulty": "標準",
+      "estimatedMinutes": 18,
+      "totalScore": 30
+    },
+    {
       "id": "general_ledger_001",
       "category": "帳簿",
       "chapterTitle": "総勘定元帳",
@@ -185,8 +205,8 @@
     {
       "id": "merchandise_inventory_ledger_001",
       "category": "帳簿",
-      "chapterTitle": "商品有高帳",
-      "title": "商品有高帳 完成問題",
+      "chapterTitle": "商品有高帳（先入先出法）",
+      "title": "商品有高帳（先入先出法） 完成問題",
       "description": "先入先出法により、商品の受入・払出・残高を記録します。",
       "difficulty": "標準",
       "estimatedMinutes": 15,

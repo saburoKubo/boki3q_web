@@ -154,6 +154,8 @@
     { id: "journal_book_001", label: "仕訳日記帳", keywords: ["仕訳日記帳"] },
     { id: "voucher_accounting_001", label: "伝票式会計", keywords: ["伝票", "入金伝票", "出金伝票", "振替伝票"] },
     { id: "petty_cash_book_001", label: "小口現金出納帳", keywords: ["小口現金", "補給"] },
+    { id: "sales_purchase_books_001", label: "売上帳・仕入帳", keywords: ["売上帳", "仕入帳", "売上戻り", "仕入戻し", "売上値引", "仕入値引"] },
+    { id: "notes_books_001", label: "受取手形記入帳・支払手形記入帳", keywords: ["受取手形記入帳", "支払手形記入帳", "受取手形", "支払手形", "満期"] },
     { id: "general_ledger_001", label: "総勘定元帳", keywords: ["総勘定元帳", "勘定記入"] },
     { id: "accounts_receivable_ledger_001", label: "売掛金元帳", keywords: ["売掛金元帳"] },
     { id: "accounts_payable_ledger_001", label: "買掛金元帳", keywords: ["買掛金元帳"] },

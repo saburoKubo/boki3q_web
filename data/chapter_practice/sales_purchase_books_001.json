@@ -1,0 +1,77 @@
+{
+  "id": "sales_purchase_books_001",
+  "mode": "chapterPractice",
+  "category": "帳簿",
+  "chapterTitle": "売上帳・仕入帳",
+  "title": "売上帳・仕入帳 完成問題",
+  "description": "売上帳と仕入帳に、売上・仕入、返品、値引を記入し、純売上高と純仕入高を求めます。",
+  "estimatedMinutes": 18,
+  "totalScore": 30,
+  "intro": "次の資料にもとづいて、売上帳と仕入帳を完成させなさい。金額は円単位で入力します。該当しない欄は空欄のままでかまいません。",
+  "materials": [
+    "6月2日 A商店へ商品180,000円を掛けで売り上げた。",
+    "6月8日 B商店へ商品95,000円を現金で売り上げた。",
+    "6月12日 A商店に売り上げた商品のうち20,000円が返品された。",
+    "6月20日 C商店へ商品220,000円を掛けで売り上げた。",
+    "6月25日 B商店に対し、売上値引5,000円を認めた。",
+    "6月3日 X商店から商品140,000円を掛けで仕入れた。",
+    "6月10日 Y商店から商品80,000円を現金で仕入れた。",
+    "6月16日 X商店から仕入れた商品のうち15,000円を返品した。",
+    "6月21日 Z商店から商品200,000円を掛けで仕入れた。",
+    "6月26日 Y商店から仕入れた商品について、仕入値引4,000円を受けた。"
+  ],
+  "tables": [
+    {
+      "id": "sales_book",
+      "title": "売上帳",
+      "hideZeroCells": true,
+      "answerKeys": ["sales", "returnsAllowances"],
+      "columns": [
+        { "key": "date", "label": "日付", "type": "static" },
+        { "key": "customer", "label": "得意先", "type": "static" },
+        { "key": "summary", "label": "摘要", "type": "static" },
+        { "key": "sales", "label": "売上", "type": "answer" },
+        { "key": "returnsAllowances", "label": "売上戻り・値引", "type": "answer" }
+      ],
+      "rows": [
+        { "date": "6/2", "description": "売上", "values": { "date": "6/2", "customer": "A商店", "summary": "掛売上" }, "cells": { "sales": 180000, "returnsAllowances": 0 } },
+        { "date": "6/8", "description": "売上", "values": { "date": "6/8", "customer": "B商店", "summary": "現金売上" }, "cells": { "sales": 95000, "returnsAllowances": 0 } },
+        { "date": "6/12", "description": "売上戻り", "values": { "date": "6/12", "customer": "A商店", "summary": "返品" }, "cells": { "sales": 0, "returnsAllowances": 20000 } },
+        { "date": "6/20", "description": "売上", "values": { "date": "6/20", "customer": "C商店", "summary": "掛売上" }, "cells": { "sales": 220000, "returnsAllowances": 0 } },
+        { "date": "6/25", "description": "売上値引", "values": { "date": "6/25", "customer": "B商店", "summary": "値引" }, "cells": { "sales": 0, "returnsAllowances": 5000 } },
+        { "date": "合計", "description": "合計", "values": { "date": "合計", "customer": "", "summary": "月計" }, "cells": { "sales": 495000, "returnsAllowances": 25000 } }
+      ]
+    },
+    {
+      "id": "purchase_book",
+      "title": "仕入帳",
+      "hideZeroCells": true,
+      "answerKeys": ["purchases", "returnsAllowances"],
+      "columns": [
+        { "key": "date", "label": "日付", "type": "static" },
+        { "key": "supplier", "label": "仕入先", "type": "static" },
+        { "key": "summary", "label": "摘要", "type": "static" },
+        { "key": "purchases", "label": "仕入", "type": "answer" },
+        { "key": "returnsAllowances", "label": "仕入戻し・値引", "type": "answer" }
+      ],
+      "rows": [
+        { "date": "6/3", "description": "仕入", "values": { "date": "6/3", "supplier": "X商店", "summary": "掛仕入" }, "cells": { "purchases": 140000, "returnsAllowances": 0 } },
+        { "date": "6/10", "description": "仕入", "values": { "date": "6/10", "supplier": "Y商店", "summary": "現金仕入" }, "cells": { "purchases": 80000, "returnsAllowances": 0 } },
+        { "date": "6/16", "description": "仕入戻し", "values": { "date": "6/16", "supplier": "X商店", "summary": "返品" }, "cells": { "purchases": 0, "returnsAllowances": 15000 } },
+        { "date": "6/21", "description": "仕入", "values": { "date": "6/21", "supplier": "Z商店", "summary": "掛仕入" }, "cells": { "purchases": 200000, "returnsAllowances": 0 } },
+        { "date": "6/26", "description": "仕入値引", "values": { "date": "6/26", "supplier": "Y商店", "summary": "値引" }, "cells": { "purchases": 0, "returnsAllowances": 4000 } },
+        { "date": "合計", "description": "合計", "values": { "date": "合計", "supplier": "", "summary": "月計" }, "cells": { "purchases": 420000, "returnsAllowances": 19000 } }
+      ]
+    }
+  ],
+  "summary": [
+    { "id": "net_sales", "label": "純売上高", "correctAnswer": 470000 },
+    { "id": "net_purchases", "label": "純仕入高", "correctAnswer": 401000 }
+  ],
+  "explanation": [
+    "売上帳では、売上額から売上戻り・売上値引を差し引いて純売上高を求めます。",
+    "純売上高は495,000円-25,000円=470,000円です。",
+    "仕入帳では、仕入額から仕入戻し・仕入値引を差し引いて純仕入高を求めます。",
+    "純仕入高は420,000円-19,000円=401,000円です。"
+  ]
+}

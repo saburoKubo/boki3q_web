@@ -1,0 +1,77 @@
+{
+  "id": "notes_books_001",
+  "mode": "chapterPractice",
+  "category": "帳簿",
+  "chapterTitle": "受取手形記入帳・支払手形記入帳",
+  "title": "受取手形記入帳・支払手形記入帳 完成問題",
+  "description": "受取手形と支払手形について、相手先、満期日、金額、てん末を記入します。",
+  "estimatedMinutes": 18,
+  "totalScore": 30,
+  "intro": "次の資料にもとづいて、受取手形記入帳と支払手形記入帳を完成させなさい。文字項目は選択肢から選び、金額は円単位で入力します。",
+  "materials": [
+    "7月1日 A商店に対する売掛金300,000円を回収するため、同店振出、満期日9月30日の約束手形を受け取った。",
+    "7月12日 B商店に商品220,000円を売り上げ、同店振出、満期日10月31日の約束手形を受け取った。",
+    "9月30日 A商店振出の約束手形300,000円が満期となり、当座預金に入金された。",
+    "7月5日 X商店に対する買掛金260,000円を支払うため、当店振出、満期日10月5日の約束手形を振り出した。",
+    "7月18日 Y商店から商品180,000円を仕入れ、当店振出、満期日11月18日の約束手形を振り出した。",
+    "10月5日 X商店あてに振り出した約束手形260,000円が満期となり、当座預金から支払われた。"
+  ],
+  "tables": [
+    {
+      "id": "notes_receivable_book",
+      "title": "受取手形記入帳",
+      "hideZeroCells": true,
+      "answerKeys": ["drawer", "dueDate", "amount", "settlement"],
+      "selectOptions": {
+        "drawer": ["A商店", "B商店", "X商店", "Y商店"],
+        "dueDate": ["9/30", "10/5", "10/31", "11/18"],
+        "settlement": ["未決済", "取立済", "支払済"]
+      },
+      "columns": [
+        { "key": "date", "label": "受入日", "type": "static" },
+        { "key": "summary", "label": "摘要", "type": "static" },
+        { "key": "drawer", "label": "振出人", "type": "answer" },
+        { "key": "dueDate", "label": "満期日", "type": "answer" },
+        { "key": "amount", "label": "金額", "type": "answer" },
+        { "key": "settlement", "label": "てん末", "type": "answer" }
+      ],
+      "rows": [
+        { "date": "7/1", "description": "売掛金回収", "values": { "date": "7/1", "summary": "売掛金回収" }, "cells": { "drawer": "A商店", "dueDate": "9/30", "amount": 300000, "settlement": "取立済" } },
+        { "date": "7/12", "description": "売上代金", "values": { "date": "7/12", "summary": "売上代金" }, "cells": { "drawer": "B商店", "dueDate": "10/31", "amount": 220000, "settlement": "未決済" } }
+      ]
+    },
+    {
+      "id": "notes_payable_book",
+      "title": "支払手形記入帳",
+      "hideZeroCells": true,
+      "answerKeys": ["payee", "dueDate", "amount", "settlement"],
+      "selectOptions": {
+        "payee": ["A商店", "B商店", "X商店", "Y商店"],
+        "dueDate": ["9/30", "10/5", "10/31", "11/18"],
+        "settlement": ["未決済", "取立済", "支払済"]
+      },
+      "columns": [
+        { "key": "date", "label": "振出日", "type": "static" },
+        { "key": "summary", "label": "摘要", "type": "static" },
+        { "key": "payee", "label": "受取人", "type": "answer" },
+        { "key": "dueDate", "label": "満期日", "type": "answer" },
+        { "key": "amount", "label": "金額", "type": "answer" },
+        { "key": "settlement", "label": "てん末", "type": "answer" }
+      ],
+      "rows": [
+        { "date": "7/5", "description": "買掛金支払", "values": { "date": "7/5", "summary": "買掛金支払" }, "cells": { "payee": "X商店", "dueDate": "10/5", "amount": 260000, "settlement": "支払済" } },
+        { "date": "7/18", "description": "仕入代金", "values": { "date": "7/18", "summary": "仕入代金" }, "cells": { "payee": "Y商店", "dueDate": "11/18", "amount": 180000, "settlement": "未決済" } }
+      ]
+    }
+  ],
+  "summary": [
+    { "id": "notes_receivable_balance", "label": "受取手形未決済残高", "correctAnswer": 220000 },
+    { "id": "notes_payable_balance", "label": "支払手形未決済残高", "correctAnswer": 180000 }
+  ],
+  "explanation": [
+    "受取手形記入帳は、手形を受け取った日、振出人、満期日、金額、取立状況を整理します。",
+    "A商店の手形300,000円は9月30日に取立済みのため、未決済残高には含めません。",
+    "支払手形記入帳は、手形を振り出した日、受取人、満期日、金額、支払状況を整理します。",
+    "X商店あての手形260,000円は10月5日に支払済みのため、未決済残高には含めません。"
+  ]
+}
