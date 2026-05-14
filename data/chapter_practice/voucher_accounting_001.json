@@ -1,0 +1,89 @@
+{
+  "id": "voucher_accounting_001",
+  "mode": "chapterPractice",
+  "category": "帳簿",
+  "chapterTitle": "伝票式会計",
+  "title": "伝票式会計 完成問題",
+  "description": "入金伝票・出金伝票・振替伝票の様式に、相手科目や金額を記入します。",
+  "estimatedMinutes": 15,
+  "totalScore": 20,
+  "intro": "次の取引について、入金伝票・出金伝票・振替伝票を完成させなさい。勘定科目は選択肢から選び、金額は円単位で入力します。",
+  "materials": [
+    "入金伝票は、現金の入金取引で使用する。相手科目は貸方科目になる。",
+    "出金伝票は、現金の出金取引で使用する。相手科目は借方科目になる。",
+    "振替伝票は、現金を伴わない取引で使用し、借方科目・貸方科目を記入する。",
+    "取引メモ: 商品90,000円を現金で売り上げた。",
+    "取引メモ: 商品140,000円を掛けで仕入れた。",
+    "取引メモ: 家賃60,000円を現金で支払った。",
+    "取引メモ: 文房具18,000円を現金で購入し、消耗品費として処理する。",
+    "取引メモ: 売掛金120,000円を現金で回収した。",
+    "取引メモ: 買掛金80,000円を普通預金から支払った。"
+  ],
+  "tables": [
+    {
+      "id": "receipt_vouchers",
+      "title": "入金伝票",
+      "hideZeroCells": true,
+      "answerKeys": ["account", "amount"],
+      "selectOptions": {
+        "account": ["売上", "売掛金", "受取手数料"]
+      },
+      "columns": [
+        { "key": "voucherNo", "label": "伝票No.", "type": "static" },
+        { "key": "summary", "label": "摘要", "type": "static" },
+        { "key": "account", "label": "相手科目", "type": "answer" },
+        { "key": "amount", "label": "入金額", "type": "answer" }
+      ],
+      "rows": [
+        { "description": "入金", "values": { "voucherNo": "入-001", "summary": "" }, "cells": { "account": "売上", "amount": 90000 } },
+        { "description": "入金", "values": { "voucherNo": "入-002", "summary": "" }, "cells": { "account": "売掛金", "amount": 120000 } }
+      ]
+    },
+    {
+      "id": "payment_vouchers",
+      "title": "出金伝票",
+      "hideZeroCells": true,
+      "answerKeys": ["account", "amount"],
+      "selectOptions": {
+        "account": ["買掛金", "仕入", "支払家賃", "消耗品費"]
+      },
+      "columns": [
+        { "key": "voucherNo", "label": "伝票No.", "type": "static" },
+        { "key": "summary", "label": "摘要", "type": "static" },
+        { "key": "account", "label": "相手科目", "type": "answer" },
+        { "key": "amount", "label": "出金額", "type": "answer" }
+      ],
+      "rows": [
+        { "description": "出金", "values": { "voucherNo": "出-001", "summary": "" }, "cells": { "account": "支払家賃", "amount": 60000 } },
+        { "description": "出金", "values": { "voucherNo": "出-002", "summary": "" }, "cells": { "account": "消耗品費", "amount": 18000 } }
+      ]
+    },
+    {
+      "id": "transfer_vouchers",
+      "title": "振替伝票",
+      "hideZeroCells": true,
+      "answerKeys": ["debitAccount", "debit", "creditAccount", "credit"],
+      "selectOptions": {
+        "debitAccount": ["普通預金", "売掛金", "買掛金", "仕入", "支払家賃"],
+        "creditAccount": ["普通預金", "売掛金", "買掛金", "売上", "仕入"]
+      },
+      "columns": [
+        { "key": "voucherNo", "label": "伝票No.", "type": "static" },
+        { "key": "summary", "label": "摘要", "type": "static" },
+        { "key": "debitAccount", "label": "借方科目", "type": "answer" },
+        { "key": "debit", "label": "借方金額", "type": "answer" },
+        { "key": "creditAccount", "label": "貸方科目", "type": "answer" },
+        { "key": "credit", "label": "貸方金額", "type": "answer" }
+      ],
+      "rows": [
+        { "description": "振替", "values": { "voucherNo": "振-001", "summary": "" }, "cells": { "debitAccount": "仕入", "debit": 140000, "creditAccount": "買掛金", "credit": 140000 } },
+        { "description": "振替", "values": { "voucherNo": "振-002", "summary": "" }, "cells": { "debitAccount": "買掛金", "debit": 80000, "creditAccount": "普通預金", "credit": 80000 } }
+      ]
+    }
+  ],
+  "explanation": [
+    "入金伝票では、現金は借方に固定されるため、相手科目と入金額を記入します。",
+    "出金伝票では、現金は貸方に固定されるため、相手科目と出金額を記入します。",
+    "振替伝票では、現金を使わない取引について、借方科目・貸方科目と金額を記入します。"
+  ]
+}

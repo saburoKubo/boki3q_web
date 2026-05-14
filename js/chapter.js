@@ -164,8 +164,44 @@
     `;
   }
 
+  function renderAnswerControl(table, rowIndex, key, expected, label) {
+    const name = cellName(table, rowIndex, key);
+    if (table.selectOptions?.[key]) {
+      return renderAccountSelect(name, state.answers[name] || "", table.selectOptions[key], label);
+    }
+    return renderInput(name, expected);
+  }
+
   function journalName(questionId, lineIndex, key) {
     return `journal.${questionId}.${lineIndex}.${key}`;
+  }
+
+  function renderSourceDocuments(documents = []) {
+    if (!documents.length) return "";
+    return documents.map((document) => `
+      <section class="source-document">
+        <h4>${escapeHtml(document.title)}</h4>
+        ${document.summary ? `<p class="source-summary">${escapeHtml(document.summary)}</p>` : ""}
+        ${document.rows ? `
+          <div class="table-scroll">
+            <table class="source-table">
+              ${document.columns ? `
+                <thead>
+                  <tr>${document.columns.map((column) => `<th>${escapeHtml(column)}</th>`).join("")}</tr>
+                </thead>
+              ` : ""}
+              <tbody>
+                ${document.rows.map((row) => `
+                  <tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+        ` : ""}
+        ${document.total ? `<p class="source-total">${escapeHtml(document.total)}</p>` : ""}
+        ${document.note ? `<p class="source-note">${escapeHtml(document.note)}</p>` : ""}
+      </section>
+    `).join("");
   }
 
   function renderJournalPractice(practice) {
@@ -181,6 +217,7 @@
                 <span class="score-chip">${question.score}点</span>
               </div>
               <p class="question-text">${escapeHtml(question.text)}</p>
+              ${renderSourceDocuments(question.documents)}
               <div class="table-scroll">
                 <table class="journal-multi-table chapter-journal-table">
                   <thead>
@@ -294,7 +331,7 @@
                       }
                       return `
                         <td class="${expected === null || expected === undefined ? "static-cell" : "answer-cell"}">
-                          ${expected === null || expected === undefined ? "" : renderInput(cellName(table, rowIndex, key), expected)}
+                          ${expected === null || expected === undefined ? "" : renderAnswerControl(table, rowIndex, key, expected, column.label)}
                         </td>
                       `;
                     }
@@ -359,6 +396,13 @@
   function isAmountCorrect(actual, expected) {
     const expectedNumber = Number(expected);
     return actual === expectedNumber || (expectedNumber === 0 && actual === null);
+  }
+
+  function isCellCorrect(actual, expected, inputType) {
+    if (inputType === "select") {
+      return window.BokiMock.normalizeText(actual) === window.BokiMock.normalizeText(expected);
+    }
+    return isAmountCorrect(normalizedNumber(actual), expected);
   }
 
   function normalizeJournalLines(lines = []) {
@@ -458,16 +502,17 @@
           if (table.hideZeroCells && Number(expected) === 0) return;
           totalCount += 1;
           const name = cellName(table, rowIndex, key);
-          const actual = normalizedNumber(answers[name]);
-          if (isAmountCorrect(actual, expected)) {
+          const inputType = table.selectOptions?.[key] ? "select" : "number";
+          const actual = answers[name];
+          if (isCellCorrect(actual, expected, inputType)) {
             correctCount += 1;
           } else {
             misses.push({
               tableTitle: table.title,
-              rowLabel: `${row.date} ${row.description}`,
+              rowLabel: `${row.date || row.values?.date || ""} ${row.description || row.values?.account || ""}`,
               field: key,
               expected,
-              actual
+              actual: inputType === "number" ? normalizedNumber(actual) : window.BokiMock.normalizeText(actual)
             });
           }
         });

@@ -1,0 +1,122 @@
+{
+  "id": "journal_closing_entries_001",
+  "mode": "journalPractice",
+  "category": "仕訳",
+  "chapterTitle": "決算振替仕訳",
+  "title": "決算振替仕訳 仕上げ問題",
+  "description": "収益・費用を損益へ振り替え、当期純利益または当期純損失を繰越利益剰余金へ振り替えます。",
+  "estimatedMinutes": 18,
+  "totalScore": 20,
+  "intro": "各決算振替について仕訳しなさい。解答欄は本番形式に合わせて5行あります。使用しない行は空欄のままでかまいません。",
+  "accountOptions": [
+    "売上",
+    "受取手数料",
+    "受取利息",
+    "仕入",
+    "給料",
+    "支払家賃",
+    "支払利息",
+    "減価償却費",
+    "租税公課",
+    "損益",
+    "繰越利益剰余金"
+  ],
+  "materials": [
+    "勘定科目は選択肢から選び、金額は円単位で入力すること。",
+    "収益は損益勘定へ振り替えるため、収益勘定を借方、損益を貸方に記入すること。",
+    "費用は損益勘定へ振り替えるため、損益を借方、費用勘定を貸方に記入すること。",
+    "当期純利益は損益を借方、繰越利益剰余金を貸方に振り替えること。同じ借方内または同じ貸方内の行順は問わない。"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "text": "決算にあたり、収益勘定を損益勘定へ振り替える。売上1,500,000円、受取手数料80,000円、受取利息5,000円。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "売上", "debitAmount": 1500000, "creditAccount": "損益", "creditAmount": 1585000 },
+          { "debitAccount": "受取手数料", "debitAmount": 80000 },
+          { "debitAccount": "受取利息", "debitAmount": 5000 }
+        ]
+      },
+      "alternativeAnswers": [
+        {
+          "lines": [
+            { "debitAccount": "売上", "debitAmount": 1500000, "creditAccount": "損益", "creditAmount": 1500000 },
+            { "debitAccount": "受取手数料", "debitAmount": 80000, "creditAccount": "損益", "creditAmount": 80000 },
+            { "debitAccount": "受取利息", "debitAmount": 5000, "creditAccount": "損益", "creditAmount": 5000 }
+          ]
+        }
+      ],
+      "explanation": "収益勘定は貸方残高を持つため、借方に記入して締め切ります。貸方の損益は収益合計1,585,000円です。損益を各収益ごとに分けて記入しても、売上1,500,000円／損益1,500,000円、受取手数料80,000円／損益80,000円、受取利息5,000円／損益5,000円であれば同じ振替として扱えます。"
+    },
+    {
+      "id": "q2",
+      "text": "決算にあたり、費用勘定を損益勘定へ振り替える。仕入900,000円、給料420,000円、支払家賃180,000円、減価償却費60,000円。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "損益", "debitAmount": 1560000, "creditAccount": "仕入", "creditAmount": 900000 },
+          { "creditAccount": "給料", "creditAmount": 420000 },
+          { "creditAccount": "支払家賃", "creditAmount": 180000 },
+          { "creditAccount": "減価償却費", "creditAmount": 60000 }
+        ]
+      },
+      "alternativeAnswers": [
+        {
+          "lines": [
+            { "debitAccount": "損益", "debitAmount": 900000, "creditAccount": "仕入", "creditAmount": 900000 },
+            { "debitAccount": "損益", "debitAmount": 420000, "creditAccount": "給料", "creditAmount": 420000 },
+            { "debitAccount": "損益", "debitAmount": 180000, "creditAccount": "支払家賃", "creditAmount": 180000 },
+            { "debitAccount": "損益", "debitAmount": 60000, "creditAccount": "減価償却費", "creditAmount": 60000 }
+          ]
+        }
+      ],
+      "explanation": "費用勘定は借方残高を持つため、貸方に記入して締め切ります。借方の損益は費用合計1,560,000円です。損益を各費用ごとに分けて記入しても、同じ振替として扱えます。"
+    },
+    {
+      "id": "q3",
+      "text": "損益勘定の貸方合計が2,040,000円、借方合計が1,760,000円であった。当期純利益を繰越利益剰余金へ振り替える。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "損益", "debitAmount": 280000, "creditAccount": "繰越利益剰余金", "creditAmount": 280000 }
+        ]
+      },
+      "explanation": "貸方合計が借方合計より280,000円多いため当期純利益です。損益を借方、繰越利益剰余金を貸方に振り替えます。"
+    },
+    {
+      "id": "q4",
+      "text": "損益勘定の貸方合計が1,250,000円、借方合計が1,390,000円であった。当期純損失を繰越利益剰余金へ振り替える。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "繰越利益剰余金", "debitAmount": 140000, "creditAccount": "損益", "creditAmount": 140000 }
+        ]
+      },
+      "explanation": "借方合計が貸方合計より140,000円多いため当期純損失です。繰越利益剰余金を借方、損益を貸方に振り替えます。"
+    },
+    {
+      "id": "q5",
+      "text": "収益勘定と費用勘定を損益勘定へ振り替えた結果、収益合計1,850,000円、費用合計1,620,000円となった。当期純利益を繰越利益剰余金へ振り替える。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "損益", "debitAmount": 230000, "creditAccount": "繰越利益剰余金", "creditAmount": 230000 }
+        ]
+      },
+      "explanation": "収益合計1,850,000円から費用合計1,620,000円を差し引いた230,000円が当期純利益です。損益を借方、繰越利益剰余金を貸方に振り替えます。"
+    }
+  ],
+  "explanation": [
+    "決算振替仕訳では、収益と費用を損益勘定へ集めて当期純利益または当期純損失を計算します。",
+    "収益の締切は、収益勘定を借方、損益を貸方に記入します。",
+    "費用の締切は、損益を借方、費用勘定を貸方に記入します。",
+    "当期純利益は繰越利益剰余金を増やし、当期純損失は繰越利益剰余金を減らします。"
+  ]
+}

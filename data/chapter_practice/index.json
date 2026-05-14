@@ -73,6 +73,86 @@
       "totalScore": 20
     },
     {
+      "id": "journal_adjustments_001",
+      "category": "仕訳",
+      "chapterTitle": "決算整理仕訳",
+      "title": "決算整理仕訳 仕上げ問題",
+      "description": "期末商品、貸倒引当金、減価償却、経過勘定、貯蔵品を決算整理仕訳で確認します。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 18,
+      "totalScore": 20
+    },
+    {
+      "id": "journal_corrections_001",
+      "category": "仕訳",
+      "chapterTitle": "訂正仕訳",
+      "title": "訂正仕訳 仕上げ問題",
+      "description": "誤記入、金額違い、科目違いを、正しい訂正仕訳で直す練習をします。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 18,
+      "totalScore": 20
+    },
+    {
+      "id": "journal_source_documents_001",
+      "category": "仕訳",
+      "chapterTitle": "証ひょう・資料読み取り仕訳",
+      "title": "証ひょう・資料読み取り仕訳 仕上げ問題",
+      "description": "請求書、領収書、通帳記録、クレジット売上票、給与明細から必要な情報を読み取って仕訳します。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 20,
+      "totalScore": 20
+    },
+    {
+      "id": "journal_closing_entries_001",
+      "category": "仕訳",
+      "chapterTitle": "決算振替仕訳",
+      "title": "決算振替仕訳 仕上げ問題",
+      "description": "収益・費用を損益へ振り替え、当期純利益または当期純損失を繰越利益剰余金へ振り替えます。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 18,
+      "totalScore": 20
+    },
+    {
+      "id": "journal_reversing_entries_001",
+      "category": "仕訳",
+      "chapterTitle": "再振替仕訳",
+      "title": "再振替仕訳 仕上げ問題",
+      "description": "前払・未払・前受・未収の決算整理後、翌期首に行う再振替仕訳を確認します。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 15,
+      "totalScore": 20
+    },
+    {
+      "id": "journal_book_001",
+      "category": "帳簿",
+      "chapterTitle": "仕訳日記帳",
+      "title": "仕訳日記帳 完成問題",
+      "description": "取引を仕訳日記帳に記入し、借方・貸方の合計を確認します。",
+      "difficulty": "標準",
+      "estimatedMinutes": 12,
+      "totalScore": 20
+    },
+    {
+      "id": "voucher_accounting_001",
+      "category": "帳簿",
+      "chapterTitle": "伝票式会計",
+      "title": "伝票式会計 完成問題",
+      "description": "入金伝票・出金伝票・振替伝票の様式に、相手科目や金額を記入します。",
+      "difficulty": "標準",
+      "estimatedMinutes": 15,
+      "totalScore": 20
+    },
+    {
+      "id": "petty_cash_book_001",
+      "category": "帳簿",
+      "chapterTitle": "小口現金出納帳",
+      "title": "小口現金出納帳 完成問題",
+      "description": "定額資金前渡制度にもとづき、小口現金の支払内訳、残高、補給額を完成させます。",
+      "difficulty": "標準",
+      "estimatedMinutes": 15,
+      "totalScore": 20
+    },
+    {
       "id": "general_ledger_001",
       "category": "帳簿",
       "chapterTitle": "総勘定元帳",
@@ -141,6 +221,16 @@
       "difficulty": "標準",
       "estimatedMinutes": 15,
       "totalScore": 25
+    },
+    {
+      "id": "total_trial_balance_001",
+      "category": "帳簿",
+      "chapterTitle": "合計残高試算表",
+      "title": "合計残高試算表 完成問題",
+      "description": "月初残高と月中取引から、借方・貸方の合計欄と残高欄を完成させます。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 20,
+      "totalScore": 30
     },
     {
       "id": "worksheet_001",

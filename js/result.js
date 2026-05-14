@@ -138,6 +138,92 @@
     return question.explanation || definition?.explanation || question.detail || "解説は準備中です。";
   }
 
+  const practiceLinks = [
+    { id: "journal_cash_deposits_001", label: "現金・預金の仕訳", keywords: ["現金", "普通預金", "当座預金", "当座借越", "小口現金"] },
+    { id: "journal_merchandise_sales_001", label: "商品売買の仕訳", keywords: ["商品", "売上", "仕入", "返品", "値引", "消費税", "クレジット"] },
+    { id: "journal_receivables_payables_001", label: "債権・債務の仕訳", keywords: ["売掛金", "買掛金", "貸付金", "借入金", "仮払金", "前払金"] },
+    { id: "journal_notes_electronic_001", label: "手形・電子記録債権債務", keywords: ["手形", "電子記録"] },
+    { id: "journal_fixed_assets_001", label: "固定資産の仕訳", keywords: ["固定資産", "備品", "建物", "減価償却", "売却", "修繕"] },
+    { id: "journal_expenses_revenues_001", label: "費用・収益の仕訳", keywords: ["給料", "家賃", "保険料", "手数料", "未収", "未払", "前受", "前払"] },
+    { id: "journal_taxes_equity_001", label: "税金・純資産の仕訳", keywords: ["税", "資本金", "配当", "利益準備金", "租税公課"] },
+    { id: "journal_adjustments_001", label: "決算整理仕訳", keywords: ["決算整理", "繰越商品", "貸倒引当金", "貯蔵品", "未払法人税"] },
+    { id: "journal_corrections_001", label: "訂正仕訳", keywords: ["訂正", "誤って", "誤記入"] },
+    { id: "journal_source_documents_001", label: "証ひょう・資料読み取り仕訳", keywords: ["請求書", "領収書", "納品書", "売上票", "給与明細", "通帳"] },
+    { id: "journal_closing_entries_001", label: "決算振替仕訳", keywords: ["損益", "当期純利益", "当期純損失", "繰越利益剰余金"] },
+    { id: "journal_reversing_entries_001", label: "再振替仕訳", keywords: ["再振替", "前払", "未払", "前受", "未収"] },
+    { id: "journal_book_001", label: "仕訳日記帳", keywords: ["仕訳日記帳"] },
+    { id: "voucher_accounting_001", label: "伝票式会計", keywords: ["伝票", "入金伝票", "出金伝票", "振替伝票"] },
+    { id: "petty_cash_book_001", label: "小口現金出納帳", keywords: ["小口現金", "補給"] },
+    { id: "general_ledger_001", label: "総勘定元帳", keywords: ["総勘定元帳", "勘定記入"] },
+    { id: "accounts_receivable_ledger_001", label: "売掛金元帳", keywords: ["売掛金元帳"] },
+    { id: "accounts_payable_ledger_001", label: "買掛金元帳", keywords: ["買掛金元帳"] },
+    { id: "merchandise_inventory_ledger_001", label: "商品有高帳", keywords: ["商品有高帳", "先入先出"] },
+    { id: "moving_average_inventory_ledger_001", label: "商品有高帳（移動平均法）", keywords: ["移動平均"] },
+    { id: "fixed_asset_register_001", label: "固定資産台帳", keywords: ["固定資産台帳"] },
+    { id: "trial_balance_001", label: "残高試算表", keywords: ["残高試算表", "決算整理後残高試算表"] },
+    { id: "total_trial_balance_001", label: "合計残高試算表", keywords: ["合計残高試算表"] },
+    { id: "worksheet_001", label: "精算表", keywords: ["精算表"] },
+    { id: "income_statement_001", label: "損益計算書", keywords: ["損益計算書"] },
+    { id: "balance_sheet_001", label: "貸借対照表", keywords: ["貸借対照表"] }
+  ];
+
+  function relatedPracticeLinks(section, question, definition) {
+    const haystack = [
+      section.title,
+      question.title,
+      question.detail,
+      definition?.title,
+      definition?.question,
+      definition?.description,
+      ...(definition?.materials || []),
+      ...(definition?.fields || []).map((field) => field.label)
+    ].filter(Boolean).join(" ");
+    const links = [];
+    const add = (id) => {
+      const link = practiceLinks.find((item) => item.id === id);
+      if (link && !links.some((item) => item.id === id)) links.push(link);
+    };
+
+    if (question.type === "journal_dropdown" || question.type === "journal_dropdown_multi") {
+      add("journal_source_documents_001");
+      add("journal_merchandise_sales_001");
+    }
+    if (section.sectionId === "section_2") {
+      add("journal_book_001");
+      add("general_ledger_001");
+    }
+    if (section.sectionId === "section_3") {
+      add("journal_adjustments_001");
+      add("worksheet_001");
+    }
+
+    practiceLinks.forEach((link) => {
+      if (link.keywords.some((keyword) => haystack.includes(keyword))) add(link.id);
+    });
+
+    return links.slice(0, 4);
+  }
+
+  function renderRelatedPracticeLinks(section, question, definition) {
+    const links = relatedPracticeLinks(section, question, definition);
+    if (!links.length) return null;
+    const wrap = document.createElement("div");
+    wrap.className = "related-practice-links";
+    const title = document.createElement("p");
+    title.innerHTML = "<b>関連練習</b>";
+    const actions = document.createElement("div");
+    actions.className = "related-practice-actions";
+    links.forEach((link) => {
+      const anchor = document.createElement("a");
+      anchor.className = "button secondary";
+      anchor.href = `practice.html?practiceId=${encodeURIComponent(link.id)}&restart=1`;
+      anchor.textContent = link.label;
+      actions.appendChild(anchor);
+    });
+    wrap.append(title, actions);
+    return wrap;
+  }
+
   function questionDefinitionMap(exam) {
     const map = new Map();
     exam.sections.forEach((section) => {
@@ -155,6 +241,7 @@
   function answerDisplayCell(resultQuestion, definition, cell, mode) {
     const td = document.createElement("td");
     if (!cell) return td;
+    if (cell.className) td.className = cell.className;
     if (typeof cell === "string") {
       td.textContent = cell;
       return td;
@@ -166,10 +253,15 @@
     if (cell.fieldId) {
       const field = fieldResultById(resultQuestion).get(cell.fieldId);
       const value = mode === "user" ? field?.userAnswer : field?.correctAnswer;
-      td.className = "answer-cell " + (field?.isCorrect ? "result-ok" : "result-ng");
+      td.className = ["answer-cell", field?.isCorrect ? "result-ok" : "result-ng", cell.className || ""].filter(Boolean).join(" ");
       td.textContent = formatAnswerValue(value);
     }
     return td;
+  }
+
+  function isAccountColumnLabel(column) {
+    const label = String(column || "");
+    return label.includes("科目") || label.includes("勘定科目");
   }
 
   function renderResultAccountsSheet(resultQuestion, definition, mode) {
@@ -311,7 +403,7 @@
       const tr = document.createElement("tr");
       tr.append(
         answerDisplayCell(resultQuestion, definition, row.debit, mode),
-        answerDisplayCell(resultQuestion, definition, { text: row.account }, mode),
+        answerDisplayCell(resultQuestion, definition, { text: row.account, className: "account-name-cell" }, mode),
         answerDisplayCell(resultQuestion, definition, row.credit, mode)
       );
       tbody.appendChild(tr);
@@ -371,7 +463,11 @@
     const tbody = document.createElement("tbody");
     definition.answerSheet.rows.forEach((row) => {
       const tr = document.createElement("tr");
-      row.cells.forEach((cell) => tr.appendChild(answerDisplayCell(resultQuestion, definition, cell, mode)));
+      row.cells.forEach((cell, index) => {
+        const td = answerDisplayCell(resultQuestion, definition, cell, mode);
+        if (isAccountColumnLabel(columns[index])) td.classList.add("account-name-cell");
+        tr.appendChild(td);
+      });
       tbody.appendChild(tr);
     });
     table.append(thead, tbody);
@@ -435,7 +531,11 @@
     (statement.rows || []).forEach((row) => {
       const tr = document.createElement("tr");
       if (row.className) tr.className = row.className;
-      row.cells.forEach((cell) => tr.appendChild(answerDisplayCell(resultQuestion, definition, cell, mode)));
+      row.cells.forEach((cell, index) => {
+        const td = answerDisplayCell(resultQuestion, definition, cell, mode);
+        if (isAccountColumnLabel(columns[index])) td.classList.add("account-name-cell");
+        tr.appendChild(td);
+      });
       tbody.appendChild(tr);
     });
     table.append(thead, tbody);
@@ -552,12 +652,18 @@
             const row = document.createElement("tr");
             const user = formatAnswerValue(field.userAnswer);
             const correct = formatAnswerValue(field.correctAnswer);
-            row.innerHTML = `<th scope="row">${field.label}</th><td>${user}</td><td>${correct}</td><td>${field.isCorrect ? "正解" : "不正解"}</td>`;
+            const accountClass = isAccountColumnLabel(field.label) ? " class=\"account-name-cell\"" : "";
+            row.innerHTML = `<th scope="row">${field.label}</th><td${accountClass}>${user}</td><td${accountClass}>${correct}</td><td>${field.isCorrect ? "正解" : "不正解"}</td>`;
             tbody.appendChild(row);
           });
           table.appendChild(tbody);
           tableWrap.appendChild(table);
           reviewBody.appendChild(tableWrap);
+        }
+
+        const relatedLinks = renderRelatedPracticeLinks(section, question, definition);
+        if (relatedLinks) {
+          reviewBody.appendChild(relatedLinks);
         }
 
         sectionNode.appendChild(item);

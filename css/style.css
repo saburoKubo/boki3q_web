@@ -728,6 +728,24 @@ a:focus-visible {
   margin: 8px 0;
 }
 
+.related-practice-links {
+  margin-top: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.related-practice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.related-practice-actions .button {
+  min-height: 36px;
+  padding: 7px 12px;
+  font-size: 0.9rem;
+}
+
 .journal-result-block {
   display: grid;
   gap: 6px;
@@ -768,6 +786,7 @@ a:focus-visible {
 
 .journal-result-table td span:first-child {
   min-width: 9em;
+  text-align: left;
 }
 
 .journal-result-table td span:last-child {
@@ -1493,6 +1512,16 @@ input[inputmode="numeric"] {
 
 .result-answer-sheet td.answer-cell {
   text-align: right;
+}
+
+.result-answer-sheet .account-name-cell,
+.result-answer-sheet td.account-name-cell,
+.result-answer-sheet .journal-multi-table td.account-name-cell,
+.result-answer-sheet .answer-table td.account-name-cell,
+.result-answer-sheet .generic-sheet-table td.account-name-cell,
+.result-answer-sheet .trial-balance-sheet-table td.account-name-cell,
+.answer-table td.account-name-cell {
+  text-align: left;
 }
 
 .result-answer-sheet .t-account-table td:nth-child(1),

@@ -1,0 +1,96 @@
+{
+  "id": "journal_reversing_entries_001",
+  "mode": "journalPractice",
+  "category": "仕訳",
+  "chapterTitle": "再振替仕訳",
+  "title": "再振替仕訳 仕上げ問題",
+  "description": "前払・未払・前受・未収の決算整理後、翌期首に行う再振替仕訳を確認します。",
+  "estimatedMinutes": 15,
+  "totalScore": 20,
+  "intro": "各事項について、翌期首に行う再振替仕訳をしなさい。解答欄は本番形式に合わせて5行あります。使用しない行は空欄のままでかまいません。",
+  "accountOptions": [
+    "保険料",
+    "前払保険料",
+    "支払家賃",
+    "未払家賃",
+    "受取手数料",
+    "前受手数料",
+    "未収手数料",
+    "支払利息",
+    "未払利息",
+    "受取利息",
+    "未収利息"
+  ],
+  "materials": [
+    "勘定科目は選択肢から選び、金額は円単位で入力すること。",
+    "再振替仕訳は、前期末の決算整理仕訳を翌期首に逆にする仕訳である。",
+    "同じ借方内または同じ貸方内の行順は問わない。"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "text": "前期末に、次期分の保険料36,000円を前払保険料として処理していた。翌期首に再振替仕訳を行う。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "保険料", "debitAmount": 36000, "creditAccount": "前払保険料", "creditAmount": 36000 }
+        ]
+      },
+      "explanation": "前払保険料は翌期首に保険料へ戻します。前期末の仕訳の逆仕訳です。"
+    },
+    {
+      "id": "q2",
+      "text": "前期末に、未払いの家賃48,000円を未払家賃として処理していた。翌期首に再振替仕訳を行う。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "未払家賃", "debitAmount": 48000, "creditAccount": "支払家賃", "creditAmount": 48000 }
+        ]
+      },
+      "explanation": "前期末に計上した未払家賃を翌期首に取り消し、支払家賃へ戻します。"
+    },
+    {
+      "id": "q3",
+      "text": "前期末に、次期分の受取手数料25,000円を前受手数料として処理していた。翌期首に再振替仕訳を行う。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "前受手数料", "debitAmount": 25000, "creditAccount": "受取手数料", "creditAmount": 25000 }
+        ]
+      },
+      "explanation": "前受手数料は翌期首に受取手数料へ戻します。収益の前受分を通常の収益勘定へ振り替えます。"
+    },
+    {
+      "id": "q4",
+      "text": "前期末に、未収の受取手数料32,000円を未収手数料として処理していた。翌期首に再振替仕訳を行う。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "受取手数料", "debitAmount": 32000, "creditAccount": "未収手数料", "creditAmount": 32000 }
+        ]
+      },
+      "explanation": "前期末に計上した未収手数料を翌期首に取り消し、受取手数料へ戻します。"
+    },
+    {
+      "id": "q5",
+      "text": "前期末に、未払いの支払利息12,000円を未払利息として処理し、未収の受取利息8,000円を未収利息として処理していた。翌期首に再振替仕訳を行う。",
+      "score": 4,
+      "maxLines": 5,
+      "correctAnswer": {
+        "lines": [
+          { "debitAccount": "未払利息", "debitAmount": 12000, "creditAccount": "支払利息", "creditAmount": 12000 },
+          { "debitAccount": "受取利息", "debitAmount": 8000, "creditAccount": "未収利息", "creditAmount": 8000 }
+        ]
+      },
+      "explanation": "未払利息は支払利息を取り消す形で、未収利息は受取利息へ戻す形で再振替します。"
+    }
+  ],
+  "explanation": [
+    "再振替仕訳は、前期末の経過勘定に関する決算整理仕訳を翌期首に逆にする処理です。",
+    "前払・未払・前受・未収のどれを使ったかを確認し、相手科目へ戻す向きを判断します。"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "journal_book_001",
+  "mode": "chapterPractice",
+  "category": "帳簿",
+  "chapterTitle": "仕訳日記帳",
+  "title": "仕訳日記帳 完成問題",
+  "description": "取引を仕訳日記帳に記入し、借方・貸方の合計を確認します。",
+  "estimatedMinutes": 12,
+  "totalScore": 20,
+  "intro": "次の取引にもとづいて、仕訳日記帳の勘定科目と金額欄を完成させなさい。該当しない欄は空欄のままでかまいません。",
+  "materials": [
+    "7月1日 商品120,000円を現金で売り上げた。",
+    "7月3日 商品180,000円を掛けで仕入れた。",
+    "7月6日 売掛金90,000円を普通預金で回収した。",
+    "7月10日 家賃50,000円を普通預金から支払った。",
+    "7月15日 商品260,000円を掛けで売り上げた。",
+    "7月20日 買掛金100,000円を現金で支払った。"
+  ],
+  "tables": [
+    {
+      "id": "journal_book",
+      "title": "仕訳日記帳",
+      "hideZeroCells": true,
+      "answerKeys": ["debitAccount", "debit", "creditAccount", "credit"],
+      "selectOptions": {
+        "debitAccount": ["現金", "普通預金", "売掛金", "買掛金", "売上", "仕入", "支払家賃"],
+        "creditAccount": ["現金", "普通預金", "売掛金", "買掛金", "売上", "仕入", "支払家賃"]
+      },
+      "columns": [
+        { "key": "date", "label": "日付", "type": "static" },
+        { "key": "debitAccount", "label": "借方科目", "type": "answer" },
+        { "key": "debit", "label": "借方金額", "type": "answer" },
+        { "key": "creditAccount", "label": "貸方科目", "type": "answer" },
+        { "key": "credit", "label": "貸方金額", "type": "answer" }
+      ],
+      "rows": [
+        { "date": "7/1", "description": "現金売上", "values": { "date": "7/1" }, "cells": { "debitAccount": "現金", "debit": 120000, "creditAccount": "売上", "credit": 120000 } },
+        { "date": "7/3", "description": "掛仕入", "values": { "date": "7/3" }, "cells": { "debitAccount": "仕入", "debit": 180000, "creditAccount": "買掛金", "credit": 180000 } },
+        { "date": "7/6", "description": "売掛金回収", "values": { "date": "7/6" }, "cells": { "debitAccount": "普通預金", "debit": 90000, "creditAccount": "売掛金", "credit": 90000 } },
+        { "date": "7/10", "description": "家賃支払", "values": { "date": "7/10" }, "cells": { "debitAccount": "支払家賃", "debit": 50000, "creditAccount": "普通預金", "credit": 50000 } },
+        { "date": "7/15", "description": "掛売上", "values": { "date": "7/15" }, "cells": { "debitAccount": "売掛金", "debit": 260000, "creditAccount": "売上", "credit": 260000 } },
+        { "date": "7/20", "description": "買掛金支払", "values": { "date": "7/20" }, "cells": { "debitAccount": "買掛金", "debit": 100000, "creditAccount": "現金", "credit": 100000 } },
+        { "date": "合計", "description": "合計", "values": { "date": "合計" }, "cells": { "debitAccount": null, "debit": 800000, "creditAccount": null, "credit": 800000 } }
+      ]
+    }
+  ],
+  "explanation": [
+    "仕訳日記帳では、各取引について借方科目と貸方科目を対応させ、同じ金額を借方・貸方に記入します。",
+    "7月15日の掛売上は、売掛金260,000円を借方、売上260,000円を貸方に記入します。",
+    "借方金額合計と貸方金額合計はいずれも800,000円で一致します。"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "id": "total_trial_balance_001",
+  "mode": "chapterPractice",
+  "category": "帳簿",
+  "chapterTitle": "合計残高試算表",
+  "title": "合計残高試算表 完成問題",
+  "description": "月初残高と月中取引から、借方・貸方の合計欄と残高欄を完成させます。",
+  "estimatedMinutes": 20,
+  "totalScore": 30,
+  "intro": "合計残高試算表では、各勘定の借方合計・貸方合計を集計し、その差額を借方残高または貸方残高に記入します。残高がない欄は空欄のままでかまいません。",
+  "materials": [
+    "5月1日現在の残高: 現金120,000、普通預金500,000、売掛金300,000、繰越商品200,000、備品800,000、買掛金250,000、借入金400,000、資本金800,000、繰越利益剰余金470,000。",
+    "商品を現金で180,000円売り上げた。",
+    "商品を掛けで420,000円売り上げた。",
+    "売掛金250,000円を普通預金で回収した。",
+    "商品360,000円を掛けで仕入れた。",
+    "買掛金300,000円を普通預金から支払った。",
+    "給料160,000円を普通預金から支払った。",
+    "家賃90,000円を現金で支払った。",
+    "借入金100,000円を返済し、利息5,000円とともに普通預金から支払った。",
+    "備品150,000円を購入し、代金は未払いである。",
+    "受取手数料70,000円が普通預金に入金された。"
+  ],
+  "tables": [
+    {
+      "id": "total_trial_balance",
+      "title": "合計残高試算表",
+      "hideZeroCells": true,
+      "answerKeys": ["debit_total", "credit_total", "debit_balance", "credit_balance"],
+      "columns": [
+        { "key": "account", "label": "勘定科目", "type": "static" },
+        { "key": "debit_total", "label": "借方合計", "type": "answer" },
+        { "key": "credit_total", "label": "貸方合計", "type": "answer" },
+        { "key": "debit_balance", "label": "借方残高", "type": "answer" },
+        { "key": "credit_balance", "label": "貸方残高", "type": "answer" }
+      ],
+      "rows": [
+        { "date": "現金", "description": "現金", "values": { "account": "現金" }, "cells": { "debit_total": 300000, "credit_total": 90000, "debit_balance": 210000, "credit_balance": 0 } },
+        { "date": "普通預金", "description": "普通預金", "values": { "account": "普通預金" }, "cells": { "debit_total": 820000, "credit_total": 565000, "debit_balance": 255000, "credit_balance": 0 } },
+        { "date": "売掛金", "description": "売掛金", "values": { "account": "売掛金" }, "cells": { "debit_total": 720000, "credit_total": 250000, "debit_balance": 470000, "credit_balance": 0 } },
+        { "date": "繰越商品", "description": "繰越商品", "values": { "account": "繰越商品" }, "cells": { "debit_total": 200000, "credit_total": 0, "debit_balance": 200000, "credit_balance": 0 } },
+        { "date": "備品", "description": "備品", "values": { "account": "備品" }, "cells": { "debit_total": 950000, "credit_total": 0, "debit_balance": 950000, "credit_balance": 0 } },
+        { "date": "仕入", "description": "仕入", "values": { "account": "仕入" }, "cells": { "debit_total": 360000, "credit_total": 0, "debit_balance": 360000, "credit_balance": 0 } },
+        { "date": "給料", "description": "給料", "values": { "account": "給料" }, "cells": { "debit_total": 160000, "credit_total": 0, "debit_balance": 160000, "credit_balance": 0 } },
+        { "date": "支払家賃", "description": "支払家賃", "values": { "account": "支払家賃" }, "cells": { "debit_total": 90000, "credit_total": 0, "debit_balance": 90000, "credit_balance": 0 } },
+        { "date": "支払利息", "description": "支払利息", "values": { "account": "支払利息" }, "cells": { "debit_total": 5000, "credit_total": 0, "debit_balance": 5000, "credit_balance": 0 } },
+        { "date": "買掛金", "description": "買掛金", "values": { "account": "買掛金" }, "cells": { "debit_total": 300000, "credit_total": 610000, "debit_balance": 0, "credit_balance": 310000 } },
+        { "date": "借入金", "description": "借入金", "values": { "account": "借入金" }, "cells": { "debit_total": 100000, "credit_total": 400000, "debit_balance": 0, "credit_balance": 300000 } },
+        { "date": "未払金", "description": "未払金", "values": { "account": "未払金" }, "cells": { "debit_total": 0, "credit_total": 150000, "debit_balance": 0, "credit_balance": 150000 } },
+        { "date": "資本金", "description": "資本金", "values": { "account": "資本金" }, "cells": { "debit_total": 0, "credit_total": 800000, "debit_balance": 0, "credit_balance": 800000 } },
+        { "date": "繰越利益剰余金", "description": "繰越利益剰余金", "values": { "account": "繰越利益剰余金" }, "cells": { "debit_total": 0, "credit_total": 470000, "debit_balance": 0, "credit_balance": 470000 } },
+        { "date": "売上", "description": "売上", "values": { "account": "売上" }, "cells": { "debit_total": 0, "credit_total": 600000, "debit_balance": 0, "credit_balance": 600000 } },
+        { "date": "受取手数料", "description": "受取手数料", "values": { "account": "受取手数料" }, "cells": { "debit_total": 0, "credit_total": 70000, "debit_balance": 0, "credit_balance": 70000 } },
+        { "date": "合計", "description": "合計", "values": { "account": "合計" }, "cells": { "debit_total": 4005000, "credit_total": 4005000, "debit_balance": 2700000, "credit_balance": 2700000 } }
+      ]
+    }
+  ],
+  "explanation": [
+    "合計残高試算表では、各勘定の借方合計・貸方合計を記入したうえで、差額を残高欄に記入します。",
+    "普通預金の借方合計は500,000円+250,000円+70,000円=820,000円、貸方合計は300,000円+160,000円+105,000円=565,000円です。",
+    "借方合計欄と貸方合計欄はいずれも4,005,000円、借方残高欄と貸方残高欄はいずれも2,700,000円で一致します。"
+  ]
+}

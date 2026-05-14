@@ -1,0 +1,57 @@
+{
+  "id": "petty_cash_book_001",
+  "mode": "chapterPractice",
+  "category": "帳簿",
+  "chapterTitle": "小口現金出納帳",
+  "title": "小口現金出納帳 完成問題",
+  "description": "定額資金前渡制度にもとづき、小口現金の支払内訳、残高、補給額を完成させます。",
+  "estimatedMinutes": 15,
+  "totalScore": 20,
+  "intro": "次の資料にもとづいて、小口現金出納帳を完成させなさい。該当しない欄は空欄のままでかまいません。",
+  "materials": [
+    "定額資金前渡制度を採用し、毎週月曜日に小口現金100,000円を用意する。",
+    "4月1日 小口現金100,000円を小切手で前渡しした。",
+    "4月2日 交通費12,000円を支払った。",
+    "4月3日 文房具代8,000円を支払った。",
+    "4月4日 郵便切手代6,000円を支払った。",
+    "4月5日 茶菓代4,000円を支払った。",
+    "4月8日 支払額を報告し、小切手で補給した。"
+  ],
+  "tables": [
+    {
+      "id": "petty_cash_book",
+      "title": "小口現金出納帳",
+      "hideZeroCells": true,
+      "answerKeys": ["receipt", "travel", "supplies", "communication", "misc", "paymentTotal", "balance"],
+      "columns": [
+        { "key": "date", "label": "日付", "type": "static" },
+        { "key": "description", "label": "摘要", "type": "static" },
+        { "key": "receipt", "label": "受入", "type": "answer" },
+        { "key": "travel", "label": "旅費交通費", "type": "answer" },
+        { "key": "supplies", "label": "消耗品費", "type": "answer" },
+        { "key": "communication", "label": "通信費", "type": "answer" },
+        { "key": "misc", "label": "雑費", "type": "answer" },
+        { "key": "paymentTotal", "label": "支払合計", "type": "answer" },
+        { "key": "balance", "label": "残高", "type": "answer" }
+      ],
+      "rows": [
+        { "date": "4/1", "description": "前渡し", "values": { "date": "4/1", "description": "前渡し" }, "cells": { "receipt": 100000, "travel": 0, "supplies": 0, "communication": 0, "misc": 0, "paymentTotal": 0, "balance": 100000 } },
+        { "date": "4/2", "description": "交通費", "values": { "date": "4/2", "description": "交通費" }, "cells": { "receipt": 0, "travel": 12000, "supplies": 0, "communication": 0, "misc": 0, "paymentTotal": 12000, "balance": 88000 } },
+        { "date": "4/3", "description": "文房具", "values": { "date": "4/3", "description": "文房具" }, "cells": { "receipt": 0, "travel": 0, "supplies": 8000, "communication": 0, "misc": 0, "paymentTotal": 8000, "balance": 80000 } },
+        { "date": "4/4", "description": "郵便切手", "values": { "date": "4/4", "description": "郵便切手" }, "cells": { "receipt": 0, "travel": 0, "supplies": 0, "communication": 6000, "misc": 0, "paymentTotal": 6000, "balance": 74000 } },
+        { "date": "4/5", "description": "茶菓代", "values": { "date": "4/5", "description": "茶菓代" }, "cells": { "receipt": 0, "travel": 0, "supplies": 0, "communication": 0, "misc": 4000, "paymentTotal": 4000, "balance": 70000 } },
+        { "date": "4/8", "description": "補給", "values": { "date": "4/8", "description": "補給" }, "cells": { "receipt": 30000, "travel": 0, "supplies": 0, "communication": 0, "misc": 0, "paymentTotal": 0, "balance": 100000 } },
+        { "date": "合計", "description": "支払内訳合計", "values": { "date": "合計", "description": "支払内訳合計" }, "cells": { "receipt": 0, "travel": 12000, "supplies": 8000, "communication": 6000, "misc": 4000, "paymentTotal": 30000, "balance": 0 } }
+      ]
+    }
+  ],
+  "summary": [
+    { "id": "replenishment", "label": "補給額", "correctAnswer": 30000 },
+    { "id": "after_replenishment", "label": "補給後残高", "correctAnswer": 100000 }
+  ],
+  "explanation": [
+    "小口現金の支払合計は12,000円+8,000円+6,000円+4,000円=30,000円です。",
+    "補給前残高は100,000円-30,000円=70,000円で、定額100,000円に戻すため補給額は30,000円です。",
+    "支払内訳は、交通費を旅費交通費、文房具を消耗品費、郵便切手を通信費、茶菓代を雑費として分類します。"
+  ]
+}

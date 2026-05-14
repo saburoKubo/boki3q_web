@@ -82,11 +82,21 @@
     return table.columns.length > 5 ? "inventory-sheet-table" : "answer-table ledger-table";
   }
 
+  function isAccountColumn(column) {
+    const key = String(column?.key || "");
+    const label = String(typeof column === "string" ? column : column?.label || "");
+    return key.toLowerCase().includes("account") || label.includes("科目") || label.includes("勘定科目");
+  }
+
+  function resultCellClass(table, column, baseClass = "") {
+    return [baseClass, isAccountColumn(column) ? "account-name-cell" : ""].filter(Boolean).join(" ");
+  }
+
   function renderCorrectTable(table) {
     const keys = tableAnswerKeys(table);
     const generic = Array.isArray(table.answerKeys);
     return `
-      <section class="answer-sheet">
+      <section class="answer-sheet result-answer-sheet">
         <h4>${escapeHtml(table.title)}</h4>
         <div class="table-scroll">
           <table class="${tableClassName(table)}">
@@ -100,9 +110,9 @@
                     const key = column.key;
                     if (column.type === "answer") {
                       if (table.hideZeroCells && Number(row.cells[key]) === 0) return "<td></td>";
-                      return `<td>${row.cells[key] === null || row.cells[key] === undefined ? "" : escapeHtml(window.BokiMock.formatYen(row.cells[key]))}</td>`;
+                      return `<td class="${resultCellClass(table, column)}">${escapeHtml(formatCellValue(table, key, row.cells[key]))}</td>`;
                     }
-                    return `<td>${escapeHtml(row.values?.[key] ?? "")}</td>`;
+                    return `<td class="${resultCellClass(table, column)}">${escapeHtml(row.values?.[key] ?? "")}</td>`;
                   }).join("") : `
                     <td>${escapeHtml(row.date)}</td>
                     <td>${escapeHtml(row.description)}</td>
@@ -129,9 +139,31 @@
     return window.BokiMock.formatYen(number);
   }
 
+  function isSelectCell(table, key) {
+    return Boolean(table.selectOptions?.[key]);
+  }
+
+  function formatCellValue(table, key, value) {
+    if (value === null || value === undefined) return "";
+    if (isSelectCell(table, key)) return String(value);
+    return window.BokiMock.formatYen(value);
+  }
+
+  function formatUserCellValue(table, key, value) {
+    if (isSelectCell(table, key)) return window.BokiMock.normalizeText(value);
+    return formatUserAnswer(value);
+  }
+
   function isAmountCorrect(actual, expected) {
     const expectedNumber = Number(expected);
     return actual === expectedNumber || (expectedNumber === 0 && actual === null);
+  }
+
+  function isCellCorrect(table, key, answer, expected) {
+    if (isSelectCell(table, key)) {
+      return window.BokiMock.normalizeText(answer) === window.BokiMock.normalizeText(expected);
+    }
+    return isAmountCorrect(window.BokiMock.normalizeNumber(answer), expected);
   }
 
   function journalName(questionId, lineIndex, key) {
@@ -205,9 +237,9 @@
           <tbody>
             ${safeLines.map((line) => `
               <tr>
-                <td>${escapeHtml(line.debitAccount || "")}</td>
+                <td class="account-name-cell">${escapeHtml(line.debitAccount || "")}</td>
                 <td>${escapeHtml(formatJournalAmount(line.debitAmount))}</td>
-                <td>${escapeHtml(line.creditAccount || "")}</td>
+                <td class="account-name-cell">${escapeHtml(line.creditAccount || "")}</td>
                 <td>${escapeHtml(formatJournalAmount(line.creditAmount))}</td>
               </tr>
             `).join("")}
@@ -286,14 +318,13 @@
                 <tr>
                   ${generic ? table.columns.map((column) => {
                     const key = column.key;
-                    if (column.type !== "answer") return `<td>${escapeHtml(row.values?.[key] ?? "")}</td>`;
+                    if (column.type !== "answer") return `<td class="${resultCellClass(table, column)}">${escapeHtml(row.values?.[key] ?? "")}</td>`;
                     const expected = row.cells?.[key];
                     if (table.hideZeroCells && Number(expected) === 0) return "<td></td>";
                     if (expected === null || expected === undefined) return "<td></td>";
                     const answer = result.answers?.[cellName(table, rowIndex, key)];
-                    const actual = window.BokiMock.normalizeNumber(answer);
-                    const correct = isAmountCorrect(actual, expected);
-                    return `<td class="${correct ? "result-ok-cell" : "result-ng-cell"}">${escapeHtml(formatUserAnswer(answer))}</td>`;
+                    const correct = isCellCorrect(table, key, answer, expected);
+                    return `<td class="${resultCellClass(table, column, correct ? "result-ok-cell" : "result-ng-cell")}">${escapeHtml(formatUserCellValue(table, key, answer))}</td>`;
                   }).join("") : `
                     <td>${escapeHtml(row.date)}</td>
                     <td>${escapeHtml(row.description)}</td>
