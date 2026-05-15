@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#eef1f4">
+    <title>簿記3Q Web実践練習 デモ</title>
+    <meta
+      name="description"
+      content="簿記3QのWeb実践練習を公開用に紹介するデモページです。仕訳、帳簿、決算、模擬試験の画面イメージを確認できます。"
+    >
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #eef1f4;
+        --surface: #ffffff;
+        --surface-2: #f7f8fa;
+        --line: #c9d0d8;
+        --line-strong: #8893a0;
+        --text: #1d232b;
+        --muted: #596575;
+        --primary: #28435f;
+        --primary-dark: #182b40;
+        --accent: #a45a2a;
+        --ok: #24704f;
+        --shadow: 0 10px 28px rgba(20, 31, 43, 0.09);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          linear-gradient(135deg, rgba(40, 67, 95, 0.08), transparent 36%),
+          linear-gradient(225deg, rgba(164, 90, 42, 0.12), transparent 34%),
+          var(--bg);
+        color: var(--text);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
+        line-height: 1.65;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .site-header {
+        background: var(--primary-dark);
+        color: #ffffff;
+        border-bottom: 4px solid var(--accent);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 24px 0;
+      }
+
+      .eyebrow {
+        margin: 0 0 4px;
+        color: inherit;
+        font-size: 0.78rem;
+        font-weight: 700;
+        opacity: 0.78;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.55rem, 3.5vw, 2.5rem);
+        letter-spacing: 0;
+        line-height: 1.25;
+      }
+
+      .header-badge {
+        flex: 0 0 auto;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        padding: 6px 10px;
+        font-size: 0.84rem;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        align-items: center;
+        padding: 34px 0 26px;
+      }
+
+      @media (min-width: 860px) {
+        .hero {
+          grid-template-columns: 0.95fr 1.05fr;
+          padding: 48px 0 34px;
+        }
+      }
+
+      .hero-copy {
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 9px 14px;
+        border: 1px solid var(--line-strong);
+        background: var(--surface);
+        color: var(--primary-dark);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .button.primary {
+        border-color: var(--primary-dark);
+        background: var(--primary-dark);
+        color: #ffffff;
+      }
+
+      .demo-frame {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .demo-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px;
+        border-bottom: 1px solid var(--line);
+        background: var(--surface-2);
+      }
+
+      .demo-title {
+        min-width: 0;
+      }
+
+      .demo-title b {
+        display: block;
+        color: var(--primary-dark);
+      }
+
+      .demo-title span,
+      .sample-status,
+      .mock-problem p,
+      .mock-note,
+      .score-card span {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .sample-status {
+        flex: 0 0 auto;
+        border: 1px solid var(--line);
+        background: #ffffff;
+        padding: 6px 10px;
+        font-weight: 700;
+      }
+
+      .demo-body {
+        display: grid;
+        gap: 14px;
+        padding: 16px;
+      }
+
+      .mock-problem,
+      .mock-answer,
+      .mock-summary,
+      .screen-card {
+        border: 1px solid var(--line);
+        background: #ffffff;
+        box-shadow: 0 6px 18px rgba(20, 31, 43, 0.05);
+      }
+
+      .mock-problem,
+      .mock-summary,
+      .screen-card {
+        padding: 16px;
+      }
+
+      .mock-problem h2,
+      .screen-card h3 {
+        margin-bottom: 8px;
+        color: var(--primary-dark);
+      }
+
+      .journal-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .journal-table th,
+      .journal-table td {
+        border: 1px solid var(--line);
+        padding: 10px;
+        text-align: left;
+      }
+
+      .journal-table th {
+        background: var(--primary);
+        color: #ffffff;
+        font-size: 0.86rem;
+      }
+
+      .input-like {
+        min-height: 36px;
+        border: 1px solid var(--line);
+        background: var(--surface-2);
+        padding: 6px 8px;
+        color: var(--muted);
+      }
+
+      .mock-summary {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .score-card {
+        border: 1px solid var(--line);
+        background: var(--surface-2);
+        padding: 12px;
+      }
+
+      .score-card b {
+        display: block;
+        color: var(--primary-dark);
+        font-size: 1.25rem;
+      }
+
+      .section {
+        padding: 28px 0;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 16px;
+        border-bottom: 2px solid var(--line);
+        padding-bottom: 14px;
+      }
+
+      .section-heading h2 {
+        margin-bottom: 4px;
+        font-size: 1.35rem;
+        color: var(--primary-dark);
+      }
+
+      .section-heading p {
+        margin-bottom: 0;
+        color: var(--muted);
+      }
+
+      .screen-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 14px;
+      }
+
+      .screen-card {
+        grid-column: span 12;
+        min-height: 184px;
+      }
+
+      @media (min-width: 780px) {
+        .screen-card {
+          grid-column: span 4;
+        }
+      }
+
+      .mini-ledger {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.86rem;
+      }
+
+      .mini-ledger td {
+        border-bottom: 1px solid var(--line);
+        padding: 7px 0;
+      }
+
+      .mini-ledger td:last-child {
+        text-align: right;
+        font-weight: 700;
+      }
+
+      .bars {
+        display: grid;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .bar {
+        height: 10px;
+        background: #e3e7ec;
+      }
+
+      .bar span {
+        display: block;
+        height: 100%;
+        background: var(--accent);
+      }
+
+      .notice {
+        border: 1px solid rgba(164, 90, 42, 0.35);
+        background: rgba(255, 247, 235, 0.86);
+        padding: 14px 16px;
+        color: #69401e;
+      }
+
+      .footer {
+        margin-top: 26px;
+        padding: 22px 0 42px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      @media (max-width: 680px) {
+        .header-inner,
+        .section-heading {
+          display: block;
+        }
+
+        .header-badge {
+          display: inline-block;
+          margin-top: 12px;
+        }
+
+        .mock-summary {
+          grid-template-columns: 1fr;
+        }
+
+        .journal-table {
+          font-size: 0.84rem;
+        }
+
+        .journal-table th,
+        .journal-table td {
+          padding: 7px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div>
+          <p class="eyebrow">簿記3Q Web実践練習</p>
+          <h1>パスコードなしで見られるデモ画面</h1>
+        </div>
+        <span class="header-badge">公開用デモ</span>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero" aria-labelledby="demo-title">
+        <div>
+          <p class="eyebrow">仕訳・帳簿・決算・模擬試験</p>
+          <h2 id="demo-title">Web版でできる実践練習の雰囲気を確認できます。</h2>
+          <p class="hero-copy">
+            実際のWeb実践練習はアプリ有料版の補完教材です。このページでは、パスコードを入力せずに画面構成や学習内容のイメージを確認できます。
+          </p>
+          <div class="button-row">
+            <a class="button primary" href="app.html">アプリ紹介へ戻る</a>
+            <a class="button" href="#screens">デモ内容を見る</a>
+          </div>
+        </div>
+
+        <div class="demo-frame" aria-label="仕訳問題デモ画面">
+          <div class="demo-topbar">
+            <div class="demo-title">
+              <b>商品売買の仕訳</b>
+              <span>本番形式に近い5行の解答欄</span>
+            </div>
+            <span class="sample-status">デモ</span>
+          </div>
+          <div class="demo-body">
+            <section class="mock-problem">
+              <p class="eyebrow">第1問 仕訳</p>
+              <h2>取引を読んで、借方・貸方・金額を入力</h2>
+              <p>商品を120,000円で売り上げ、代金は掛けとした。なお消費税は税抜方式で処理する。</p>
+            </section>
+            <div class="mock-answer">
+              <table class="journal-table" aria-label="仕訳入力例">
+                <thead>
+                  <tr>
+                    <th>借方科目</th>
+                    <th>借方金額</th>
+                    <th>貸方科目</th>
+                    <th>貸方金額</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><div class="input-like">売掛金</div></td>
+                    <td><div class="input-like">132,000</div></td>
+                    <td><div class="input-like">売上</div></td>
+                    <td><div class="input-like">120,000</div></td>
+                  </tr>
+                  <tr>
+                    <td><div class="input-like"></div></td>
+                    <td><div class="input-like"></div></td>
+                    <td><div class="input-like">仮受消費税</div></td>
+                    <td><div class="input-like">12,000</div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="mock-summary">
+              <div class="score-card">
+                <b>20点</b>
+                <span>配点</span>
+              </div>
+              <div class="score-card">
+                <b>20分</b>
+                <span>目安時間</span>
+              </div>
+              <div class="score-card">
+                <b>実戦</b>
+                <span>難易度</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="screens" class="section" aria-labelledby="screens-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="screens-title">デモで見られる内容</h2>
+            <p>実際の問題データとは異なるサンプル表示です。操作の流れと画面の雰囲気を確認できます。</p>
+          </div>
+        </div>
+
+        <div class="screen-grid">
+          <article class="screen-card">
+            <p class="eyebrow">仕訳</p>
+            <h3>5行の解答欄で仕訳を練習</h3>
+            <p class="mock-note">借方・貸方・金額をセットで確認し、本番に近い形で入力する練習ができます。</p>
+            <div class="bars" aria-hidden="true">
+              <div class="bar"><span style="width: 88%;"></span></div>
+              <div class="bar"><span style="width: 64%;"></span></div>
+            </div>
+          </article>
+
+          <article class="screen-card">
+            <p class="eyebrow">帳簿</p>
+            <h3>補助簿・元帳の流れを確認</h3>
+            <table class="mini-ledger" aria-label="帳簿デモ">
+              <tbody>
+                <tr><td>売掛金</td><td>132,000</td></tr>
+                <tr><td>売上</td><td>120,000</td></tr>
+                <tr><td>仮受消費税</td><td>12,000</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="screen-card">
+            <p class="eyebrow">決算・模擬試験</p>
+            <h3>大きな表をPCで仕上げる</h3>
+            <p class="mock-note">試算表、精算表、損益計算書、貸借対照表など、スマホでは見づらい問題の練習に向いています。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-label="注意事項">
+        <div class="notice">
+          このページは公開用の静的デモです。採点、保存、実問題への回答は行いません。実際のWeb実践練習はアプリ内の案内に従ってご利用ください。
+        </div>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <div>© Saburo KUBO</div>
+    </footer>
+  </body>
+</html>
