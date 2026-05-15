@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#f6f2ea">
+    <title>利用規約 | 簿記3Q</title>
+    <meta name="description" content="簿記3Qの利用規約です。アプリおよび関連Webサイトの利用条件を定めています。">
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f2ea;
+        --ink: #17202a;
+        --muted: #66707c;
+        --surface: #ffffff;
+        --line: rgba(23, 32, 42, 0.14);
+        --navy: #19324d;
+        --teal: #0d9488;
+        --amber: #f5b84b;
+        --shadow: 0 16px 48px rgba(25, 50, 77, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        background:
+          linear-gradient(120deg, rgba(13, 148, 136, 0.12), transparent 32%),
+          linear-gradient(240deg, rgba(245, 184, 75, 0.18), transparent 34%),
+          var(--bg);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+        line-height: 1.8;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .wrap {
+        width: min(920px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--navy);
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 13px;
+        background: linear-gradient(145deg, var(--navy), var(--teal));
+        color: #ffffff;
+        font-weight: 900;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .nav a,
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 38px;
+        padding: 7px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--navy);
+        font-size: 0.88rem;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .hero {
+        padding: 40px 0 18px;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--teal);
+        font-size: 0.82rem;
+        font-weight: 850;
+      }
+
+      h1,
+      h2,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 12px;
+        color: var(--navy);
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        line-height: 1.18;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 44rem;
+        color: var(--muted);
+      }
+
+      .terms-card {
+        margin: 20px 0 42px;
+        padding: 28px;
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: var(--shadow);
+      }
+
+      .terms-section {
+        padding: 22px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .terms-section:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .terms-section h2 {
+        margin-bottom: 8px;
+        color: var(--navy);
+        font-size: 1.18rem;
+        line-height: 1.35;
+      }
+
+      .terms-section p,
+      .terms-section li {
+        color: #3f4a56;
+      }
+
+      .terms-section p:last-child,
+      .terms-section ul:last-child {
+        margin-bottom: 0;
+      }
+
+      ul {
+        padding-left: 1.25rem;
+      }
+
+      .note {
+        margin-top: 18px;
+        padding: 14px 16px;
+        border: 1px solid rgba(245, 184, 75, 0.5);
+        border-radius: 18px;
+        background: rgba(255, 248, 225, 0.78);
+        color: #68470c;
+        font-size: 0.92rem;
+      }
+
+      .footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 24px 0 44px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      @media (max-width: 680px) {
+        .topbar {
+          align-items: flex-start;
+        }
+
+        .nav {
+          display: none;
+        }
+
+        .terms-card {
+          padding: 20px;
+          border-radius: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="wrap topbar">
+      <a class="brand" href="app.html" aria-label="簿記3Q アプリ紹介へ">
+        <span class="mark">3Q</span>
+        <span>簿記3Q</span>
+      </a>
+      <nav class="nav" aria-label="関連ページ">
+        <a href="app.html">アプリ紹介</a>
+        <a href="demo.html">Web実践練習デモ</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+      </nav>
+    </header>
+
+    <main class="wrap">
+      <section class="hero" aria-labelledby="terms-title">
+        <p class="eyebrow">Terms of Use</p>
+        <h1 id="terms-title">利用規約</h1>
+        <p class="lead">
+          この利用規約は、簿記3Qおよび関連Webサイトをご利用いただく際の条件を定めるものです。
+        </p>
+      </section>
+
+      <article class="terms-card">
+        <section class="terms-section">
+          <h2>第1条 適用</h2>
+          <p>
+            本規約は、Saburo KUBO（以下「運営者」といいます）が提供する学習アプリ「簿記3Q」および関連Webサイト（以下「本サービス」といいます）の利用に適用されます。
+            本サービスを利用した時点で、利用者は本規約に同意したものとみなします。
+          </p>
+        </section>
+
+        <section class="terms-section">
+          <h2>第2条 サービス内容</h2>
+          <p>
+            本サービスは、日商簿記3級の学習を支援するため、テキスト、確認問題、復習機能、ブックマーク機能、Web実践練習デモ等を提供します。
+            本サービスは学習支援を目的とするものであり、試験の合格、得点、学習成果を保証するものではありません。
+          </p>
+        </section>
+
+        <section class="terms-section">
+          <h2>第3条 利用環境</h2>
+          <p>
+            利用者は、本サービスを利用するために必要な端末、通信環境、Google Play等のアカウントを自己の責任と費用で準備するものとします。
+            通信料、端末設定、OSやブラウザの仕様により、本サービスの一部が利用できない場合があります。
+          </p>
+        </section>
+
+        <section class="terms-section">
+          <h2>第4条 有料機能および決済</h2>
+          <p>
+            本サービスには、無料で利用できる機能と、有料で利用できる機能があります。有料機能の購入、解約、返金等は、Google Playその他の配信プラットフォームが定める条件に従うものとします。
+          </p>
+        </section>
+
+        <section class="terms-section">
+          <h2>第5条 学習データ</h2>
+          <p>
+            進捗、ブックマーク、復習履歴等の学習データは、原則として利用者の端末内に保存されます。
+            端末の故障、アプリの削除、OSの初期化、機種変更等によりデータが失われる場合があります。
+          </p>
+        </section>
+
+        <section class="terms-section">
+          <h2>第6条 禁止事項</h2>
+          <p>利用者は、本サービスの利用にあたり、次の行為をしてはなりません。</p>
+          <ul>
+            <li>法令または公序良俗に反する行為</li>
+            <li>本サービスの内容、問題、文章、画像等を無断で複製、転載、配布、販売する行為</li>
+            <li>本サービスの運営を妨害する行為</li>
+            <li>不正アクセス、解析、改ざん、リバースエンジニアリング等を行う行為</li>
+            <li>第三者または運営者の権利、利益、信用を侵害する行為</li>
+            <li>その他、運営者が不適切と判断する行為</li>
+          </ul>
+        </section>
+
+        <section class="terms-section">
+          <h2>第7条 知的財産権</h2>
+          <p>
+            本サービスに含まれる文章、問題、解説、画像、デザイン、プログラムその他のコンテンツに関する知的財産権は、運営者または正当な権利者に帰属します。
+            利用者は、私的利用の範囲を超えてこれらを利用することはできません。
+          </p>
+        </section>
+
+        <section class="terms-section">
+          <h2>第8条 広告および外部サービス</h2>
+          <p>
+            本サービスでは、広告配信、アプリ配信、決済、解析等のために外部サービスを利用する場合があります。
+            外部サービスの利用条件、障害、仕様変更等について、運営者は責任を負いません。
+          </p>
+        </section>
+
+        <section class="terms-section">
+          <h2>第9条 サービスの変更・中断・終了</h2>
+          <p>
+            運営者は、必要に応じて、本サービスの内容を変更、中断、終了することがあります。
+            これにより利用者に損害が生じた場合でも、運営者に故意または重過失がある場合を除き、運営者は責任を負いません。
+          </p>
+        </section>
+
+        <section class="terms-section">
+          <h2>第10条 免責事項</h2>
+          <p>
+            運営者は、本サービスの正確性、完全性、有用性、特定目的への適合性について保証しません。
+            本サービスの利用により生じた損害について、運営者に故意または重過失がある場合を除き、運営者は責任を負いません。
+          </p>
+        </section>
+
+        <section class="terms-section">
+          <h2>第11条 規約の変更</h2>
+          <p>
+            運営者は、必要に応じて本規約を変更できるものとします。変更後の規約は、本ページに掲載した時点から効力を生じるものとします。
+          </p>
+        </section>
+
+        <section class="terms-section">
+          <h2>第12条 準拠法・管轄</h2>
+          <p>
+            本規約は日本法に準拠します。本サービスに関して紛争が生じた場合、運営者の所在地を管轄する日本の裁判所を第一審の専属的合意管轄裁判所とします。
+          </p>
+        </section>
+
+        <section class="terms-section">
+          <h2>第13条 お問い合わせ</h2>
+          <p>
+            本規約または本サービスに関するお問い合わせは、アプリストア掲載情報またはアプリ紹介ページのお問い合わせ欄からご連絡ください。
+          </p>
+          <p class="note">
+            本ページは一般的な利用条件を整理したものです。公開前に、必要に応じて専門家による確認をおすすめします。
+          </p>
+        </section>
+
+        <p>制定日: 2026年5月15日</p>
+      </article>
+    </main>
+
+    <footer class="wrap footer">
+      <div>© Saburo KUBO</div>
+      <div class="footer-links">
+        <a href="app.html">アプリ紹介</a>
+        <a href="demo.html">Web実践練習デモ</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+      </div>
+    </footer>
+  </body>
+</html>

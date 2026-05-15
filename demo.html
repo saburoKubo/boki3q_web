@@ -341,11 +341,21 @@
       }
 
       .footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 14px;
         margin-top: 26px;
         padding: 22px 0 42px;
         border-top: 1px solid var(--line);
         color: var(--muted);
         font-size: 0.88rem;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
       }
 
       @media (max-width: 680px) {
@@ -505,6 +515,10 @@
 
     <footer class="container footer">
       <div>© Saburo KUBO</div>
+      <div class="footer-links">
+        <a href="app.html">アプリ紹介</a>
+        <a href="terms.html">利用規約</a>
+      </div>
     </footer>
   </body>
 </html>
