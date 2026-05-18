@@ -33,26 +33,6 @@
       "totalScore": 20
     },
     {
-      "id": "journal_notes_electronic_001",
-      "category": "仕訳",
-      "chapterTitle": "手形・電子記録債権債務",
-      "title": "手形・電子記録債権債務 仕上げ問題",
-      "description": "約束手形、手形の裏書、電子記録債権・電子記録債務の発生と決済を仕訳します。",
-      "difficulty": "実戦",
-      "estimatedMinutes": 15,
-      "totalScore": 20
-    },
-    {
-      "id": "journal_fixed_assets_001",
-      "category": "仕訳",
-      "chapterTitle": "固定資産の仕訳",
-      "title": "固定資産の仕訳 仕上げ問題",
-      "description": "固定資産の取得、改良と修繕、減価償却、売却、除却を仕訳します。売却時の減価償却費も計算します。",
-      "difficulty": "実戦",
-      "estimatedMinutes": 20,
-      "totalScore": 20
-    },
-    {
       "id": "journal_expenses_revenues_001",
       "category": "仕訳",
       "chapterTitle": "費用・収益の仕訳",
@@ -63,23 +43,13 @@
       "totalScore": 20
     },
     {
-      "id": "journal_taxes_equity_001",
+      "id": "journal_notes_electronic_001",
       "category": "仕訳",
-      "chapterTitle": "税金・純資産の仕訳",
-      "title": "税金・純資産の仕訳 仕上げ問題",
-      "description": "租税公課、消費税、法人税等、資本金、配当と利益準備金を仕訳します。",
+      "chapterTitle": "手形・電子記録債権債務",
+      "title": "手形・電子記録債権債務 仕上げ問題",
+      "description": "約束手形、手形の裏書、電子記録債権・電子記録債務の発生と決済を仕訳します。",
       "difficulty": "実戦",
-      "estimatedMinutes": 18,
-      "totalScore": 20
-    },
-    {
-      "id": "journal_adjustments_001",
-      "category": "仕訳",
-      "chapterTitle": "決算整理仕訳",
-      "title": "決算整理仕訳 仕上げ問題",
-      "description": "期末商品、貸倒引当金、減価償却、経過勘定、貯蔵品を決算整理仕訳で確認します。",
-      "difficulty": "実戦",
-      "estimatedMinutes": 18,
+      "estimatedMinutes": 15,
       "totalScore": 20
     },
     {
@@ -93,6 +63,16 @@
       "totalScore": 20
     },
     {
+      "id": "journal_fixed_assets_001",
+      "category": "仕訳",
+      "chapterTitle": "固定資産の仕訳",
+      "title": "固定資産の仕訳 仕上げ問題",
+      "description": "固定資産の取得、改良と修繕、減価償却、売却、除却を仕訳します。売却時の減価償却費も計算します。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 20,
+      "totalScore": 20
+    },
+    {
       "id": "journal_source_documents_001",
       "category": "仕訳",
       "chapterTitle": "証ひょう・資料読み取り仕訳",
@@ -103,11 +83,11 @@
       "totalScore": 20
     },
     {
-      "id": "journal_closing_entries_001",
+      "id": "journal_taxes_equity_001",
       "category": "仕訳",
-      "chapterTitle": "決算振替仕訳",
-      "title": "決算振替仕訳 仕上げ問題",
-      "description": "収益・費用を損益へ振り替え、当期純利益または当期純損失を繰越利益剰余金へ振り替えます。",
+      "chapterTitle": "税金・純資産の仕訳",
+      "title": "税金・純資産の仕訳 仕上げ問題",
+      "description": "租税公課、消費税、法人税等、資本金、配当と利益準備金を仕訳します。",
       "difficulty": "実戦",
       "estimatedMinutes": 18,
       "totalScore": 20
@@ -120,6 +100,26 @@
       "description": "前払・未払・前受・未収の決算整理後、翌期首に行う再振替仕訳を確認します。",
       "difficulty": "実戦",
       "estimatedMinutes": 15,
+      "totalScore": 20
+    },
+    {
+      "id": "journal_adjustments_001",
+      "category": "仕訳",
+      "chapterTitle": "決算整理仕訳",
+      "title": "決算整理仕訳 仕上げ問題",
+      "description": "期末商品、貸倒引当金、減価償却、経過勘定、貯蔵品を決算整理仕訳で確認します。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 18,
+      "totalScore": 20
+    },
+    {
+      "id": "journal_closing_entries_001",
+      "category": "仕訳",
+      "chapterTitle": "決算振替仕訳",
+      "title": "決算振替仕訳 仕上げ問題",
+      "description": "収益・費用を損益へ振り替え、当期純利益または当期純損失を繰越利益剰余金へ振り替えます。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 18,
       "totalScore": 20
     },
     {
@@ -163,6 +163,26 @@
       "totalScore": 20
     },
     {
+      "id": "accounts_receivable_ledger_001",
+      "category": "帳簿",
+      "chapterTitle": "売掛金元帳",
+      "title": "売掛金元帳 完成問題",
+      "description": "得意先別に売掛金の増減を記録し、月末残高を求めます。",
+      "difficulty": "標準",
+      "estimatedMinutes": 10,
+      "totalScore": 15
+    },
+    {
+      "id": "accounts_payable_ledger_001",
+      "category": "帳簿",
+      "chapterTitle": "買掛金元帳",
+      "title": "買掛金元帳 完成問題",
+      "description": "仕入先別に買掛金の増減を記録し、月末残高を求めます。",
+      "difficulty": "標準",
+      "estimatedMinutes": 10,
+      "totalScore": 15
+    },
+    {
       "id": "sales_purchase_books_001",
       "category": "帳簿",
       "chapterTitle": "売上帳・仕入帳",
@@ -191,26 +211,6 @@
       "difficulty": "標準",
       "estimatedMinutes": 15,
       "totalScore": 25
-    },
-    {
-      "id": "accounts_receivable_ledger_001",
-      "category": "帳簿",
-      "chapterTitle": "売掛金元帳",
-      "title": "売掛金元帳 完成問題",
-      "description": "得意先別に売掛金の増減を記録し、月末残高を求めます。",
-      "difficulty": "標準",
-      "estimatedMinutes": 10,
-      "totalScore": 15
-    },
-    {
-      "id": "accounts_payable_ledger_001",
-      "category": "帳簿",
-      "chapterTitle": "買掛金元帳",
-      "title": "買掛金元帳 完成問題",
-      "description": "仕入先別に買掛金の増減を記録し、月末残高を求めます。",
-      "difficulty": "標準",
-      "estimatedMinutes": 10,
-      "totalScore": 15
     },
     {
       "id": "merchandise_inventory_ledger_001",
