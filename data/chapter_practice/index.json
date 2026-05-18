@@ -153,6 +153,16 @@
       "totalScore": 20
     },
     {
+      "id": "bank_reconciliation_001",
+      "category": "帳簿",
+      "chapterTitle": "銀行勘定調整表",
+      "title": "銀行勘定調整表 完成問題",
+      "description": "当社の普通預金勘定残高と銀行残高証明書残高を調整し、正しい残高を求めます。",
+      "difficulty": "標準",
+      "estimatedMinutes": 15,
+      "totalScore": 20
+    },
+    {
       "id": "sales_purchase_books_001",
       "category": "帳簿",
       "chapterTitle": "売上帳・仕入帳",

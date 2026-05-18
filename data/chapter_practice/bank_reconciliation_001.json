@@ -1,0 +1,81 @@
+{
+  "id": "bank_reconciliation_001",
+  "mode": "chapterPractice",
+  "category": "帳簿",
+  "chapterTitle": "銀行勘定調整表",
+  "title": "銀行勘定調整表 完成問題",
+  "description": "当社の普通預金勘定残高と銀行残高証明書残高を調整し、正しい残高を求めます。",
+  "estimatedMinutes": 15,
+  "totalScore": 20,
+  "intro": "次の資料にもとづいて、銀行勘定調整表を完成させなさい。加算・減算がない欄は空欄のままでかまいません。",
+  "materials": [
+    "6月30日現在、当社の普通預金勘定残高は1,250,000円である。",
+    "6月30日現在、銀行残高証明書の残高は1,560,000円である。",
+    "6月30日の営業時間終了後に現金120,000円を預け入れたが、銀行側では翌営業日の入金として処理されている。",
+    "仕入先へ振り出した小切手240,000円が、6月30日現在まだ銀行で支払われていない。",
+    "銀行からの通知により、受取手形180,000円が取り立てられ、普通預金に入金されていることが判明した。当社ではまだ記帳していない。",
+    "振込手数料10,000円が普通預金から引き落とされていたが、当社ではまだ記帳していない。",
+    "買掛金支払いのために振り出した小切手100,000円を、当社では誤って120,000円として記帳していた。"
+  ],
+  "tables": [
+    {
+      "id": "bank_reconciliation",
+      "title": "銀行勘定調整表",
+      "hideZeroCells": true,
+      "answerKeys": ["add", "subtract", "balance"],
+      "columns": [
+        { "key": "side", "label": "区分", "type": "static" },
+        { "key": "item", "label": "調整項目", "type": "static" },
+        { "key": "add", "label": "加算", "type": "answer" },
+        { "key": "subtract", "label": "減算", "type": "answer" },
+        { "key": "balance", "label": "調整後残高", "type": "answer" }
+      ],
+      "rows": [
+        {
+          "description": "当社帳簿残高",
+          "values": { "side": "会社側", "item": "当社帳簿残高" },
+          "cells": { "add": 0, "subtract": 0, "balance": 1250000 }
+        },
+        {
+          "description": "受取手形取立の未記帳",
+          "values": { "side": "会社側", "item": "受取手形取立の未記帳" },
+          "cells": { "add": 180000, "subtract": 0, "balance": 1430000 }
+        },
+        {
+          "description": "振込手数料の未記帳",
+          "values": { "side": "会社側", "item": "振込手数料の未記帳" },
+          "cells": { "add": 0, "subtract": 10000, "balance": 1420000 }
+        },
+        {
+          "description": "小切手金額の記帳誤り",
+          "values": { "side": "会社側", "item": "小切手金額の記帳誤り" },
+          "cells": { "add": 20000, "subtract": 0, "balance": 1440000 }
+        },
+        {
+          "description": "銀行残高証明書残高",
+          "values": { "side": "銀行側", "item": "銀行残高証明書残高" },
+          "cells": { "add": 0, "subtract": 0, "balance": 1560000 }
+        },
+        {
+          "description": "時間外預入",
+          "values": { "side": "銀行側", "item": "時間外預入" },
+          "cells": { "add": 120000, "subtract": 0, "balance": 1680000 }
+        },
+        {
+          "description": "未取付小切手",
+          "values": { "side": "銀行側", "item": "未取付小切手" },
+          "cells": { "add": 0, "subtract": 240000, "balance": 1440000 }
+        }
+      ]
+    }
+  ],
+  "summary": [
+    { "id": "adjusted_balance", "label": "調整後の正しい普通預金残高", "correctAnswer": 1440000 }
+  ],
+  "explanation": [
+    "当社側では、銀行が処理済みで当社が未記帳の項目や、当社の記帳誤りを修正します。受取手形の取立180,000円を加算し、振込手数料10,000円を減算します。",
+    "小切手100,000円を120,000円として記帳していたため、普通預金を20,000円減らしすぎています。したがって会社側に20,000円を加算します。",
+    "銀行側では、銀行がまだ処理していない時間外預入120,000円を加算し、未取付小切手240,000円を減算します。",
+    "会社側・銀行側のどちらから調整しても、正しい普通預金残高は1,440,000円になります。"
+  ]
+}
