@@ -629,8 +629,8 @@
         const reviewBody = item.querySelector(".review-body");
         if (question.type === "journal_dropdown" || question.type === "journal_dropdown_multi") {
           reviewBody.prepend(
-            renderJournalAnswerTable(question.correctAnswer, "正答"),
-            renderJournalAnswerTable(question.userAnswer, "ユーザーの解答")
+            renderJournalAnswerTable(question.userAnswer, "あなたの解答"),
+            renderJournalAnswerTable(question.correctAnswer, "正答答案")
           );
         } else {
           const correct = document.createElement("p");

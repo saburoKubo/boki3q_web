@@ -1586,6 +1586,27 @@ input[inputmode="numeric"] {
   text-align: left;
 }
 
+.journal-answer-pair {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.journal-answer-pair p {
+  margin: 0 0 6px;
+}
+
+.result-explanation {
+  margin: 12px 0 0;
+}
+
+@media (min-width: 760px) {
+  .journal-answer-pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
 
 .amount-keypad {
   position: fixed;

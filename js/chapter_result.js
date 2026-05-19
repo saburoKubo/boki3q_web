@@ -254,7 +254,7 @@
     elements.details.innerHTML = `
       <article class="result-section">
         <div class="result-section-head">
-          <h2>あなたの答案</h2>
+          <h2>仕訳答案</h2>
           <strong>${misses.length}件</strong>
         </div>
         <div class="review-body">
@@ -262,40 +262,25 @@
           ${practice.questions.map((question, index) => {
             const correct = isJournalQuestionCorrect(question, result.answers || {});
             const lines = journalAnswerLines(question, result.answers || {});
+            const correctLines = normalizeJournalLines(question.correctAnswer?.lines || []);
             return `
               <section class="answer-sheet result-answer-sheet">
                 <h4>第${index + 1}問</h4>
                 <p class="question-text">${escapeHtml(question.text)}</p>
-                ${renderJournalLineTable(lines, correct ? "result-ok-row" : "result-ng-cell")}
+                <div class="journal-answer-pair">
+                  <div>
+                    <p><strong>あなたの解答</strong></p>
+                    ${renderJournalLineTable(lines, correct ? "result-ok-row" : "result-ng-cell")}
+                  </div>
+                  <div>
+                    <p><strong>正答答案</strong></p>
+                    ${renderJournalLineTable(correctLines)}
+                  </div>
+                </div>
+                <p class="result-explanation"><strong>解説:</strong> ${escapeHtml(question.explanation || "")}</p>
               </section>
             `;
           }).join("")}
-        </div>
-      </article>
-
-      <article class="result-section">
-        <div class="result-section-head">
-          <h2>正答答案</h2>
-        </div>
-        <div class="review-body">
-          ${practice.questions.map((question, index) => `
-            <section class="answer-sheet result-answer-sheet">
-              <h4>第${index + 1}問</h4>
-              <p class="question-text">${escapeHtml(question.text)}</p>
-              ${renderJournalLineTable(normalizeJournalLines(question.correctAnswer?.lines || []))}
-            </section>
-          `).join("")}
-        </div>
-      </article>
-
-      <article class="result-section">
-        <div class="result-section-head">
-          <h2>解説</h2>
-        </div>
-        <div class="review-body">
-          ${practice.questions.map((question, index) => `
-            <p><strong>第${index + 1}問:</strong> ${escapeHtml(question.explanation || "")}</p>
-          `).join("")}
           ${(practice.explanation || []).map((line) => `<p>${escapeHtml(line)}</p>`).join("")}
         </div>
       </article>
