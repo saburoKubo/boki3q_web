@@ -183,7 +183,7 @@
       <div class="amount-keypad__panel" role="dialog" aria-label="金額入力">
         <div class="amount-keypad__display" aria-live="polite">0</div>
         <div class="amount-keypad__keys">
-          ${["7", "8", "9", "4", "5", "6", "1", "2", "3", "00", "0"].map((key) => `<button type="button" data-amount-key="${key}">${key}</button>`).join("")}
+          ${["7", "8", "9", "4", "5", "6", "1", "2", "3", "0", "00"].map((key) => `<button type="button" data-amount-key="${key}">${key}</button>`).join("")}
           <button type="button" data-amount-action="backspace" aria-label="1文字削除">⌫</button>
           <button type="button" data-amount-action="clear">C</button>
           <button type="button" data-amount-action="done" class="amount-keypad__done">完了</button>
