@@ -285,8 +285,8 @@
     {
       "id": "total_trial_balance_001",
       "category": "帳簿",
-      "chapterTitle": "合計残高試算表",
-      "title": "合計残高試算表 完成問題",
+      "chapterTitle": "合計試算表",
+      "title": "合計試算表 完成問題",
       "description": "月初残高と月中取引から、借方・貸方の合計欄と残高欄を完成させます。",
       "difficulty": "実戦",
       "estimatedMinutes": 20,
