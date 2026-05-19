@@ -147,9 +147,11 @@
 
 
   const AMOUNT_KEYPAD_QUERY = "(max-width: 760px), (pointer: coarse)";
+  const AMOUNT_EXPR_MAX_LEN = 48;
   let activeAmountInput = null;
   let amountKeypad = null;
   let amountKeypadDisplay = null;
+  let amountKeypadExpression = "";
 
   function formatAmountText(value) {
     const normalized = String(value || "").replace(/[^0-9]/g, "");
@@ -161,17 +163,129 @@
     return String(value || "").replace(/[^0-9]/g, "");
   }
 
+  function normalizeAmountExpression(expr) {
+    return String(expr || "")
+      .replace(/[,\s]/g, "")
+      .replace(/×/g, "*")
+      .replace(/÷/g, "/")
+      .replace(/−/g, "-");
+  }
+
+  function formatAmountExpressionDisplay(expr) {
+    const normalized = normalizeAmountExpression(expr);
+    if (normalized === "") return "0";
+    return normalized
+      .replace(/\//g, "÷")
+      .replace(/\*/g, "×")
+      .replace(/-/g, "−");
+  }
+
+  function evaluateAmountExpression(expr) {
+    const normalized = normalizeAmountExpression(expr);
+    if (normalized === "") return null;
+    if (!/^[\d+\-*/().]+$/.test(normalized)) return null;
+    if (/[+\-*/.]{2,}/.test(normalized)) return null;
+    try {
+      const value = Function(`"use strict"; return (${normalized})`)();
+      if (typeof value !== "number" || !Number.isFinite(value)) return null;
+      return Math.round(value);
+    } catch {
+      return null;
+    }
+  }
+
+  function updateAmountKeypadDisplay() {
+    if (!amountKeypadDisplay) return;
+    amountKeypadDisplay.textContent = formatAmountExpressionDisplay(amountKeypadExpression);
+  }
+
+  function setAmountKeypadExpression(expr) {
+    amountKeypadExpression = String(expr || "").slice(0, AMOUNT_EXPR_MAX_LEN);
+    updateAmountKeypadDisplay();
+  }
+
+  function splitAmountExpressionTail(expr) {
+    let lastOpAt = -1;
+    for (const op of ["+", "-", "*", "/"]) {
+      const index = expr.lastIndexOf(op);
+      if (index > lastOpAt) lastOpAt = index;
+    }
+    if (lastOpAt < 0) {
+      return { prefix: "", tail: expr };
+    }
+    return {
+      prefix: expr.slice(0, lastOpAt + 1),
+      tail: expr.slice(lastOpAt + 1),
+    };
+  }
+
+  function appendAmountKeypadDigit(key) {
+    const expr = normalizeAmountExpression(amountKeypadExpression);
+    const { prefix, tail: currentTail } = splitAmountExpressionTail(expr);
+    let tail = currentTail;
+
+    if (key === "00") {
+      tail = tail === "" || tail === "0" ? "0" : tail + "00";
+    } else if (tail === "" || tail === "0") {
+      tail = key;
+    } else {
+      tail += key;
+    }
+
+    if (tail.length > 1 && tail.startsWith("0")) {
+      tail = String(Number(tail));
+    }
+
+    setAmountKeypadExpression(prefix + tail);
+  }
+
+  function appendAmountKeypadOperator(op) {
+    let expr = normalizeAmountExpression(amountKeypadExpression);
+    if (expr === "") return;
+    if (/[+\-*/]$/.test(expr)) {
+      expr = expr.slice(0, -1) + op;
+    } else {
+      expr += op;
+    }
+    setAmountKeypadExpression(expr);
+  }
+
+  function commitAmountKeypadExpression(input, notify = true) {
+    const evaluated = evaluateAmountExpression(amountKeypadExpression);
+    const rawDigits =
+      evaluated === null
+        ? rawAmountDigits(amountKeypadExpression)
+        : String(Math.max(0, evaluated));
+    const formatted = formatAmountText(rawDigits);
+    input.value = formatted;
+    setAmountKeypadExpression(rawDigits || "");
+    if (notify) input.dispatchEvent(new Event("input", { bubbles: true }));
+    return formatted;
+  }
+
   function setAmountInputValue(input, rawDigits, notify = true) {
     const formatted = formatAmountText(rawDigits);
     input.value = formatted;
     if (amountKeypadDisplay && activeAmountInput === input) {
-      amountKeypadDisplay.textContent = formatted || "0";
+      setAmountKeypadExpression(rawDigits || "");
     }
     if (notify) input.dispatchEvent(new Event("input", { bubbles: true }));
   }
 
+  function syncAmountInputMode(input) {
+    input.inputMode = isMobileAmountInputMode() ? "none" : "numeric";
+  }
+
   function isMobileAmountInputMode() {
     return window.matchMedia(AMOUNT_KEYPAD_QUERY).matches;
+  }
+
+  function amountDigitButton(key) {
+    return `<button type="button" data-amount-key="${key}">${key}</button>`;
+  }
+
+  function amountOperatorButton(op, label) {
+    return `<button type="button" data-amount-op="${op}" aria-label="${label}">${label}</button>`;
   }
 
   function ensureAmountKeypad() {
@@ -180,41 +294,66 @@
     amountKeypad.className = "amount-keypad";
     amountKeypad.hidden = true;
     amountKeypad.innerHTML = `
-      <div class="amount-keypad__panel" role="dialog" aria-label="金額入力">
+      <div class="amount-keypad__panel" role="dialog" aria-label="金額入力（電卓）">
         <div class="amount-keypad__display" aria-live="polite">0</div>
-        <div class="amount-keypad__keys">
-          ${["7", "8", "9", "4", "5", "6", "1", "2", "3", "0", "00"].map((key) => `<button type="button" data-amount-key="${key}">${key}</button>`).join("")}
+        <div class="amount-keypad__keys amount-keypad__keys--calc">
+          ${["7", "8", "9"].map(amountDigitButton).join("")}
+          ${amountOperatorButton("/", "÷")}
+          ${["4", "5", "6"].map(amountDigitButton).join("")}
+          ${amountOperatorButton("*", "×")}
+          ${["1", "2", "3"].map(amountDigitButton).join("")}
+          ${amountOperatorButton("-", "−")}
+          ${amountDigitButton("0")}
+          ${amountDigitButton("00")}
           <button type="button" data-amount-action="backspace" aria-label="1文字削除">⌫</button>
+          ${amountOperatorButton("+", "+")}
+          <button type="button" data-amount-action="equals" aria-label="計算">=</button>
           <button type="button" data-amount-action="clear">C</button>
           <button type="button" data-amount-action="done" class="amount-keypad__done">完了</button>
         </div>
       </div>
     `;
+
     amountKeypadDisplay = amountKeypad.querySelector(".amount-keypad__display");
     amountKeypad.addEventListener("pointerdown", (event) => event.preventDefault());
     amountKeypad.addEventListener("click", (event) => {
       const button = event.target.closest("button");
       if (!button || !activeAmountInput) return;
       const key = button.dataset.amountKey;
+      const op = button.dataset.amountOp;
       const action = button.dataset.amountAction;
-      let digits = rawAmountDigits(activeAmountInput.value);
+
       if (key) {
-        digits = (digits + key).replace(/^0+(?=\d)/, "");
-        setAmountInputValue(activeAmountInput, digits);
+        appendAmountKeypadDigit(key);
+        activeAmountInput.focus({ preventScroll: true });
+        return;
+      }
+      if (op) {
+        appendAmountKeypadOperator(op);
         activeAmountInput.focus({ preventScroll: true });
         return;
       }
       if (action === "backspace") {
-        setAmountInputValue(activeAmountInput, digits.slice(0, -1));
+        const expr = normalizeAmountExpression(amountKeypadExpression);
+        setAmountKeypadExpression(expr.slice(0, -1));
         activeAmountInput.focus({ preventScroll: true });
         return;
       }
       if (action === "clear") {
-        setAmountInputValue(activeAmountInput, "");
+        setAmountKeypadExpression("");
+        activeAmountInput.focus({ preventScroll: true });
+        return;
+      }
+      if (action === "equals") {
+        const evaluated = evaluateAmountExpression(amountKeypadExpression);
+        if (evaluated !== null) {
+          setAmountKeypadExpression(String(Math.max(0, evaluated)));
+        }
         activeAmountInput.focus({ preventScroll: true });
         return;
       }
       if (action === "done") {
+        commitAmountKeypadExpression(activeAmountInput);
         hideAmountKeypad();
       }
     });
@@ -226,7 +365,7 @@
     activeAmountInput = input;
     const keypad = ensureAmountKeypad();
     document.body.classList.add("amount-keypad-open");
-    amountKeypadDisplay.textContent = input.value || "0";
+    setAmountKeypadExpression(rawAmountDigits(input.value) || "");
     keypad.hidden = false;
   }
 
@@ -235,43 +374,64 @@
     amountKeypad.hidden = true;
     document.body.classList.remove("amount-keypad-open");
     activeAmountInput = null;
+    amountKeypadExpression = "";
   }
 
   function bindAmountInput(input, onValue) {
     input.classList.add("amount-input");
-    input.inputMode = "numeric";
     input.autocomplete = "off";
+    syncAmountInputMode(input);
     input.value = formatAmountText(input.value);
 
     input.addEventListener("focus", () => {
       const mobileMode = isMobileAmountInputMode();
+      syncAmountInputMode(input);
       input.readOnly = mobileMode;
-      setAmountInputValue(input, input.value, false);
-      if (mobileMode) showAmountKeypad(input);
+      if (mobileMode) {
+        showAmountKeypad(input);
+      } else {
+        setAmountInputValue(input, input.value, false);
+      }
     });
     input.addEventListener("input", () => {
+      if (isMobileAmountInputMode()) return;
       setAmountInputValue(input, input.value, false);
       onValue?.(input.value);
     });
     input.addEventListener("keydown", (event) => {
-      if (isMobileAmountInputMode() && event.key.length === 1 && /\d/.test(event.key)) {
+      if (!isMobileAmountInputMode()) return;
+      if (event.key.length === 1 && /[\d+\-*/.=]/.test(event.key)) {
         event.preventDefault();
-        const digits = rawAmountDigits(input.value) + event.key;
-        setAmountInputValue(input, digits);
+        if (/\d/.test(event.key)) {
+          appendAmountKeypadDigit(event.key);
+        } else if (event.key === "=" || event.key === "Enter") {
+          const evaluated = evaluateAmountExpression(amountKeypadExpression);
+          if (evaluated !== null) {
+            setAmountKeypadExpression(String(Math.max(0, evaluated)));
+          }
+        } else if ("+-*/".includes(event.key)) {
+          appendAmountKeypadOperator(event.key);
+        }
         return;
       }
       if (event.key === "Enter") {
         event.preventDefault();
-        setAmountInputValue(input, input.value);
+        commitAmountKeypadExpression(input);
         hideAmountKeypad();
       }
     });
     input.addEventListener("blur", () => {
-      setAmountInputValue(input, input.value);
+      if (isMobileAmountInputMode() && activeAmountInput === input && amountKeypadExpression) {
+        commitAmountKeypadExpression(input, false);
+      } else {
+        setAmountInputValue(input, input.value, false);
+      }
       input.readOnly = false;
+      syncAmountInputMode(input);
       setTimeout(() => {
         if (!amountKeypad?.contains(document.activeElement)) hideAmountKeypad();
       }, 0);
+      onValue?.(input.value);
     });
   }
 

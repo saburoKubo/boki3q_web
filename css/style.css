@@ -1622,6 +1622,10 @@ input[inputmode="numeric"] {
   gap: 8px;
 }
 
+.amount-keypad__keys--calc {
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .amount-keypad__keys button {
   min-height: 48px;
   border: 1px solid var(--line-strong);
@@ -1631,14 +1635,29 @@ input[inputmode="numeric"] {
   font-weight: 800;
 }
 
+.amount-keypad__keys--calc [data-amount-op],
+.amount-keypad__keys--calc [data-amount-action="backspace"],
+.amount-keypad__keys--calc [data-amount-action="clear"],
+.amount-keypad__keys--calc [data-amount-action="equals"] {
+  background: var(--surface-2);
+}
+
+.amount-keypad__keys--calc [data-amount-action="equals"] {
+  font-size: 1.28rem;
+}
+
 .amount-keypad__done {
   grid-column: span 2;
   background: var(--accent) !important;
   color: #ffffff !important;
 }
 
+.amount-keypad__keys--calc .amount-keypad__done {
+  grid-column: span 2;
+}
+
 .amount-keypad-open {
-  padding-bottom: 250px;
+  padding-bottom: 320px;
 }
 
 @media (max-width: 760px), (pointer: coarse) {
