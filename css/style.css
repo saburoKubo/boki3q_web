@@ -1585,3 +1585,64 @@ input[inputmode="numeric"] {
 .result-answer-sheet .t-account-table td:nth-child(3) {
   text-align: left;
 }
+
+
+.amount-keypad {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 80;
+  display: none;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.96);
+  border-top: 1px solid var(--line-strong);
+  box-shadow: 0 -12px 28px rgba(43, 33, 25, 0.16);
+}
+
+.amount-keypad__panel {
+  width: min(480px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 8px;
+}
+
+.amount-keypad__display {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 1.35rem;
+  font-weight: 800;
+  text-align: right;
+}
+
+.amount-keypad__keys {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.amount-keypad__keys button {
+  min-height: 48px;
+  border: 1px solid var(--line-strong);
+  background: #ffffff;
+  color: var(--text);
+  font-size: 1.12rem;
+  font-weight: 800;
+}
+
+.amount-keypad__done {
+  grid-column: span 2;
+  background: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+.amount-keypad-open {
+  padding-bottom: 250px;
+}
+
+@media (max-width: 760px), (pointer: coarse) {
+  .amount-keypad:not([hidden]) {
+    display: block;
+  }
+}

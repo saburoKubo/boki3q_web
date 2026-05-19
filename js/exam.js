@@ -7,7 +7,9 @@
     getSession,
     gradeExam,
     saveResult,
-    clearSession
+    clearSession,
+    formatAmountText,
+    bindAmountInput
   } = window.BokiMock;
 
   const state = {
@@ -57,30 +59,14 @@
   }
 
   function formatNumericText(value) {
-    const normalized = String(value || "").replace(/[,\s￥¥]/g, "");
-    if (normalized === "") return "";
-    const number = Number(normalized);
-    return Number.isFinite(number) ? number.toLocaleString("ja-JP") : value;
+    return formatAmountText(value);
   }
 
-  function commitFormattedNumber(input, onFormat) {
-    const formatted = formatNumericText(input.value);
-    input.classList.add("amount-input");
-    input.style.textAlign = "right";
-    if (formatted === input.value) return;
-    input.value = formatted;
-    onFormat(formatted);
-    saveProgress();
-  }
-
-  function formatOnCommit(input, onFormat) {
-    input.classList.add("amount-input");
-    input.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter") return;
-      event.preventDefault();
-      commitFormattedNumber(input, onFormat);
+  function bindFormattedAmountInput(input, onValue) {
+    bindAmountInput(input, (value) => {
+      onValue(value);
+      saveProgress();
     });
-    input.addEventListener("blur", () => commitFormattedNumber(input, onFormat));
   }
 
   function initEmptyAnswer(question) {
@@ -223,8 +209,7 @@
 
     debitSelect.addEventListener("change", () => updateAnswer(question.id, "debitAccount", debitSelect.value));
     creditSelect.addEventListener("change", () => updateAnswer(question.id, "creditAccount", creditSelect.value));
-    amountInput.addEventListener("input", () => updateAnswer(question.id, "amount", amountInput.value));
-    formatOnCommit(amountInput, (value) => updateAnswer(question.id, "amount", value));
+    bindFormattedAmountInput(amountInput, (value) => updateAnswer(question.id, "amount", value));
 
     article.appendChild(form);
     return article;
@@ -321,11 +306,9 @@
       creditAmount.setAttribute("aria-label", "貸方金額");
 
       debitSelect.addEventListener("change", () => updateJournalLine(question.id, index, "debitAccount", debitSelect.value));
-      debitAmount.addEventListener("input", () => updateJournalLine(question.id, index, "debitAmount", debitAmount.value));
+      bindFormattedAmountInput(debitAmount, (value) => updateJournalLine(question.id, index, "debitAmount", value));
       creditSelect.addEventListener("change", () => updateJournalLine(question.id, index, "creditAccount", creditSelect.value));
-      creditAmount.addEventListener("input", () => updateJournalLine(question.id, index, "creditAmount", creditAmount.value));
-      formatOnCommit(debitAmount, (value) => updateJournalLine(question.id, index, "debitAmount", value));
-      formatOnCommit(creditAmount, (value) => updateJournalLine(question.id, index, "creditAmount", value));
+      bindFormattedAmountInput(creditAmount, (value) => updateJournalLine(question.id, index, "creditAmount", value));
 
       [debitSelect, debitAmount, creditSelect, creditAmount].forEach((control) => {
         const cell = document.createElement("td");
@@ -398,7 +381,7 @@
     });
 
     if (field.inputType !== "select") {
-      formatOnCommit(input, (value) => {
+      bindFormattedAmountInput(input, (value) => {
         state.answers[question.id][field.id] = value;
       });
     }

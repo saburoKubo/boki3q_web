@@ -144,6 +144,138 @@
     return Number.isFinite(number) ? number : null;
   }
 
+
+
+  const AMOUNT_KEYPAD_QUERY = "(max-width: 760px), (pointer: coarse)";
+  let activeAmountInput = null;
+  let amountKeypad = null;
+  let amountKeypadDisplay = null;
+
+  function formatAmountText(value) {
+    const normalized = String(value || "").replace(/[^0-9]/g, "");
+    if (normalized === "") return "";
+    return Number(normalized).toLocaleString("ja-JP");
+  }
+
+  function rawAmountDigits(value) {
+    return String(value || "").replace(/[^0-9]/g, "");
+  }
+
+  function setAmountInputValue(input, rawDigits, notify = true) {
+    const formatted = formatAmountText(rawDigits);
+    input.value = formatted;
+    if (amountKeypadDisplay && activeAmountInput === input) {
+      amountKeypadDisplay.textContent = formatted || "0";
+    }
+    if (notify) input.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
+  function isMobileAmountInputMode() {
+    return window.matchMedia(AMOUNT_KEYPAD_QUERY).matches;
+  }
+
+  function ensureAmountKeypad() {
+    if (amountKeypad) return amountKeypad;
+    amountKeypad = document.createElement("div");
+    amountKeypad.className = "amount-keypad";
+    amountKeypad.hidden = true;
+    amountKeypad.innerHTML = `
+      <div class="amount-keypad__panel" role="dialog" aria-label="金額入力">
+        <div class="amount-keypad__display" aria-live="polite">0</div>
+        <div class="amount-keypad__keys">
+          ${["7", "8", "9", "4", "5", "6", "1", "2", "3", "00", "0"].map((key) => `<button type="button" data-amount-key="${key}">${key}</button>`).join("")}
+          <button type="button" data-amount-action="backspace" aria-label="1文字削除">⌫</button>
+          <button type="button" data-amount-action="clear">C</button>
+          <button type="button" data-amount-action="done" class="amount-keypad__done">完了</button>
+        </div>
+      </div>
+    `;
+    amountKeypadDisplay = amountKeypad.querySelector(".amount-keypad__display");
+    amountKeypad.addEventListener("pointerdown", (event) => event.preventDefault());
+    amountKeypad.addEventListener("click", (event) => {
+      const button = event.target.closest("button");
+      if (!button || !activeAmountInput) return;
+      const key = button.dataset.amountKey;
+      const action = button.dataset.amountAction;
+      let digits = rawAmountDigits(activeAmountInput.value);
+      if (key) {
+        digits = (digits + key).replace(/^0+(?=\d)/, "");
+        setAmountInputValue(activeAmountInput, digits);
+        activeAmountInput.focus({ preventScroll: true });
+        return;
+      }
+      if (action === "backspace") {
+        setAmountInputValue(activeAmountInput, digits.slice(0, -1));
+        activeAmountInput.focus({ preventScroll: true });
+        return;
+      }
+      if (action === "clear") {
+        setAmountInputValue(activeAmountInput, "");
+        activeAmountInput.focus({ preventScroll: true });
+        return;
+      }
+      if (action === "done") {
+        hideAmountKeypad();
+      }
+    });
+    document.body.appendChild(amountKeypad);
+    return amountKeypad;
+  }
+
+  function showAmountKeypad(input) {
+    activeAmountInput = input;
+    const keypad = ensureAmountKeypad();
+    document.body.classList.add("amount-keypad-open");
+    amountKeypadDisplay.textContent = input.value || "0";
+    keypad.hidden = false;
+  }
+
+  function hideAmountKeypad() {
+    if (!amountKeypad) return;
+    amountKeypad.hidden = true;
+    document.body.classList.remove("amount-keypad-open");
+    activeAmountInput = null;
+  }
+
+  function bindAmountInput(input, onValue) {
+    input.classList.add("amount-input");
+    input.inputMode = "numeric";
+    input.autocomplete = "off";
+    input.value = formatAmountText(input.value);
+
+    input.addEventListener("focus", () => {
+      const mobileMode = isMobileAmountInputMode();
+      input.readOnly = mobileMode;
+      setAmountInputValue(input, input.value, false);
+      if (mobileMode) showAmountKeypad(input);
+    });
+    input.addEventListener("input", () => {
+      setAmountInputValue(input, input.value, false);
+      onValue?.(input.value);
+    });
+    input.addEventListener("keydown", (event) => {
+      if (isMobileAmountInputMode() && event.key.length === 1 && /\d/.test(event.key)) {
+        event.preventDefault();
+        const digits = rawAmountDigits(input.value) + event.key;
+        setAmountInputValue(input, digits);
+        return;
+      }
+      if (event.key === "Enter") {
+        event.preventDefault();
+        setAmountInputValue(input, input.value);
+        hideAmountKeypad();
+      }
+    });
+    input.addEventListener("blur", () => {
+      setAmountInputValue(input, input.value);
+      input.readOnly = false;
+      setTimeout(() => {
+        if (!amountKeypad?.contains(document.activeElement)) hideAmountKeypad();
+      }, 0);
+    });
+  }
+
+
   function isNumberAnswerCorrect(actual, expected) {
     return normalizeNumber(actual) === Number(expected);
   }
@@ -373,6 +505,8 @@
     loadExam,
     formatTime,
     formatYen,
+    formatAmountText,
+    bindAmountInput,
     normalizeText,
     normalizeNumber,
     gradeExam,

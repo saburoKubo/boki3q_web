@@ -79,12 +79,13 @@
   }
 
   function formatAmountInput(input) {
-    const number = window.BokiMock.normalizeNumber(input.value);
-    if (number === null) {
-      input.value = "";
-      return;
-    }
-    input.value = window.BokiMock.formatYen(number);
+    input.value = window.BokiMock.formatAmountText(input.value);
+  }
+
+  function bindRenderedAmountInputs() {
+    elements.form.querySelectorAll("input.amount-input").forEach((input) => {
+      window.BokiMock.bindAmountInput(input, saveAnswers);
+    });
   }
 
   function statusLabel(practice) {
@@ -381,12 +382,14 @@
     elements.materials.innerHTML = (practice.materials || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("");
     if (practice.mode === "journalPractice") {
       elements.answerArea.innerHTML = renderJournalPractice(practice);
+      bindRenderedAmountInputs();
       return;
     }
     elements.answerArea.innerHTML = practice.tables.map((table) => {
       if (Array.isArray(table.answerKeys)) return renderGenericTable(table);
       return table.columns.length > 5 ? renderInventoryTable(table) : renderLedgerTable(table);
     }).join("") + renderSummary(practice.summary);
+    bindRenderedAmountInputs();
   }
 
   function normalizedNumber(value) {
