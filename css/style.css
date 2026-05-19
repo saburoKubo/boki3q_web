@@ -1600,14 +1600,6 @@ input[inputmode="numeric"] {
   margin: 12px 0 0;
 }
 
-@media (min-width: 760px) {
-  .journal-answer-pair {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
-  }
-}
-
-
 .amount-keypad {
   position: fixed;
   inset: auto 0 0;
