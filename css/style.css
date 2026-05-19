@@ -804,6 +804,8 @@ a:focus-visible {
 }
 
 .journal-result-block {
+  min-width: 0;
+  max-width: 100%;
   display: grid;
   gap: 6px;
   margin: 10px 0;
@@ -811,6 +813,7 @@ a:focus-visible {
 
 .journal-result-table {
   width: min(100%, 720px);
+  table-layout: fixed;
   border-collapse: collapse;
   background: #ffffff;
   color: var(--ink);
@@ -1587,9 +1590,16 @@ input[inputmode="numeric"] {
 }
 
 .journal-answer-pair {
+  min-width: 0;
+  max-width: 100%;
   display: grid;
   gap: 12px;
   margin-top: 12px;
+}
+
+.journal-answer-pair > div {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .journal-answer-pair p {
@@ -1598,6 +1608,36 @@ input[inputmode="numeric"] {
 
 .result-explanation {
   margin: 12px 0 0;
+}
+
+@media (max-width: 760px) {
+  .result-answer-sheet .journal-multi-table {
+    min-width: 0;
+    table-layout: fixed;
+    font-size: 0.82rem;
+  }
+
+  .result-answer-sheet .journal-multi-table th,
+  .result-answer-sheet .journal-multi-table td {
+    padding: 6px 4px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .journal-result-table th,
+  .journal-result-table td {
+    padding: 6px 5px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .journal-result-table td span {
+    display: block;
+  }
+
+  .journal-result-table td span:first-child {
+    min-width: 0;
+  }
 }
 
 .amount-keypad {
