@@ -1,0 +1,67 @@
+{
+  "id": "account_entry_001",
+  "mode": "chapterPractice",
+  "category": "第2問対策",
+  "chapterTitle": "勘定記入",
+  "title": "第2問対策 勘定記入 完成問題",
+  "description": "収益・費用を損益勘定へ振り替え、当期純利益を繰越利益剰余金勘定へ記入します。",
+  "estimatedMinutes": 12,
+  "totalScore": 20,
+  "intro": "次の資料にもとづいて、損益勘定と繰越利益剰余金勘定を完成させなさい。該当しない欄は空欄のままでかまいません。",
+  "materials": [
+    "決算にあたり、収益・費用の各勘定を損益勘定へ振り替える。",
+    "収益: 売上 1,200,000円、受取手数料 80,000円。",
+    "費用: 仕入 720,000円、給料 180,000円、支払家賃 90,000円、支払利息 10,000円。",
+    "当期純利益は、損益勘定から繰越利益剰余金勘定へ振り替える。"
+  ],
+  "tables": [
+    {
+      "id": "profit_loss_account",
+      "title": "損益勘定",
+      "hideZeroCells": true,
+      "answerKeys": ["debit", "credit"],
+      "columns": [
+        { "key": "account", "label": "勘定", "type": "static" },
+        { "key": "item", "label": "相手科目", "type": "static" },
+        { "key": "debit", "label": "借方", "type": "answer" },
+        { "key": "credit", "label": "貸方", "type": "answer" }
+      ],
+      "rows": [
+        { "values": { "account": "損益", "item": "仕入" }, "cells": { "debit": 720000, "credit": 0 } },
+        { "values": { "account": "損益", "item": "給料" }, "cells": { "debit": 180000, "credit": 0 } },
+        { "values": { "account": "損益", "item": "支払家賃" }, "cells": { "debit": 90000, "credit": 0 } },
+        { "values": { "account": "損益", "item": "支払利息" }, "cells": { "debit": 10000, "credit": 0 } },
+        { "values": { "account": "損益", "item": "売上" }, "cells": { "debit": 0, "credit": 1200000 } },
+        { "values": { "account": "損益", "item": "受取手数料" }, "cells": { "debit": 0, "credit": 80000 } },
+        { "values": { "account": "損益", "item": "繰越利益剰余金" }, "cells": { "debit": 280000, "credit": 0 } },
+        { "values": { "account": "損益", "item": "合計" }, "cells": { "debit": 1280000, "credit": 1280000 } }
+      ]
+    },
+    {
+      "id": "retained_earnings_account",
+      "title": "繰越利益剰余金勘定",
+      "hideZeroCells": true,
+      "answerKeys": ["debit", "credit"],
+      "columns": [
+        { "key": "account", "label": "勘定", "type": "static" },
+        { "key": "item", "label": "相手科目", "type": "static" },
+        { "key": "debit", "label": "借方", "type": "answer" },
+        { "key": "credit", "label": "貸方", "type": "answer" }
+      ],
+      "rows": [
+        { "values": { "account": "繰越利益剰余金", "item": "損益" }, "cells": { "debit": 0, "credit": 280000 } },
+        { "values": { "account": "繰越利益剰余金", "item": "次期繰越" }, "cells": { "debit": 280000, "credit": 0 } },
+        { "values": { "account": "繰越利益剰余金", "item": "合計" }, "cells": { "debit": 280000, "credit": 280000 } }
+      ]
+    }
+  ],
+  "summary": [
+    { "id": "net_income", "label": "当期純利益", "correctAnswer": 280000 }
+  ],
+  "explanation": [
+    "収益は損益勘定の貸方へ、費用は損益勘定の借方へ振り替えます。",
+    "収益合計は1,200,000円+80,000円=1,280,000円、費用合計は720,000円+180,000円+90,000円+10,000円=1,000,000円です。",
+    "差額280,000円が当期純利益です。損益勘定では借方に繰越利益剰余金280,000円を記入して締め切ります。",
+    "当期純利益は繰越利益剰余金勘定の貸方に記入します。"
+  ]
+}

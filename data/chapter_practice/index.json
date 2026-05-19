@@ -83,6 +83,16 @@
       "totalScore": 20
     },
     {
+      "id": "journal_source_documents_002",
+      "category": "仕訳",
+      "chapterTitle": "証ひょう・資料読み取り仕訳",
+      "title": "証ひょう・資料読み取り仕訳 第2セット",
+      "description": "納品書、領収書、通帳明細、クレジット売上票などから必要な情報を読み取り、仕訳します。",
+      "difficulty": "実戦",
+      "estimatedMinutes": 20,
+      "totalScore": 20
+    },
+    {
       "id": "journal_taxes_equity_001",
       "category": "仕訳",
       "chapterTitle": "税金・純資産の仕訳",
@@ -140,6 +150,26 @@
       "description": "入金伝票・出金伝票・振替伝票の様式に、相手科目や金額を記入します。",
       "difficulty": "標準",
       "estimatedMinutes": 15,
+      "totalScore": 20
+    },
+    {
+      "id": "cash_book_001",
+      "category": "帳簿",
+      "chapterTitle": "現金出納帳",
+      "title": "現金出納帳 完成問題",
+      "description": "現金の収入・支出を日付順に記入し、残高を求めます。",
+      "difficulty": "標準",
+      "estimatedMinutes": 12,
+      "totalScore": 20
+    },
+    {
+      "id": "checking_account_book_001",
+      "category": "帳簿",
+      "chapterTitle": "当座預金出納帳",
+      "title": "当座預金出納帳 完成問題",
+      "description": "当座預金の預入・小切手振出・入金を記入し、残高を求めます。",
+      "difficulty": "標準",
+      "estimatedMinutes": 12,
       "totalScore": 20
     },
     {
@@ -291,6 +321,26 @@
       "difficulty": "実戦",
       "estimatedMinutes": 15,
       "totalScore": 25
+    },
+    {
+      "id": "term_fill_001",
+      "category": "第2問対策",
+      "chapterTitle": "語句記入",
+      "title": "第2問対策 語句記入 完成問題",
+      "description": "帳簿・試算表・決算書類に関する空欄へ、適切な語句を選んで入れます。",
+      "difficulty": "標準",
+      "estimatedMinutes": 10,
+      "totalScore": 20
+    },
+    {
+      "id": "account_entry_001",
+      "category": "第2問対策",
+      "chapterTitle": "勘定記入",
+      "title": "第2問対策 勘定記入 完成問題",
+      "description": "収益・費用を損益勘定へ振り替え、当期純利益を繰越利益剰余金勘定へ記入します。",
+      "difficulty": "標準",
+      "estimatedMinutes": 12,
+      "totalScore": 20
     }
   ]
 }

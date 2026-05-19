@@ -1,0 +1,56 @@
+{
+  "id": "cash_book_001",
+  "mode": "chapterPractice",
+  "category": "帳簿",
+  "chapterTitle": "現金出納帳",
+  "title": "現金出納帳 完成問題",
+  "description": "現金の収入・支出を日付順に記入し、残高を求めます。",
+  "estimatedMinutes": 12,
+  "totalScore": 20,
+  "intro": "次の取引にもとづいて、現金出納帳を完成させなさい。該当しない欄は空欄のままでかまいません。",
+  "materials": [
+    "4月1日 現金の前月繰越高は180,000円である。",
+    "4月3日 商品80,000円を現金で売り上げた。",
+    "4月6日 文房具代12,000円を現金で支払った。",
+    "4月10日 売掛金60,000円を現金で回収した。",
+    "4月14日 商品50,000円を現金で仕入れた。",
+    "4月20日 普通預金から現金100,000円を引き出した。",
+    "4月25日 旅費交通費18,000円を現金で支払った。",
+    "4月30日 現金の次月繰越高を求める。"
+  ],
+  "tables": [
+    {
+      "id": "cash_book",
+      "title": "現金出納帳",
+      "hideZeroCells": true,
+      "answerKeys": ["receipt", "payment", "balance"],
+      "columns": [
+        { "key": "date", "label": "日付", "type": "static" },
+        { "key": "description", "label": "摘要", "type": "static" },
+        { "key": "receipt", "label": "収入", "type": "answer" },
+        { "key": "payment", "label": "支出", "type": "answer" },
+        { "key": "balance", "label": "残高", "type": "answer" }
+      ],
+      "rows": [
+        { "values": { "date": "4/1", "description": "前月繰越" }, "cells": { "receipt": 180000, "payment": 0, "balance": 180000 } },
+        { "values": { "date": "4/3", "description": "売上" }, "cells": { "receipt": 80000, "payment": 0, "balance": 260000 } },
+        { "values": { "date": "4/6", "description": "消耗品費" }, "cells": { "receipt": 0, "payment": 12000, "balance": 248000 } },
+        { "values": { "date": "4/10", "description": "売掛金" }, "cells": { "receipt": 60000, "payment": 0, "balance": 308000 } },
+        { "values": { "date": "4/14", "description": "仕入" }, "cells": { "receipt": 0, "payment": 50000, "balance": 258000 } },
+        { "values": { "date": "4/20", "description": "普通預金" }, "cells": { "receipt": 100000, "payment": 0, "balance": 358000 } },
+        { "values": { "date": "4/25", "description": "旅費交通費" }, "cells": { "receipt": 0, "payment": 18000, "balance": 340000 } },
+        { "values": { "date": "4/30", "description": "次月繰越" }, "cells": { "receipt": 0, "payment": 340000, "balance": 0 } },
+        { "values": { "date": "合計", "description": "" }, "cells": { "receipt": 420000, "payment": 420000, "balance": 0 } }
+      ]
+    }
+  ],
+  "summary": [
+    { "id": "ending_cash", "label": "4月30日の現金残高", "correctAnswer": 340000 }
+  ],
+  "explanation": [
+    "現金出納帳では、現金が増えた取引を収入欄、現金が減った取引を支出欄に記入します。",
+    "前月繰越180,000円に、現金売上80,000円、売掛金回収60,000円、普通預金からの引出100,000円を加えます。",
+    "消耗品費12,000円、現金仕入50,000円、旅費交通費18,000円を差し引くと、4月30日の現金残高は340,000円です。",
+    "次月繰越340,000円を支出欄に記入すると、収入合計と支出合計はいずれも420,000円で一致します。"
+  ]
+}
