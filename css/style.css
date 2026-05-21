@@ -82,6 +82,20 @@ select {
   padding: 24px 0;
 }
 
+.header-title-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.header-app-icon {
+  width: 56px;
+  height: 56px;
+  flex: 0 0 auto;
+  border-radius: 12px;
+}
+
 .site-header h1,
 .exam-topbar h1 {
   margin: 0;
@@ -906,6 +920,16 @@ a:focus-visible {
   .site-header h1,
   .exam-topbar h1 {
     font-size: 1.2rem;
+  }
+
+  .header-title-group {
+    gap: 10px;
+  }
+
+  .header-app-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
   }
 
   .header-badge {
