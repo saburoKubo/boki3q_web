@@ -136,6 +136,50 @@ select {
   font-size: 1.3rem;
 }
 
+.section-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--primary-dark);
+}
+
+.section-title-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.section-title-icon.journal {
+  color: var(--accent);
+}
+
+.section-title-icon.ledger {
+  color: var(--primary-dark);
+}
+
+.section-title-icon.closing {
+  color: var(--ok);
+}
+
+.section-title-icon.mock {
+  color: #6f4f9f;
+}
+
 .section-heading p {
   margin: 0;
   color: var(--muted);

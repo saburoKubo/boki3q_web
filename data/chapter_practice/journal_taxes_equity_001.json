@@ -41,6 +41,14 @@
           { "debitAccount": "租税公課", "debitAmount": 128000, "creditAccount": "普通預金", "creditAmount": 128000 }
         ]
       },
+      "alternativeAnswers": [
+        {
+          "lines": [
+            { "debitAccount": "租税公課", "debitAmount": 120000, "creditAccount": "普通預金", "creditAmount": 128000 },
+            { "debitAccount": "租税公課", "debitAmount": 8000 }
+          ]
+        }
+      ],
       "explanation": "固定資産税や収入印紙代は租税公課として処理し、普通預金の支払い額は合計128,000円です。"
     },
     {

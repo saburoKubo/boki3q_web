@@ -1,6 +1,6 @@
 {
   "title": "チャプター仕上げ問題",
-  "description": "帳簿と決算の各チャプターを、1テーマ1問の実戦形式で確認します。",
+  "description": "仕訳・帳簿・決算の各チャプターを、1テーマ1問の実戦形式で確認します。",
   "practices": [
     {
       "id": "journal_cash_deposits_001",
@@ -87,7 +87,7 @@
       "category": "仕訳",
       "chapterTitle": "証ひょう・資料読み取り仕訳",
       "title": "証ひょう・資料読み取り仕訳 第2セット",
-      "description": "納品書、領収書、通帳明細、クレジット売上票などから必要な情報を読み取り、仕訳します。",
+      "description": "納品書、領収書、通帳明細、売上請求書などから必要な情報を読み取り、仕訳します。",
       "difficulty": "実戦",
       "estimatedMinutes": 20,
       "totalScore": 20
@@ -264,7 +264,7 @@
     },
     {
       "id": "fixed_asset_register_001",
-      "category": "決算",
+      "category": "帳簿",
       "chapterTitle": "固定資産台帳",
       "title": "固定資産台帳 完成問題",
       "description": "取得原価、耐用年数、期首累計額から当期償却費と期末帳簿価額を求めます。",
@@ -274,7 +274,7 @@
     },
     {
       "id": "trial_balance_001",
-      "category": "帳簿",
+      "category": "決算",
       "chapterTitle": "残高試算表",
       "title": "残高試算表 完成問題",
       "description": "月初残高と月中取引から、月末の残高試算表を完成させます。",
@@ -284,7 +284,7 @@
     },
     {
       "id": "total_trial_balance_001",
-      "category": "帳簿",
+      "category": "決算",
       "chapterTitle": "合計試算表",
       "title": "合計試算表 完成問題",
       "description": "月初残高と月中取引から、借方・貸方の合計欄と残高欄を完成させます。",
