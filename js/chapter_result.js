@@ -205,6 +205,93 @@
     return actual.every((entry, index) => entry.account === expected[index].account && entry.amount === expected[index].amount);
   }
 
+  function emptyJournalMarkers(lines) {
+    return lines.map(() => ({
+      debitAccount: "",
+      debitAmount: "",
+      creditAccount: "",
+      creditAmount: ""
+    }));
+  }
+
+  function sideAnswerEntries(lines, side) {
+    const accountKey = side === "debit" ? "debitAccount" : "creditAccount";
+    const amountKey = side === "debit" ? "debitAmount" : "creditAmount";
+    return lines
+      .map((line, lineIndex) => ({
+        lineIndex,
+        accountKey,
+        amountKey,
+        account: window.BokiMock.normalizeText(line[accountKey]),
+        amount: window.BokiMock.normalizeNumber(line[amountKey])
+      }))
+      .filter((entry) => entry.account || entry.amount !== null);
+  }
+
+  function markSideJournalCells(markers, actualLines, expectedLines, side) {
+    const accountKey = side === "debit" ? "debitAccount" : "creditAccount";
+    const amountKey = side === "debit" ? "debitAmount" : "creditAmount";
+    const actualEntries = sideAnswerEntries(actualLines, side);
+    const expectedEntries = sideEntries(expectedLines, side).map((entry) => ({ ...entry, matched: false }));
+
+    actualEntries.forEach((actual) => {
+      const exact = expectedEntries.find((expected) => !expected.matched && actual.account === expected.account && actual.amount === expected.amount);
+      if (!exact) return;
+      exact.matched = true;
+      markers[actual.lineIndex][actual.accountKey] = "result-ok-cell";
+      markers[actual.lineIndex][actual.amountKey] = "result-ok-cell";
+      actual.matched = true;
+    });
+
+    actualEntries.forEach((actual) => {
+      if (actual.matched) return;
+      const sameAccount = expectedEntries.find((expected) => !expected.matched && actual.account && actual.account === expected.account);
+      if (!sameAccount) return;
+      sameAccount.matched = true;
+      markers[actual.lineIndex][actual.accountKey] = "result-ok-cell";
+      markers[actual.lineIndex][actual.amountKey] = actual.amount === sameAccount.amount ? "result-ok-cell" : "result-ng-cell";
+      actual.matched = true;
+    });
+
+    actualEntries.forEach((actual) => {
+      if (actual.matched) return;
+      const sameAmount = expectedEntries.find((expected) => !expected.matched && actual.amount !== null && actual.amount === expected.amount);
+      if (!sameAmount) return;
+      sameAmount.matched = true;
+      markers[actual.lineIndex][actual.accountKey] = actual.account === sameAmount.account ? "result-ok-cell" : "result-ng-cell";
+      markers[actual.lineIndex][actual.amountKey] = "result-ok-cell";
+      actual.matched = true;
+    });
+
+    actualEntries.forEach((actual) => {
+      if (actual.matched) return;
+      if (actual.account) markers[actual.lineIndex][actual.accountKey] = "result-ng-cell";
+      if (actual.amount !== null) markers[actual.lineIndex][actual.amountKey] = "result-ng-cell";
+    });
+
+    expectedEntries
+      .filter((expected) => !expected.matched)
+      .forEach(() => {
+        const blankIndex = actualLines.findIndex((line, lineIndex) => {
+          const marker = markers[lineIndex];
+          return !window.BokiMock.normalizeText(line[accountKey]) &&
+            window.BokiMock.normalizeNumber(line[amountKey]) === null &&
+            !marker[accountKey] &&
+            !marker[amountKey];
+        });
+        if (blankIndex === -1) return;
+        markers[blankIndex][accountKey] = "result-ng-cell";
+        markers[blankIndex][amountKey] = "result-ng-cell";
+      });
+  }
+
+  function journalCellMarkers(actualLines, expectedLines) {
+    const markers = emptyJournalMarkers(actualLines);
+    markSideJournalCells(markers, actualLines, expectedLines, "debit");
+    markSideJournalCells(markers, actualLines, expectedLines, "credit");
+    return markers;
+  }
+
   function isJournalQuestionCorrect(question, answers) {
     const actualLines = normalizeJournalLines(journalAnswerLines(question, answers));
     const correctAnswers = [question.correctAnswer, ...(question.alternativeAnswers || [])];
@@ -221,7 +308,7 @@
     return window.BokiMock.formatYen(number);
   }
 
-  function renderJournalLineTable(lines, className = "") {
+  function renderJournalLineTable(lines, className = "", cellMarkers = []) {
     const safeLines = lines.length ? lines : [{ debitAccount: "", debitAmount: "", creditAccount: "", creditAmount: "" }];
     return `
       <div class="table-scroll">
@@ -235,12 +322,12 @@
             </tr>
           </thead>
           <tbody>
-            ${safeLines.map((line) => `
+            ${safeLines.map((line, lineIndex) => `
               <tr>
-                <td class="account-name-cell">${escapeHtml(line.debitAccount || "")}</td>
-                <td>${escapeHtml(formatJournalAmount(line.debitAmount))}</td>
-                <td class="account-name-cell">${escapeHtml(line.creditAccount || "")}</td>
-                <td>${escapeHtml(formatJournalAmount(line.creditAmount))}</td>
+                <td class="${["account-name-cell", cellMarkers[lineIndex]?.debitAccount].filter(Boolean).join(" ")}">${escapeHtml(line.debitAccount || "")}</td>
+                <td class="${cellMarkers[lineIndex]?.debitAmount || ""}">${escapeHtml(formatJournalAmount(line.debitAmount))}</td>
+                <td class="${["account-name-cell", cellMarkers[lineIndex]?.creditAccount].filter(Boolean).join(" ")}">${escapeHtml(line.creditAccount || "")}</td>
+                <td class="${cellMarkers[lineIndex]?.creditAmount || ""}">${escapeHtml(formatJournalAmount(line.creditAmount))}</td>
               </tr>
             `).join("")}
           </tbody>
@@ -258,7 +345,7 @@
           <strong>${misses.length}件</strong>
         </div>
         <div class="review-body">
-          <p class="result-hint">赤字の表は正答と異なる問題です。借方内・貸方内の行順は採点で問いません。</p>
+          <p class="result-hint">赤字のセルが正答と異なる箇所です。借方内・貸方内の行順は採点で問いません。</p>
           ${practice.questions.map((question, index) => {
             const correct = isJournalQuestionCorrect(question, result.answers || {});
             const lines = journalAnswerLines(question, result.answers || {});
@@ -270,7 +357,7 @@
                 <div class="journal-answer-pair">
                   <div>
                     <p><strong>あなたの解答</strong></p>
-                    ${renderJournalLineTable(lines, correct ? "result-ok-row" : "result-ng-cell")}
+                    ${renderJournalLineTable(lines, "", correct ? emptyJournalMarkers(lines) : journalCellMarkers(lines, correctLines))}
                   </div>
                   <div>
                     <p><strong>正答答案</strong></p>
