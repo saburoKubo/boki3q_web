@@ -22,6 +22,8 @@
       "id": "bank_reconciliation",
       "title": "銀行勘定調整表",
       "hideZeroCells": true,
+      "showZeroInputKeys": ["add", "subtract"],
+      "groupByKey": "side",
       "answerKeys": ["add", "subtract", "balance"],
       "columns": [
         { "key": "side", "label": "区分", "type": "static" },
@@ -34,7 +36,7 @@
         {
           "description": "当社帳簿残高",
           "values": { "side": "会社側", "item": "当社帳簿残高" },
-          "cells": { "add": 0, "subtract": 0, "balance": 1250000 }
+          "cells": { "add": null, "subtract": null, "balance": 1250000 }
         },
         {
           "description": "受取手形取立の未記帳",
@@ -54,7 +56,7 @@
         {
           "description": "銀行残高証明書残高",
           "values": { "side": "銀行側", "item": "銀行残高証明書残高" },
-          "cells": { "add": 0, "subtract": 0, "balance": 1560000 }
+          "cells": { "add": null, "subtract": null, "balance": 1560000 }
         },
         {
           "description": "時間外預入",

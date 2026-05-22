@@ -697,6 +697,15 @@ a:focus-visible {
   font-weight: 700;
 }
 
+.answer-table .table-group-row th,
+.generic-sheet-table .table-group-row th {
+  width: auto;
+  background: #e7edf3;
+  color: var(--primary-dark);
+  text-align: left;
+  font-weight: 800;
+}
+
 .exam-actions {
   position: sticky;
   bottom: 0;

@@ -23,6 +23,7 @@
       "id": "checking_account_book",
       "title": "当座預金出納帳",
       "hideZeroCells": true,
+      "showZeroInputKeys": ["deposit", "withdrawal"],
       "answerKeys": ["deposit", "withdrawal", "balance"],
       "columns": [
         { "key": "date", "label": "日付", "type": "static" },

@@ -25,6 +25,7 @@
       "id": "sales_book",
       "title": "売上帳",
       "hideZeroCells": true,
+      "showZeroInputKeys": ["sales", "returnsAllowances"],
       "answerKeys": ["sales", "returnsAllowances"],
       "columns": [
         { "key": "date", "label": "日付", "type": "static" },
@@ -46,6 +47,7 @@
       "id": "purchase_book",
       "title": "仕入帳",
       "hideZeroCells": true,
+      "showZeroInputKeys": ["purchases", "returnsAllowances"],
       "answerKeys": ["purchases", "returnsAllowances"],
       "columns": [
         { "key": "date", "label": "日付", "type": "static" },

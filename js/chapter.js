@@ -173,6 +173,10 @@
     return renderInput(name, expected);
   }
 
+  function shouldHideZeroCell(table, key, expected) {
+    return table.hideZeroCells && Number(expected) === 0 && !table.showZeroInputKeys?.includes(key);
+  }
+
   function journalName(questionId, lineIndex, key) {
     return `journal.${questionId}.${lineIndex}.${key}`;
   }
@@ -269,8 +273,8 @@
                   <td>${escapeHtml(row.date)}</td>
                   <td>${escapeHtml(row.description)}</td>
                   ${["debit", "credit", "balance"].map((key) => `
-                    <td class="${row.cells[key] === null ? "static-cell" : "answer-cell"}">
-                      ${row.cells[key] === null ? "" : renderInput(cellName(table, rowIndex, key), row.cells[key])}
+                    <td class="${row.cells[key] === null || shouldHideZeroCell(table, key, row.cells[key]) ? "static-cell" : "answer-cell"}">
+                      ${row.cells[key] === null || shouldHideZeroCell(table, key, row.cells[key]) ? "" : renderInput(cellName(table, rowIndex, key), row.cells[key])}
                     </td>
                   `).join("")}
                 </tr>
@@ -312,6 +316,7 @@
   }
 
   function renderGenericTable(table) {
+    let currentGroup = "";
     return `
       <section class="answer-sheet">
         <h4>${escapeHtml(table.title)}</h4>
@@ -321,25 +326,33 @@
               <tr>${tableColumnLabels(table).map((column) => `<th>${escapeHtml(column)}</th>`).join("")}</tr>
             </thead>
             <tbody>
-              ${table.rows.map((row, rowIndex) => `
-                <tr>
-                  ${table.columns.map((column) => {
-                    const key = column.key;
-                    if (column.type === "answer") {
-                      const expected = row.cells?.[key];
-                      if (table.hideZeroCells && Number(expected) === 0) {
-                        return "<td class=\"static-cell\"></td>";
+              ${table.rows.map((row, rowIndex) => {
+                const group = table.groupByKey ? row.values?.[table.groupByKey] : "";
+                const groupRow = group && group !== currentGroup
+                  ? `<tr class="table-group-row"><th colspan="${table.columns.length}">${escapeHtml(group)}</th></tr>`
+                  : "";
+                if (group) currentGroup = group;
+                return `
+                  ${groupRow}
+                  <tr>
+                    ${table.columns.map((column) => {
+                      const key = column.key;
+                      if (column.type === "answer") {
+                        const expected = row.cells?.[key];
+                        if (shouldHideZeroCell(table, key, expected)) {
+                          return "<td class=\"static-cell\"></td>";
+                        }
+                        return `
+                          <td class="${expected === null || expected === undefined ? "static-cell" : "answer-cell"}">
+                            ${expected === null || expected === undefined ? "" : renderAnswerControl(table, rowIndex, key, expected, column.label)}
+                          </td>
+                        `;
                       }
-                      return `
-                        <td class="${expected === null || expected === undefined ? "static-cell" : "answer-cell"}">
-                          ${expected === null || expected === undefined ? "" : renderAnswerControl(table, rowIndex, key, expected, column.label)}
-                        </td>
-                      `;
-                    }
-                    return `<td>${escapeHtml(row.values?.[key] ?? "")}</td>`;
-                  }).join("")}
-                </tr>
-              `).join("")}
+                      return `<td>${escapeHtml(row.values?.[key] ?? "")}</td>`;
+                    }).join("")}
+                  </tr>
+                `;
+              }).join("")}
             </tbody>
           </table>
         </div>
@@ -502,7 +515,7 @@
       table.rows.forEach((row, rowIndex) => {
         Object.entries(row.cells).forEach(([key, expected]) => {
           if (expected === null) return;
-          if (table.hideZeroCells && Number(expected) === 0) return;
+          if (shouldHideZeroCell(table, key, expected)) return;
           totalCount += 1;
           const name = cellName(table, rowIndex, key);
           const inputType = table.selectOptions?.[key] ? "select" : "number";

@@ -92,9 +92,14 @@
     return [baseClass, isAccountColumn(column) ? "account-name-cell" : ""].filter(Boolean).join(" ");
   }
 
+  function shouldHideZeroCell(table, key, expected) {
+    return table.hideZeroCells && Number(expected) === 0 && !table.showZeroInputKeys?.includes(key);
+  }
+
   function renderCorrectTable(table) {
     const keys = tableAnswerKeys(table);
     const generic = Array.isArray(table.answerKeys);
+    let currentGroup = "";
     return `
       <section class="answer-sheet result-answer-sheet">
         <h4>${escapeHtml(table.title)}</h4>
@@ -104,24 +109,32 @@
               <tr>${tableColumnLabels(table).map((column) => `<th>${escapeHtml(column)}</th>`).join("")}</tr>
             </thead>
             <tbody>
-              ${table.rows.map((row) => `
-                <tr>
-                  ${generic ? table.columns.map((column) => {
-                    const key = column.key;
-                    if (column.type === "answer") {
-                      if (table.hideZeroCells && Number(row.cells[key]) === 0) return "<td></td>";
-                      return `<td class="${resultCellClass(table, column)}">${escapeHtml(formatCellValue(table, key, row.cells[key]))}</td>`;
-                    }
-                    return `<td class="${resultCellClass(table, column)}">${escapeHtml(row.values?.[key] ?? "")}</td>`;
-                  }).join("") : `
+              ${table.rows.map((row) => {
+                const group = generic && table.groupByKey ? row.values?.[table.groupByKey] : "";
+                const groupRow = group && group !== currentGroup
+                  ? `<tr class="table-group-row"><th colspan="${table.columns.length}">${escapeHtml(group)}</th></tr>`
+                  : "";
+                if (group) currentGroup = group;
+                return `
+                  ${groupRow}
+                  <tr>
+                    ${generic ? table.columns.map((column) => {
+                      const key = column.key;
+                      if (column.type === "answer") {
+                        if (table.hideZeroCells && Number(row.cells[key]) === 0) return "<td></td>";
+                        return `<td class="${resultCellClass(table, column)}">${escapeHtml(formatCellValue(table, key, row.cells[key]))}</td>`;
+                      }
+                      return `<td class="${resultCellClass(table, column)}">${escapeHtml(row.values?.[key] ?? "")}</td>`;
+                    }).join("") : `
                     <td>${escapeHtml(row.date)}</td>
                     <td>${escapeHtml(row.description)}</td>
                     ${keys.map((key) => `
-                      <td>${row.cells[key] === null ? "" : escapeHtml(window.BokiMock.formatYen(row.cells[key]))}</td>
+                      <td>${row.cells[key] === null || shouldHideZeroCell(table, key, row.cells[key]) ? "" : escapeHtml(window.BokiMock.formatYen(row.cells[key]))}</td>
                     `).join("")}
-                  `}
-                </tr>
-              `).join("")}
+                    `}
+                  </tr>
+                `;
+              }).join("")}
             </tbody>
           </table>
         </div>
@@ -342,7 +355,7 @@
       <article class="result-section">
         <div class="result-section-head">
           <h2>仕訳答案</h2>
-          <strong>${misses.length}件</strong>
+          <strong>誤答 ${misses.length}件</strong>
         </div>
         <div class="review-body">
           <p class="result-hint">赤字のセルが正答と異なる箇所です。借方内・貸方内の行順は採点で問いません。</p>
@@ -377,6 +390,7 @@
   function renderUserTable(table, result) {
     const keys = tableAnswerKeys(table);
     const generic = Array.isArray(table.answerKeys);
+    let currentGroup = "";
     return `
       <section class="answer-sheet result-answer-sheet">
         <h4>${escapeHtml(table.title)}</h4>
@@ -386,35 +400,43 @@
               <tr>${tableColumnLabels(table).map((column) => `<th>${escapeHtml(column)}</th>`).join("")}</tr>
             </thead>
             <tbody>
-              ${table.rows.map((row, rowIndex) => `
-                <tr>
-                  ${generic ? table.columns.map((column) => {
-                    const key = column.key;
-                    if (column.type !== "answer") return `<td class="${resultCellClass(table, column)}">${escapeHtml(row.values?.[key] ?? "")}</td>`;
-                    const expected = row.cells?.[key];
-                    if (table.hideZeroCells && Number(expected) === 0) return "<td></td>";
-                    if (expected === null || expected === undefined) return "<td></td>";
-                    const answer = result.answers?.[cellName(table, rowIndex, key)];
-                    const correct = isCellCorrect(table, key, answer, expected);
-                    return `<td class="${resultCellClass(table, column, correct ? "result-ok-cell" : "result-ng-cell")}">${escapeHtml(formatUserCellValue(table, key, answer))}</td>`;
-                  }).join("") : `
-                    <td>${escapeHtml(row.date)}</td>
-                    <td>${escapeHtml(row.description)}</td>
-                    ${keys.map((key) => {
-                      const expected = row.cells[key];
-                      if (expected === null) return "<td></td>";
+              ${table.rows.map((row, rowIndex) => {
+                const group = generic && table.groupByKey ? row.values?.[table.groupByKey] : "";
+                const groupRow = group && group !== currentGroup
+                  ? `<tr class="table-group-row"><th colspan="${table.columns.length}">${escapeHtml(group)}</th></tr>`
+                  : "";
+                if (group) currentGroup = group;
+                return `
+                  ${groupRow}
+                  <tr>
+                    ${generic ? table.columns.map((column) => {
+                      const key = column.key;
+                      if (column.type !== "answer") return `<td class="${resultCellClass(table, column)}">${escapeHtml(row.values?.[key] ?? "")}</td>`;
+                      const expected = row.cells?.[key];
+                      if (shouldHideZeroCell(table, key, expected)) return "<td></td>";
+                      if (expected === null || expected === undefined) return "<td></td>";
                       const answer = result.answers?.[cellName(table, rowIndex, key)];
-                      const actual = window.BokiMock.normalizeNumber(answer);
-                      const correct = isAmountCorrect(actual, expected);
-                      return `
-                        <td class="${correct ? "result-ok-cell" : "result-ng-cell"}">
-                          ${escapeHtml(formatUserAnswer(answer))}
-                        </td>
-                      `;
-                    }).join("")}
-                  `}
-                </tr>
-              `).join("")}
+                      const correct = isCellCorrect(table, key, answer, expected);
+                      return `<td class="${resultCellClass(table, column, correct ? "result-ok-cell" : "result-ng-cell")}">${escapeHtml(formatUserCellValue(table, key, answer))}</td>`;
+                    }).join("") : `
+                      <td>${escapeHtml(row.date)}</td>
+                      <td>${escapeHtml(row.description)}</td>
+                      ${keys.map((key) => {
+                      const expected = row.cells[key];
+                      if (expected === null || shouldHideZeroCell(table, key, expected)) return "<td></td>";
+                      const answer = result.answers?.[cellName(table, rowIndex, key)];
+                        const actual = window.BokiMock.normalizeNumber(answer);
+                        const correct = isAmountCorrect(actual, expected);
+                        return `
+                          <td class="${correct ? "result-ok-cell" : "result-ng-cell"}">
+                            ${escapeHtml(formatUserAnswer(answer))}
+                          </td>
+                        `;
+                      }).join("")}
+                    `}
+                  </tr>
+                `;
+              }).join("")}
             </tbody>
           </table>
         </div>
@@ -451,7 +473,7 @@
       <article class="result-section">
         <div class="result-section-head">
           <h2>あなたの答案</h2>
-          <strong>${misses.length}件</strong>
+          <strong>誤答 ${misses.length}件</strong>
         </div>
         <div class="review-body">
           <p class="result-hint">赤字のセルが正答と異なる箇所です。</p>

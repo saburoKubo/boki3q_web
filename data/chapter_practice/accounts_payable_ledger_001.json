@@ -21,25 +21,29 @@
     {
       "id": "c_shop",
       "title": "C商店 買掛金元帳",
+      "hideZeroCells": true,
+      "showZeroInputKeys": ["debit", "credit"],
       "columns": ["日付", "摘要", "借方", "貸方", "残高"],
       "rows": [
-        { "date": "5/1", "description": "前月繰越", "cells": { "debit": null, "credit": 90000, "balance": 90000 } },
-        { "date": "5/4", "description": "仕入", "cells": { "debit": null, "credit": 160000, "balance": 250000 } },
-        { "date": "5/12", "description": "仕入戻し", "cells": { "debit": 30000, "credit": null, "balance": 220000 } },
-        { "date": "5/24", "description": "普通預金", "cells": { "debit": 150000, "credit": null, "balance": 70000 } },
-        { "date": "5/31", "description": "次月繰越", "cells": { "debit": null, "credit": null, "balance": 70000 } }
+        { "date": "5/1", "description": "前月繰越", "cells": { "debit": 0, "credit": 90000, "balance": 90000 } },
+        { "date": "5/4", "description": "仕入", "cells": { "debit": 0, "credit": 160000, "balance": 250000 } },
+        { "date": "5/12", "description": "仕入戻し", "cells": { "debit": 30000, "credit": 0, "balance": 220000 } },
+        { "date": "5/24", "description": "普通預金", "cells": { "debit": 150000, "credit": 0, "balance": 70000 } },
+        { "date": "5/31", "description": "次月繰越", "cells": { "debit": 70000, "credit": 0, "balance": null } }
       ]
     },
     {
       "id": "d_shop",
       "title": "D商店 買掛金元帳",
+      "hideZeroCells": true,
+      "showZeroInputKeys": ["debit", "credit"],
       "columns": ["日付", "摘要", "借方", "貸方", "残高"],
       "rows": [
-        { "date": "5/1", "description": "前月繰越", "cells": { "debit": null, "credit": 110000, "balance": 110000 } },
-        { "date": "5/9", "description": "普通預金", "cells": { "debit": 70000, "credit": null, "balance": 40000 } },
-        { "date": "5/18", "description": "仕入", "cells": { "debit": null, "credit": 140000, "balance": 180000 } },
-        { "date": "5/27", "description": "仕入値引", "cells": { "debit": 10000, "credit": null, "balance": 170000 } },
-        { "date": "5/31", "description": "次月繰越", "cells": { "debit": null, "credit": null, "balance": 170000 } }
+        { "date": "5/1", "description": "前月繰越", "cells": { "debit": 0, "credit": 110000, "balance": 110000 } },
+        { "date": "5/9", "description": "普通預金", "cells": { "debit": 70000, "credit": 0, "balance": 40000 } },
+        { "date": "5/18", "description": "仕入", "cells": { "debit": 0, "credit": 140000, "balance": 180000 } },
+        { "date": "5/27", "description": "仕入値引", "cells": { "debit": 10000, "credit": 0, "balance": 170000 } },
+        { "date": "5/31", "description": "次月繰越", "cells": { "debit": 170000, "credit": 0, "balance": null } }
       ]
     }
   ],
