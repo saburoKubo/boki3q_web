@@ -113,6 +113,7 @@ select {
 
 .header-badge {
   border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 8px;
   padding: 6px 10px;
   font-size: 0.84rem;
 }
@@ -192,6 +193,7 @@ select {
   align-items: center;
   background: var(--surface);
   border: 1px solid var(--line);
+  border-radius: 8px;
   box-shadow: var(--shadow);
   padding: 24px;
 }
@@ -233,6 +235,7 @@ select {
 .section-jump-link {
   flex: 0 0 auto;
   border: 1px solid var(--line-strong);
+  border-radius: 8px;
   background: var(--surface);
   color: var(--primary-dark);
   padding: 7px 12px;
@@ -264,6 +267,7 @@ select {
 .meta-grid div {
   background: var(--surface-2);
   border: 1px solid var(--line);
+  border-radius: 8px;
   padding: 10px 12px;
 }
 
@@ -301,6 +305,7 @@ select {
   justify-content: center;
   min-height: 42px;
   border: 1px solid transparent;
+  border-radius: 8px;
   padding: 9px 16px;
   text-decoration: none;
   font-weight: 700;
@@ -335,6 +340,7 @@ select {
 
 .access-card {
   border: 1px solid var(--line-strong);
+  border-radius: 8px;
   background: #ffffff;
   padding: 24px;
   box-shadow: var(--shadow);
