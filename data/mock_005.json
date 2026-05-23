@@ -154,7 +154,7 @@
           "id": "m005_s1_q07",
           "type": "journal_dropdown_multi",
           "score": 3,
-          "question": "決算にあたり、消耗品の未使用高が ￥25,000 であることが判明した。なお、購入時には消耗品として処理している。",
+          "question": "第6問で購入した消耗品について、決算にあたり未使用高が ￥25,000 であることが判明した。なお、購入時には消耗品として処理している。",
           "answerLineCount": 2,
           "correctAnswer": {
             "lines": [

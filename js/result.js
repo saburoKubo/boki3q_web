@@ -149,29 +149,34 @@
     { id: "journal_adjustments_001", label: "決算整理仕訳", keywords: ["決算整理", "繰越商品", "貸倒引当金", "貯蔵品", "未払法人税"] },
     { id: "journal_corrections_001", label: "訂正仕訳", keywords: ["訂正", "誤って", "誤記入"] },
     { id: "journal_source_documents_001", label: "証ひょう・資料読み取り仕訳", keywords: ["請求書", "領収書", "納品書", "売上票", "給与明細", "通帳"] },
+    { id: "journal_source_documents_002", label: "証ひょう・資料読み取り仕訳", keywords: ["納品書", "領収書", "通帳明細", "売上請求書", "クレジット販売"] },
     { id: "journal_closing_entries_001", label: "決算振替仕訳", keywords: ["損益", "当期純利益", "当期純損失", "繰越利益剰余金"] },
     { id: "journal_reversing_entries_001", label: "再振替仕訳", keywords: ["再振替", "前払", "未払", "前受", "未収"] },
     { id: "journal_book_001", label: "仕訳日記帳", keywords: ["仕訳日記帳"] },
     { id: "voucher_accounting_001", label: "伝票式会計", keywords: ["伝票", "入金伝票", "出金伝票", "振替伝票"] },
+    { id: "cash_book_001", label: "現金出納帳", keywords: ["現金出納帳", "現金の収入", "現金の支出"] },
+    { id: "checking_account_book_001", label: "当座預金出納帳", keywords: ["当座預金出納帳", "当座預金", "小切手"] },
     { id: "petty_cash_book_001", label: "小口現金出納帳", keywords: ["小口現金", "補給"] },
+    { id: "bank_reconciliation_001", label: "銀行勘定調整表", keywords: ["銀行勘定調整表", "銀行残高証明書", "未取立", "未渡小切手", "時間外預入"] },
     { id: "sales_purchase_books_001", label: "売上帳・仕入帳", keywords: ["売上帳", "仕入帳", "売上戻り", "仕入戻し", "売上値引", "仕入値引"] },
     { id: "notes_books_001", label: "受取手形記入帳・支払手形記入帳", keywords: ["受取手形記入帳", "支払手形記入帳", "受取手形", "支払手形", "満期"] },
     { id: "general_ledger_001", label: "総勘定元帳", keywords: ["総勘定元帳", "勘定記入"] },
     { id: "accounts_receivable_ledger_001", label: "売掛金元帳", keywords: ["売掛金元帳"] },
     { id: "accounts_payable_ledger_001", label: "買掛金元帳", keywords: ["買掛金元帳"] },
-    { id: "merchandise_inventory_ledger_001", label: "商品有高帳", keywords: ["商品有高帳", "先入先出"] },
+    { id: "merchandise_inventory_ledger_001", label: "商品有高帳（先入先出法）", keywords: ["商品有高帳", "先入先出"] },
     { id: "moving_average_inventory_ledger_001", label: "商品有高帳（移動平均法）", keywords: ["移動平均"] },
     { id: "fixed_asset_register_001", label: "固定資産台帳", keywords: ["固定資産台帳"] },
     { id: "trial_balance_001", label: "残高試算表", keywords: ["残高試算表", "決算整理後残高試算表"] },
-    { id: "total_trial_balance_001", label: "合計残高試算表", keywords: ["合計残高試算表"] },
+    { id: "total_trial_balance_001", label: "合計試算表", keywords: ["合計試算表", "合計残高試算表"] },
     { id: "worksheet_001", label: "精算表", keywords: ["精算表"] },
     { id: "income_statement_001", label: "損益計算書", keywords: ["損益計算書"] },
-    { id: "balance_sheet_001", label: "貸借対照表", keywords: ["貸借対照表"] }
+    { id: "balance_sheet_001", label: "貸借対照表", keywords: ["貸借対照表"] },
+    { id: "term_fill_001", label: "語句記入", keywords: ["語句", "空欄", "勘定科目の分類", "分類"] },
+    { id: "account_entry_001", label: "勘定記入", keywords: ["勘定記入", "損益勘定", "繰越利益剰余金勘定"] }
   ];
 
   function relatedPracticeLinks(section, question, definition) {
     const haystack = [
-      section.title,
       question.title,
       question.detail,
       definition?.title,
@@ -180,30 +185,39 @@
       ...(definition?.materials || []),
       ...(definition?.fields || []).map((field) => field.label)
     ].filter(Boolean).join(" ");
-    const links = [];
-    const add = (id) => {
+    const scores = new Map();
+    const boost = (id, score) => {
       const link = practiceLinks.find((item) => item.id === id);
-      if (link && !links.some((item) => item.id === id)) links.push(link);
+      if (!link) return;
+      scores.set(id, (scores.get(id) || 0) + score);
     };
 
     if (question.type === "journal_dropdown" || question.type === "journal_dropdown_multi") {
-      add("journal_source_documents_001");
-      add("journal_merchandise_sales_001");
+      boost("journal_source_documents_001", 12);
+      boost("journal_merchandise_sales_001", 12);
     }
     if (section.sectionId === "section_2") {
-      add("journal_book_001");
-      add("general_ledger_001");
+      boost("journal_book_001", 10);
+      boost("general_ledger_001", 10);
     }
     if (section.sectionId === "section_3") {
-      add("journal_adjustments_001");
-      add("worksheet_001");
+      boost("journal_adjustments_001", 10);
+      boost("worksheet_001", 10);
     }
 
     practiceLinks.forEach((link) => {
-      if (link.keywords.some((keyword) => haystack.includes(keyword))) add(link.id);
+      if (haystack.includes(link.label)) boost(link.id, 100);
+      link.keywords.forEach((keyword) => {
+        if (!haystack.includes(keyword)) return;
+        const specificBonus = /帳|表|分類|記入|伝票|台帳|試算表|計算書/.test(keyword) ? 20 : 0;
+        boost(link.id, Math.min(keyword.length, 20) + specificBonus);
+      });
     });
 
-    return links.slice(0, 4);
+    return [...scores.entries()]
+      .map(([id, score]) => ({ ...practiceLinks.find((link) => link.id === id), score }))
+      .sort((a, b) => b.score - a.score || practiceLinks.findIndex((link) => link.id === a.id) - practiceLinks.findIndex((link) => link.id === b.id))
+      .slice(0, 4);
   }
 
   function renderRelatedPracticeLinks(section, question, definition) {

@@ -1352,6 +1352,7 @@ input[inputmode="numeric"] {
 .statement-account-table th:nth-child(3),
 .statement-account-table td:nth-child(3) {
   text-align: left;
+  font-weight: 700;
 }
 
 .statement-account-table {
@@ -1492,6 +1493,92 @@ input[inputmode="numeric"] {
 .chapter-worksheet-table .answer-cell input {
   min-width: 0;
   padding: 6px 7px;
+}
+
+.worksheet-practice-table {
+  min-width: 1060px;
+}
+
+.worksheet-practice-table th {
+  line-height: 1.2;
+  text-align: center;
+  white-space: pre-line;
+}
+
+.worksheet-practice-table th:first-child,
+.worksheet-practice-table td:first-child {
+  width: 135px;
+}
+
+.worksheet-practice-table th:nth-child(2),
+.worksheet-practice-table td:nth-child(2),
+.worksheet-practice-table th:nth-child(3),
+.worksheet-practice-table td:nth-child(3) {
+  width: 92px;
+}
+
+.fixed-asset-register-table {
+  table-layout: fixed;
+  min-width: 980px;
+  font-size: 0.82rem;
+}
+
+.fixed-asset-register-table th,
+.fixed-asset-register-table td {
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  line-height: 1.25;
+  padding: 7px 6px;
+  white-space: normal;
+}
+
+.fixed-asset-register-table th:nth-child(1),
+.fixed-asset-register-table td:nth-child(1) {
+  width: 64px;
+  text-align: center;
+}
+
+.fixed-asset-register-table th:nth-child(2),
+.fixed-asset-register-table td:nth-child(2) {
+  width: 82px;
+  text-align: center;
+}
+
+.fixed-asset-register-table th:nth-child(3),
+.fixed-asset-register-table td:nth-child(3) {
+  width: 88px;
+}
+
+.fixed-asset-register-table th:nth-child(4),
+.fixed-asset-register-table td:nth-child(4) {
+  width: 62px;
+  text-align: center;
+}
+
+.fixed-asset-register-table th:nth-child(5),
+.fixed-asset-register-table td:nth-child(5) {
+  width: 122px;
+  border-left: 3px double var(--line-strong);
+}
+
+.fixed-asset-register-table th:nth-child(8),
+.fixed-asset-register-table td:nth-child(8) {
+  width: 122px;
+}
+
+.fixed-asset-register-table th:nth-child(6),
+.fixed-asset-register-table td:nth-child(6),
+.fixed-asset-register-table th:nth-child(7),
+.fixed-asset-register-table td:nth-child(7),
+.fixed-asset-register-table th:nth-child(9),
+.fixed-asset-register-table td:nth-child(9) {
+  width: 104px;
+}
+
+.fixed-asset-register-table .answer-cell input {
+  width: 100%;
+  min-width: 0;
+  padding: 6px;
 }
 
 .inventory-summary-fields {

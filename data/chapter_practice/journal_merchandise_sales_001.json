@@ -6,7 +6,7 @@
   "title": "商品売買の仕訳 仕上げ問題",
   "description": "消費税、内金、返品、諸掛り、クレジット売上を含む商品売買の取引を仕訳します。",
   "estimatedMinutes": 18,
-  "totalScore": 20,
+  "totalScore": 100,
   "intro": "各取引について仕訳しなさい。解答欄は本番形式に合わせて5行あります。使用しない行は空欄のままでかまいません。",
   "accountOptions": [
     "現金",

@@ -1,13 +1,13 @@
 {
   "id": "trial_balance_001",
   "mode": "chapterPractice",
-  "category": "帳簿",
+  "category": "決算",
   "chapterTitle": "残高試算表",
   "title": "残高試算表 完成問題",
-  "description": "次の月初残高と月中取引にもとづいて、5月31日の残高試算表を完成させなさい。",
+  "description": "月初残高と月中取引から、月末の残高試算表を完成させます。",
   "estimatedMinutes": 15,
-  "totalScore": 25,
-  "intro": "残高試算表では、各勘定の借方残高または貸方残高だけを記入します。残高がない欄は空欄のままでかまいません。",
+  "totalScore": 100,
+  "intro": "次の月初残高と月中取引にもとづいて、5月31日の残高試算表を完成させなさい。該当しない欄は空欄のままでかまいません。",
   "materials": [
     "5月1日現在の残高: 現金120,000、普通預金500,000、売掛金300,000、繰越商品200,000、備品800,000、買掛金250,000、借入金400,000、資本金800,000、繰越利益剰余金470,000。",
     "商品を現金で180,000円売り上げた。",
@@ -26,6 +26,7 @@
       "id": "trial_balance",
       "title": "残高試算表",
       "hideZeroCells": true,
+      "showZeroInputKeys": ["debit", "credit"],
       "answerKeys": ["debit", "credit"],
       "columns": [
         { "key": "account", "label": "勘定科目", "type": "static" },

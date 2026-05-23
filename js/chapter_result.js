@@ -70,11 +70,14 @@
     if (Array.isArray(table.answerKeys)) {
       const labels = tableColumnLabels(table);
       const classes = ["answer-table", "generic-sheet-table"];
-      if (table.columns.length >= 9) {
+      if (table.id === "fixed_assets") {
+        classes.push("fixed-asset-register-table");
+      } else if (table.columns.length >= 9) {
         classes.push("worksheet-table", "chapter-worksheet-table");
       } else {
         classes.push("compact-sheet-table");
       }
+      if (table.id === "worksheet") classes.push("worksheet-practice-table");
       if (labels.includes("負債・純資産")) classes.push("balance-sheet-table");
       if (table.format === "account") classes.push("statement-account-table");
       return classes.join(" ");
@@ -94,6 +97,12 @@
 
   function shouldHideZeroCell(table, key, expected) {
     return table.hideZeroCells && Number(expected) === 0 && !table.showZeroInputKeys?.includes(key);
+  }
+
+  function shouldSkipZeroScore(table, key, expected, answer) {
+    if (isSelectCell(table, key) || Number(expected) !== 0) return false;
+    const actual = window.BokiMock.normalizeNumber(answer);
+    return actual === null || actual === 0;
   }
 
   function renderCorrectTable(table) {
@@ -172,7 +181,23 @@
     return actual === expectedNumber || (expectedNumber === 0 && actual === null);
   }
 
-  function isCellCorrect(table, key, answer, expected) {
+  function isRowAlternativeCorrect(table, row, rowIndex, key, answers) {
+    if (!Array.isArray(row.alternativeCells)) return false;
+    return row.alternativeCells.some((alternative) => {
+      if (!Object.prototype.hasOwnProperty.call(alternative, key)) return false;
+      return Object.entries(alternative).every(([altKey, altExpected]) => {
+        const answer = answers?.[cellName(table, rowIndex, altKey)];
+        if (isSelectCell(table, altKey)) {
+          return window.BokiMock.normalizeText(answer) === window.BokiMock.normalizeText(altExpected);
+        }
+        return isAmountCorrect(window.BokiMock.normalizeNumber(answer), altExpected);
+      });
+    });
+  }
+
+  function isCellCorrect(table, row, rowIndex, key, answers, expected) {
+    if (isRowAlternativeCorrect(table, row, rowIndex, key, answers)) return true;
+    const answer = answers?.[cellName(table, rowIndex, key)];
     if (isSelectCell(table, key)) {
       return window.BokiMock.normalizeText(answer) === window.BokiMock.normalizeText(expected);
     }
@@ -416,7 +441,10 @@
                       if (shouldHideZeroCell(table, key, expected)) return "<td></td>";
                       if (expected === null || expected === undefined) return "<td></td>";
                       const answer = result.answers?.[cellName(table, rowIndex, key)];
-                      const correct = isCellCorrect(table, key, answer, expected);
+                      if (shouldSkipZeroScore(table, key, expected, answer)) {
+                        return `<td class="${resultCellClass(table, column)}">${escapeHtml(formatUserCellValue(table, key, answer))}</td>`;
+                      }
+                      const correct = isCellCorrect(table, row, rowIndex, key, result.answers, expected);
                       return `<td class="${resultCellClass(table, column, correct ? "result-ok-cell" : "result-ng-cell")}">${escapeHtml(formatUserCellValue(table, key, answer))}</td>`;
                     }).join("") : `
                       <td>${escapeHtml(row.date)}</td>
@@ -425,6 +453,9 @@
                       const expected = row.cells[key];
                       if (expected === null || shouldHideZeroCell(table, key, expected)) return "<td></td>";
                       const answer = result.answers?.[cellName(table, rowIndex, key)];
+                      if (shouldSkipZeroScore(table, key, expected, answer)) {
+                        return `<td>${escapeHtml(formatUserAnswer(answer))}</td>`;
+                      }
                         const actual = window.BokiMock.normalizeNumber(answer);
                         const correct = isAmountCorrect(actual, expected);
                         return `
@@ -450,6 +481,13 @@
       <div class="result-summary-fields">
         ${practice.summary.map((field) => {
           const answer = result.answers?.[`summary.${field.id}`];
+          if (Number(field.correctAnswer) === 0) {
+            return `
+              <p>
+                <strong>${escapeHtml(field.label)}:</strong> ${escapeHtml(formatUserAnswer(answer))}
+              </p>
+            `;
+          }
           const actual = window.BokiMock.normalizeNumber(answer);
           const correct = isAmountCorrect(actual, field.correctAnswer);
           return `

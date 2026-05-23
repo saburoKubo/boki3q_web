@@ -6,7 +6,7 @@
   "title": "税金・純資産の仕訳 仕上げ問題",
   "description": "租税公課、消費税、法人税等、資本金、配当と利益準備金を仕訳します。",
   "estimatedMinutes": 18,
-  "totalScore": 20,
+  "totalScore": 100,
   "intro": "各取引について仕訳しなさい。解答欄は本番形式に合わせて5行あります。使用しない行は空欄のままでかまいません。",
   "accountOptions": [
     "現金",

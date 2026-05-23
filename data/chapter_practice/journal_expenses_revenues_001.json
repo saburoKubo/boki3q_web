@@ -6,7 +6,7 @@
   "title": "費用・収益の仕訳 仕上げ問題",
   "description": "給料、家賃、保険料、手数料、前払・未払・前受・未収を含む取引を仕訳します。",
   "estimatedMinutes": 18,
-  "totalScore": 20,
+  "totalScore": 100,
   "intro": "各取引について仕訳しなさい。解答欄は本番形式に合わせて5行あります。使用しない行は空欄のままでかまいません。",
   "accountOptions": [
     "現金",

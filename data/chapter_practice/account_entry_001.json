@@ -6,7 +6,7 @@
   "title": "第2問対策 勘定記入 完成問題",
   "description": "収益・費用を損益勘定へ振り替え、当期純利益を繰越利益剰余金勘定へ記入します。",
   "estimatedMinutes": 12,
-  "totalScore": 20,
+  "totalScore": 100,
   "intro": "次の資料にもとづいて、損益勘定と繰越利益剰余金勘定を完成させなさい。該当しない欄は空欄のままでかまいません。",
   "materials": [
     "決算にあたり、収益・費用の各勘定を損益勘定へ振り替える。",
@@ -19,9 +19,9 @@
       "id": "profit_loss_account",
       "title": "損益勘定",
       "hideZeroCells": true,
+      "showZeroInputKeys": ["debit", "credit"],
       "answerKeys": ["debit", "credit"],
       "columns": [
-        { "key": "account", "label": "勘定", "type": "static" },
         { "key": "item", "label": "相手科目", "type": "static" },
         { "key": "debit", "label": "借方", "type": "answer" },
         { "key": "credit", "label": "貸方", "type": "answer" }
@@ -41,9 +41,9 @@
       "id": "retained_earnings_account",
       "title": "繰越利益剰余金勘定",
       "hideZeroCells": true,
+      "showZeroInputKeys": ["debit", "credit"],
       "answerKeys": ["debit", "credit"],
       "columns": [
-        { "key": "account", "label": "勘定", "type": "static" },
         { "key": "item", "label": "相手科目", "type": "static" },
         { "key": "debit", "label": "借方", "type": "answer" },
         { "key": "credit", "label": "貸方", "type": "answer" }

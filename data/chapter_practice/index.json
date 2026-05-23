@@ -8,9 +8,9 @@
       "chapterTitle": "現金・預金の仕訳",
       "title": "現金・預金の仕訳 仕上げ問題",
       "description": "現金過不足、普通預金、小口現金、当座借越など、現金・預金まわりの取引を仕訳します。",
-      "difficulty": "実戦",
+      "difficulty": "標準",
       "estimatedMinutes": 12,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "journal_merchandise_sales_001",
@@ -20,7 +20,7 @@
       "description": "消費税、内金、返品、諸掛り、クレジット売上を含む商品売買の取引を仕訳します。",
       "difficulty": "実戦",
       "estimatedMinutes": 18,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "journal_receivables_payables_001",
@@ -30,7 +30,7 @@
       "description": "売掛金・買掛金、貸付金・借入金、仮払金、貸倒れ、前払・前受を含む取引を仕訳します。",
       "difficulty": "実戦",
       "estimatedMinutes": 18,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "journal_expenses_revenues_001",
@@ -40,7 +40,7 @@
       "description": "給料、家賃、保険料、手数料、前払・未払・前受・未収を含む取引を仕訳します。",
       "difficulty": "実戦",
       "estimatedMinutes": 18,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "journal_notes_electronic_001",
@@ -48,9 +48,9 @@
       "chapterTitle": "手形・電子記録債権債務",
       "title": "手形・電子記録債権債務 仕上げ問題",
       "description": "約束手形、手形の裏書、電子記録債権・電子記録債務の発生と決済を仕訳します。",
-      "difficulty": "実戦",
+      "difficulty": "標準",
       "estimatedMinutes": 15,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "journal_corrections_001",
@@ -60,7 +60,7 @@
       "description": "誤記入、金額違い、科目違いを、正しい訂正仕訳で直す練習をします。",
       "difficulty": "実戦",
       "estimatedMinutes": 18,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "journal_fixed_assets_001",
@@ -70,7 +70,7 @@
       "description": "固定資産の取得、改良と修繕、減価償却、売却、除却を仕訳します。売却時の減価償却費も計算します。",
       "difficulty": "実戦",
       "estimatedMinutes": 20,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "journal_source_documents_001",
@@ -80,7 +80,7 @@
       "description": "請求書、領収書、通帳記録、クレジット売上票、給与明細から必要な情報を読み取って仕訳します。",
       "difficulty": "実戦",
       "estimatedMinutes": 20,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "journal_source_documents_002",
@@ -90,7 +90,7 @@
       "description": "納品書、領収書、通帳明細、売上請求書などから必要な情報を読み取り、仕訳します。",
       "difficulty": "実戦",
       "estimatedMinutes": 20,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "journal_taxes_equity_001",
@@ -100,7 +100,7 @@
       "description": "租税公課、消費税、法人税等、資本金、配当と利益準備金を仕訳します。",
       "difficulty": "実戦",
       "estimatedMinutes": 18,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "journal_reversing_entries_001",
@@ -108,9 +108,9 @@
       "chapterTitle": "再振替仕訳",
       "title": "再振替仕訳 仕上げ問題",
       "description": "前払・未払・前受・未収の決算整理後、翌期首に行う再振替仕訳を確認します。",
-      "difficulty": "実戦",
+      "difficulty": "標準",
       "estimatedMinutes": 15,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "journal_adjustments_001",
@@ -120,7 +120,7 @@
       "description": "期末商品、貸倒引当金、減価償却、経過勘定、貯蔵品を決算整理仕訳で確認します。",
       "difficulty": "実戦",
       "estimatedMinutes": 18,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "journal_closing_entries_001",
@@ -130,7 +130,7 @@
       "description": "収益・費用を損益へ振り替え、当期純利益または当期純損失を繰越利益剰余金へ振り替えます。",
       "difficulty": "実戦",
       "estimatedMinutes": 18,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "journal_book_001",
@@ -140,7 +140,7 @@
       "description": "取引を仕訳日記帳に記入し、借方・貸方の合計を確認します。",
       "difficulty": "標準",
       "estimatedMinutes": 12,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "voucher_accounting_001",
@@ -150,7 +150,7 @@
       "description": "入金伝票・出金伝票・振替伝票の様式に、相手科目や金額を記入します。",
       "difficulty": "標準",
       "estimatedMinutes": 15,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "cash_book_001",
@@ -160,7 +160,7 @@
       "description": "現金の収入・支出を日付順に記入し、残高を求めます。",
       "difficulty": "標準",
       "estimatedMinutes": 12,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "checking_account_book_001",
@@ -170,7 +170,7 @@
       "description": "当座預金の預入・小切手振出・入金を記入し、残高を求めます。",
       "difficulty": "標準",
       "estimatedMinutes": 12,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "petty_cash_book_001",
@@ -180,7 +180,7 @@
       "description": "定額資金前渡制度にもとづき、小口現金の支払内訳、残高、補給額を完成させます。",
       "difficulty": "標準",
       "estimatedMinutes": 15,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "bank_reconciliation_001",
@@ -190,7 +190,7 @@
       "description": "当社の普通預金勘定残高と銀行残高証明書残高を調整し、正しい残高を求めます。",
       "difficulty": "標準",
       "estimatedMinutes": 15,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "accounts_receivable_ledger_001",
@@ -200,7 +200,7 @@
       "description": "得意先別に売掛金の増減を記録し、月末残高を求めます。",
       "difficulty": "標準",
       "estimatedMinutes": 10,
-      "totalScore": 15
+      "totalScore": 100
     },
     {
       "id": "accounts_payable_ledger_001",
@@ -210,7 +210,7 @@
       "description": "仕入先別に買掛金の増減を記録し、月末残高を求めます。",
       "difficulty": "標準",
       "estimatedMinutes": 10,
-      "totalScore": 15
+      "totalScore": 100
     },
     {
       "id": "sales_purchase_books_001",
@@ -218,9 +218,9 @@
       "chapterTitle": "売上帳・仕入帳",
       "title": "売上帳・仕入帳 完成問題",
       "description": "売上帳と仕入帳に、売上・仕入、返品、値引を記入し、純売上高と純仕入高を求めます。",
-      "difficulty": "標準",
+      "difficulty": "実戦",
       "estimatedMinutes": 18,
-      "totalScore": 30
+      "totalScore": 100
     },
     {
       "id": "notes_books_001",
@@ -228,9 +228,9 @@
       "chapterTitle": "受取手形記入帳・支払手形記入帳",
       "title": "受取手形記入帳・支払手形記入帳 完成問題",
       "description": "受取手形と支払手形について、相手先、満期日、金額、てん末を記入します。",
-      "difficulty": "標準",
+      "difficulty": "実戦",
       "estimatedMinutes": 18,
-      "totalScore": 30
+      "totalScore": 100
     },
     {
       "id": "general_ledger_001",
@@ -238,9 +238,9 @@
       "chapterTitle": "総勘定元帳",
       "title": "総勘定元帳 完成問題",
       "description": "仕訳日記帳の取引を指定勘定へ転記し、月末残高を求めます。",
-      "difficulty": "標準",
+      "difficulty": "実戦",
       "estimatedMinutes": 15,
-      "totalScore": 25
+      "totalScore": 100
     },
     {
       "id": "merchandise_inventory_ledger_001",
@@ -248,9 +248,9 @@
       "chapterTitle": "商品有高帳（先入先出法）",
       "title": "商品有高帳（先入先出法） 完成問題",
       "description": "先入先出法により、商品の受入・払出・残高を記録します。",
-      "difficulty": "標準",
+      "difficulty": "実戦",
       "estimatedMinutes": 15,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "moving_average_inventory_ledger_001",
@@ -258,9 +258,9 @@
       "chapterTitle": "商品有高帳（移動平均法）",
       "title": "商品有高帳 移動平均法 完成問題",
       "description": "移動平均法により、商品の受入・払出・残高を記録します。",
-      "difficulty": "標準",
+      "difficulty": "実戦",
       "estimatedMinutes": 15,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "fixed_asset_register_001",
@@ -270,7 +270,7 @@
       "description": "取得原価、耐用年数、期首累計額から当期償却費と期末帳簿価額を求めます。",
       "difficulty": "標準",
       "estimatedMinutes": 15,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "trial_balance_001",
@@ -280,7 +280,7 @@
       "description": "月初残高と月中取引から、月末の残高試算表を完成させます。",
       "difficulty": "標準",
       "estimatedMinutes": 15,
-      "totalScore": 25
+      "totalScore": 100
     },
     {
       "id": "total_trial_balance_001",
@@ -290,7 +290,7 @@
       "description": "月初残高と月中取引から、借方・貸方の合計欄と残高欄を完成させます。",
       "difficulty": "実戦",
       "estimatedMinutes": 20,
-      "totalScore": 30
+      "totalScore": 100
     },
     {
       "id": "worksheet_001",
@@ -300,7 +300,7 @@
       "description": "決算整理事項を反映し、精算表の修正記入・損益計算書・貸借対照表欄を完成させます。",
       "difficulty": "実戦",
       "estimatedMinutes": 25,
-      "totalScore": 35
+      "totalScore": 100
     },
     {
       "id": "income_statement_001",
@@ -308,9 +308,9 @@
       "chapterTitle": "損益計算書",
       "title": "損益計算書 完成問題",
       "description": "決算整理後の金額から損益計算書を完成させます。",
-      "difficulty": "実戦",
+      "difficulty": "標準",
       "estimatedMinutes": 15,
-      "totalScore": 25
+      "totalScore": 100
     },
     {
       "id": "balance_sheet_001",
@@ -318,9 +318,9 @@
       "chapterTitle": "貸借対照表",
       "title": "貸借対照表 完成問題",
       "description": "決算整理後の金額から貸借対照表を完成させます。",
-      "difficulty": "実戦",
+      "difficulty": "標準",
       "estimatedMinutes": 15,
-      "totalScore": 25
+      "totalScore": 100
     },
     {
       "id": "term_fill_001",
@@ -330,7 +330,7 @@
       "description": "帳簿・試算表・決算書類に関する空欄へ、適切な語句を選んで入れます。",
       "difficulty": "標準",
       "estimatedMinutes": 10,
-      "totalScore": 20
+      "totalScore": 100
     },
     {
       "id": "account_entry_001",
@@ -340,7 +340,7 @@
       "description": "収益・費用を損益勘定へ振り替え、当期純利益を繰越利益剰余金勘定へ記入します。",
       "difficulty": "標準",
       "estimatedMinutes": 12,
-      "totalScore": 20
+      "totalScore": 100
     }
   ]
 }

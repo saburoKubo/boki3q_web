@@ -134,11 +134,14 @@
   function genericTableClassName(table) {
     const labels = tableColumnLabels(table);
     const classes = ["answer-table", "generic-sheet-table"];
-    if (table.columns.length >= 9) {
+    if (table.id === "fixed_assets") {
+      classes.push("fixed-asset-register-table");
+    } else if (table.columns.length >= 9) {
       classes.push("worksheet-table", "chapter-worksheet-table");
     } else {
       classes.push("compact-sheet-table");
     }
+    if (table.id === "worksheet") classes.push("worksheet-practice-table");
     if (labels.includes("負債・純資産")) classes.push("balance-sheet-table");
     if (table.format === "account") classes.push("statement-account-table");
     return classes.join(" ");
@@ -175,6 +178,12 @@
 
   function shouldHideZeroCell(table, key, expected) {
     return table.hideZeroCells && Number(expected) === 0 && !table.showZeroInputKeys?.includes(key);
+  }
+
+  function shouldSkipZeroScore(table, key, expected, answer) {
+    if (table.selectOptions?.[key] || Number(expected) !== 0) return false;
+    const actual = normalizedNumber(answer);
+    return actual === null || actual === 0;
   }
 
   function journalName(questionId, lineIndex, key) {
@@ -414,11 +423,28 @@
     return actual === expectedNumber || (expectedNumber === 0 && actual === null);
   }
 
-  function isCellCorrect(actual, expected, inputType) {
+  function isRowAlternativeCorrect(table, row, rowIndex, key, answers) {
+    if (!Array.isArray(row.alternativeCells)) return false;
+    return row.alternativeCells.some((alternative) => {
+      if (!Object.prototype.hasOwnProperty.call(alternative, key)) return false;
+      return Object.entries(alternative).every(([altKey, altExpected]) => {
+        const inputType = table.selectOptions?.[altKey] ? "select" : "number";
+        const answer = answers[cellName(table, rowIndex, altKey)];
+        if (inputType === "select") {
+          return window.BokiMock.normalizeText(answer) === window.BokiMock.normalizeText(altExpected);
+        }
+        return isAmountCorrect(normalizedNumber(answer), altExpected);
+      });
+    });
+  }
+
+  function isCellCorrect(table, row, rowIndex, key, answers, expected, inputType) {
+    if (isRowAlternativeCorrect(table, row, rowIndex, key, answers)) return true;
     if (inputType === "select") {
+      const actual = answers[cellName(table, rowIndex, key)];
       return window.BokiMock.normalizeText(actual) === window.BokiMock.normalizeText(expected);
     }
-    return isAmountCorrect(normalizedNumber(actual), expected);
+    return isAmountCorrect(normalizedNumber(answers[cellName(table, rowIndex, key)]), expected);
   }
 
   function normalizeJournalLines(lines = []) {
@@ -490,10 +516,11 @@
 
     const totalCount = practice.questions.length;
     const rate = totalCount ? Math.round((correctCount / totalCount) * 100) : 0;
+    const scoreWithFloor = score > 0 ? Math.max(1, score) : 0;
     return {
       practiceId: practice.id,
       title: practice.title,
-      score,
+      score: scoreWithFloor,
       maxScore: practice.totalScore || maxScore,
       rate,
       correctCount,
@@ -516,11 +543,12 @@
         Object.entries(row.cells).forEach(([key, expected]) => {
           if (expected === null) return;
           if (shouldHideZeroCell(table, key, expected)) return;
-          totalCount += 1;
           const name = cellName(table, rowIndex, key);
           const inputType = table.selectOptions?.[key] ? "select" : "number";
           const actual = answers[name];
-          if (isCellCorrect(actual, expected, inputType)) {
+          if (shouldSkipZeroScore(table, key, expected, actual)) return;
+          totalCount += 1;
+          if (isCellCorrect(table, row, rowIndex, key, answers, expected, inputType)) {
             correctCount += 1;
           } else {
             misses.push({
@@ -536,6 +564,7 @@
     });
 
     (practice.summary || []).forEach((field) => {
+      if (Number(field.correctAnswer) === 0) return;
       totalCount += 1;
       const name = `summary.${field.id}`;
       const actual = normalizedNumber(answers[name]);
@@ -553,7 +582,7 @@
     });
 
     const rate = totalCount ? Math.round((correctCount / totalCount) * 100) : 0;
-    const score = Math.round((rate / 100) * practice.totalScore);
+    const score = correctCount > 0 ? Math.max(1, Math.round((rate / 100) * practice.totalScore)) : 0;
     return {
       practiceId: practice.id,
       title: practice.title,

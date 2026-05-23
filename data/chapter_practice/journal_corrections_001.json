@@ -6,7 +6,7 @@
   "title": "訂正仕訳 仕上げ問題",
   "description": "誤記入、金額違い、科目違いを、正しい訂正仕訳で直す練習をします。",
   "estimatedMinutes": 18,
-  "totalScore": 20,
+  "totalScore": 100,
   "intro": "各誤処理について、訂正仕訳をしなさい。解答欄は本番形式に合わせて5行あります。使用しない行は空欄のままでかまいません。",
   "accountOptions": [
     "現金",

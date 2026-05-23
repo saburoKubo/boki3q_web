@@ -4,10 +4,10 @@
   "category": "帳簿",
   "chapterTitle": "固定資産台帳",
   "title": "固定資産台帳 完成問題",
-  "description": "次の資料にもとづいて、固定資産台帳の空欄を完成させなさい。",
+  "description": "取得原価、耐用年数、期首累計額から当期償却費と期末帳簿価額を求めます。",
   "estimatedMinutes": 15,
-  "totalScore": 20,
-  "intro": "定額法により減価償却費を計算します。残存価額は0円、記帳方法は間接法とします。当期はX6年4月1日からX7年3月31日までです。",
+  "totalScore": 100,
+  "intro": "次の資料にもとづいて、固定資産台帳の空欄を完成させなさい。定額法、残存価額0円、間接法により記入します。当期はX6年4月1日からX7年3月31日までです。",
   "materials": [
     "備品AはX4年4月1日に600,000円で取得した。耐用年数は6年である。",
     "備品BはX5年10月1日に480,000円で取得した。耐用年数は4年である。",
@@ -41,7 +41,7 @@
         },
         {
           "values": { "name": "備品C", "acquired": "X6/7/1", "cost": "360,000", "life": "3年" },
-          "cells": { "begin_accum": 0, "begin_book": 360000, "current_dep": 90000, "end_accum": 90000, "end_book": 270000 }
+          "cells": { "begin_accum": 0, "begin_book": 0, "current_dep": 90000, "end_accum": 90000, "end_book": 270000 }
         }
       ]
     }
