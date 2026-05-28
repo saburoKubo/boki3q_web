@@ -34,6 +34,13 @@
     })[char]);
   }
 
+  function displayScore(practice, result) {
+    if (practice.mode !== "journalPractice") return result.score;
+    const maxScore = Number(result.maxScore || practice.totalScore || 0);
+    if (!maxScore || !Number.isFinite(Number(result.rate))) return result.score;
+    return Math.round((Number(result.rate) / 100) * maxScore);
+  }
+
   function renderSummary(practice, result) {
     const passed = result.rate >= 80;
     const status = passed ? "完了" : result.rate >= 60 ? "復習推奨" : "もう一度";
@@ -41,7 +48,7 @@
     elements.summary.innerHTML = `
       <div>
         <h2>${escapeHtml(status)}</h2>
-        <p class="result-score">${result.score}<span> / ${result.maxScore}点</span></p>
+        <p class="result-score">${displayScore(practice, result)}<span> / ${result.maxScore}点</span></p>
         <p>${result.correctCount} / ${result.totalCount}項目 正解（正答率 ${result.rate}%）</p>
       </div>
       <div>

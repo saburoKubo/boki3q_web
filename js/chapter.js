@@ -218,6 +218,17 @@
     `).join("");
   }
 
+  function journalRawMaxScore(practice) {
+    return (practice.questions || []).reduce((sum, question) => sum + Number(question.score || 0), 0);
+  }
+
+  function scaledJournalScore(practice, rawScore) {
+    const rawMaxScore = journalRawMaxScore(practice);
+    const maxScore = Number(practice.totalScore) || rawMaxScore;
+    if (!rawMaxScore) return Number(rawScore) || 0;
+    return Math.round((Number(rawScore) || 0) / rawMaxScore * maxScore);
+  }
+
   function renderJournalPractice(practice) {
     const options = practice.accountOptions || [];
     return `
@@ -228,7 +239,7 @@
             <article class="question-card journal-question-card">
               <div class="question-head">
                 <h3>第${questionIndex + 1}問</h3>
-                <span class="score-chip">${question.score}点</span>
+                <span class="score-chip">${scaledJournalScore(practice, question.score)}点</span>
               </div>
               <p class="question-text">${escapeHtml(question.text)}</p>
               ${renderSourceDocuments(question.documents)}
@@ -494,14 +505,14 @@
 
   function scoreJournalPractice(practice, answers) {
     const misses = [];
-    let score = 0;
-    let maxScore = 0;
+    let rawScore = 0;
+    let rawMaxScore = 0;
     let correctCount = 0;
 
     practice.questions.forEach((question, index) => {
-      maxScore += question.score;
+      rawMaxScore += question.score;
       if (isJournalQuestionCorrect(question, answers)) {
-        score += question.score;
+        rawScore += question.score;
         correctCount += 1;
       } else {
         misses.push({
@@ -516,12 +527,14 @@
 
     const totalCount = practice.questions.length;
     const rate = totalCount ? Math.round((correctCount / totalCount) * 100) : 0;
+    const maxScore = Number(practice.totalScore) || rawMaxScore;
+    const score = scaledJournalScore(practice, rawScore);
     const scoreWithFloor = score > 0 ? Math.max(1, score) : 0;
     return {
       practiceId: practice.id,
       title: practice.title,
       score: scoreWithFloor,
-      maxScore: practice.totalScore || maxScore,
+      maxScore,
       rate,
       correctCount,
       totalCount,

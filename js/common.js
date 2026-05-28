@@ -175,6 +175,7 @@
     const normalized = normalizeAmountExpression(expr);
     if (normalized === "") return "0";
     return normalized
+      .replace(/\d+/g, (digits) => digits.replace(/\B(?=(\d{3})+(?!\d))/g, ","))
       .replace(/\//g, "÷")
       .replace(/\*/g, "×")
       .replace(/-/g, "−");
@@ -353,8 +354,10 @@
         return;
       }
       if (action === "done") {
-        commitAmountKeypadExpression(activeAmountInput);
+        const input = activeAmountInput;
+        commitAmountKeypadExpression(input);
         hideAmountKeypad();
+        input.blur();
       }
     });
     document.body.appendChild(amountKeypad);
@@ -418,6 +421,7 @@
         event.preventDefault();
         commitAmountKeypadExpression(input);
         hideAmountKeypad();
+        input.blur();
       }
     });
     input.addEventListener("blur", () => {
@@ -428,8 +432,11 @@
       }
       input.readOnly = false;
       syncAmountInputMode(input);
+      const blurredInput = input;
       setTimeout(() => {
-        if (!amountKeypad?.contains(document.activeElement)) hideAmountKeypad();
+        if (activeAmountInput === blurredInput && !amountKeypad?.contains(document.activeElement)) {
+          hideAmountKeypad();
+        }
       }, 0);
       onValue?.(input.value);
     });
