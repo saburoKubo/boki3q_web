@@ -196,8 +196,9 @@
   }
 
   function updateAmountKeypadDisplay() {
-    if (!amountKeypadDisplay) return;
-    amountKeypadDisplay.textContent = formatAmountExpressionDisplay(amountKeypadExpression);
+    const displayText = formatAmountExpressionDisplay(amountKeypadExpression);
+    if (amountKeypadDisplay) amountKeypadDisplay.textContent = displayText;
+    if (activeAmountInput) activeAmountInput.value = amountKeypadExpression ? displayText : "";
   }
 
   function setAmountKeypadExpression(expr) {
