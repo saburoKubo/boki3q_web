@@ -382,6 +382,25 @@
         color: var(--ink);
       }
 
+      .answer-cell {
+        border: 1px solid rgba(37, 116, 90, 0.55);
+        border-radius: 4px;
+        background: var(--green-soft);
+        color: var(--green);
+        padding: 3px 6px;
+        font-weight: 800;
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .blank-cell {
+        min-width: 56px;
+        min-height: 24px;
+        border: 1px dashed var(--line-strong);
+        border-radius: 4px;
+        background: #ffffff;
+      }
+
       .input-like.muted {
         color: var(--muted);
       }
@@ -741,24 +760,26 @@
             <div class="mini-screen">
               <div class="mini-chip-row">
                 <span class="mini-chip">決算</span>
-                <span class="mini-chip">第3問</span>
+                <span class="mini-chip">精算表</span>
+                <span class="mini-chip">空欄入力</span>
               </div>
               <div class="table-scroll">
                 <table class="worksheet-table">
                   <thead>
-                    <tr><th>科目</th><th>試算表</th><th>整理記入</th><th>PL</th><th>BS</th></tr>
+                    <tr><th>科目</th><th>試算表</th><th>整理記入</th><th>損益計算書</th><th>貸借対照表</th></tr>
                   </thead>
                   <tbody>
-                    <tr><td>売上</td><td class="amount">280,000</td><td></td><td class="amount">280,000</td><td></td></tr>
-                    <tr><td>備品</td><td class="amount">160,000</td><td></td><td></td><td class="amount">160,000</td></tr>
-                    <tr><td>減価償却費</td><td></td><td class="amount">20,000</td><td class="amount">20,000</td><td></td></tr>
+                    <tr><td>売上</td><td class="amount">280,000</td><td></td><td><div class="answer-cell">280,000</div></td><td></td></tr>
+                    <tr><td>備品</td><td class="amount">160,000</td><td></td><td></td><td><div class="blank-cell" aria-label="貸借対照表欄の空欄"></div></td></tr>
+                    <tr><td>減価償却費</td><td></td><td><div class="answer-cell">20,000</div></td><td><div class="blank-cell" aria-label="損益計算書欄の空欄"></div></td><td></td></tr>
+                    <tr><td>貸倒引当金繰入</td><td></td><td><div class="blank-cell" aria-label="整理記入欄の空欄"></div></td><td><div class="blank-cell" aria-label="損益計算書欄の空欄"></div></td><td></td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
             <div class="feature-copy">
-              <h3>大きな表を使う練習</h3>
-              <p>精算表、損益計算書、貸借対照表など、スマホでは見づらい問題をPC幅で確認できます。</p>
+              <h3>精算表のどこを埋めるかが見える</h3>
+              <p>決算整理仕訳を整理記入へ入れ、損益計算書欄・貸借対照表欄へ金額を写す流れを確認できます。</p>
             </div>
           </article>
 
@@ -766,24 +787,26 @@
             <div class="mini-screen">
               <div class="mini-chip-row">
                 <span class="mini-chip">模擬試験</span>
-                <span class="mini-chip">本番形式</span>
+                <span class="mini-chip">第3問</span>
+                <span class="mini-chip">PL・BS</span>
               </div>
               <div class="table-scroll">
-                <table class="ledger-table">
+                <table class="worksheet-table">
                   <thead>
-                    <tr><th>大問</th><th>内容</th><th>配点</th><th>状態</th></tr>
+                    <tr><th>書類</th><th>科目</th><th>金額</th><th>入力</th></tr>
                   </thead>
                   <tbody>
-                    <tr><td>第1問</td><td>仕訳問題</td><td class="amount">45点</td><td>解答中</td></tr>
-                    <tr><td>第2問</td><td>帳簿・語句</td><td class="amount">20点</td><td>未着手</td></tr>
-                    <tr><td>第3問</td><td>決算・財務諸表</td><td class="amount">35点</td><td>未着手</td></tr>
+                    <tr><td>損益計算書</td><td>売上原価</td><td class="amount">96,000</td><td><div class="answer-cell">入力済</div></td></tr>
+                    <tr><td>損益計算書</td><td>当期純利益</td><td></td><td><div class="blank-cell" aria-label="当期純利益の空欄"></div></td></tr>
+                    <tr><td>貸借対照表</td><td>繰越利益剰余金</td><td></td><td><div class="blank-cell" aria-label="繰越利益剰余金の空欄"></div></td></tr>
+                    <tr><td>貸借対照表</td><td>資産合計</td><td class="amount">350,000</td><td><div class="answer-cell">入力済</div></td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
             <div class="feature-copy">
-              <h3>本番に近い分量を確認</h3>
-              <p>大問ごとの配点、解答状況、提出後の採点結果を見ながら、試験1回分の流れを練習できます。</p>
+              <h3>第3問の出され方を確認</h3>
+              <p>模擬試験では第1問から第3問までを通して解き、決算では損益計算書や貸借対照表の空欄を埋めます。</p>
             </div>
           </article>
         </div>
