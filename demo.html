@@ -463,6 +463,10 @@
         overflow: hidden;
       }
 
+      .feature-card > * {
+        min-width: 0;
+      }
+
       .feature-copy {
         display: flex;
         flex-direction: column;
@@ -498,6 +502,21 @@
         padding: 3px 8px;
         font-size: 0.76rem;
         font-weight: 800;
+      }
+
+      .table-scroll {
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .table-scroll table {
+        width: max-content;
+      }
+
+      .table-scroll .journal-table,
+      .table-scroll .ledger-table {
+        min-width: 520px;
       }
 
       .wide-table {
@@ -620,22 +639,12 @@
           padding: 12px;
         }
 
-        .journal-table,
-        .worksheet-table,
-        .ledger-table {
-          min-width: 520px;
-        }
-
         .wide-table {
           min-width: 760px;
         }
 
         .exam-flow-grid {
           grid-template-columns: 1fr;
-        }
-
-        .table-scroll {
-          overflow-x: auto;
         }
 
         .score-box {
